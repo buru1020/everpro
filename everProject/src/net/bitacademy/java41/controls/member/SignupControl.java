@@ -1,11 +1,8 @@
 package net.bitacademy.java41.controls.member;
 
-import java.io.File;
 import java.util.Map;
 
 import javax.servlet.http.HttpSession;
-
-import org.apache.commons.fileupload.FileItem;
 
 import net.bitacademy.java41.annotation.Component;
 import net.bitacademy.java41.controls.PageControl;
@@ -32,19 +29,22 @@ public class SignupControl implements PageControl {
 	@Override
 	public String execute(Map<String, Object> model) throws Exception {
 		@SuppressWarnings("unchecked")
-		Map<String, Object> params = (Map<String, Object>) model.get("params");
+		Map<String, String[]> params = (Map<String, String[]>) model.get("params");
 
-		FileItem photo = (FileItem) params.get("photo");
-		String filename = this.getNewFileName();
-		String path = rootRealPath + "res/photo/" + filename;
-		photo.write( new File(path) );
+//		FileItem photo = (FileItem) params.get("photo");
+//		String filename = null;
+//		if (photo != null) {
+//			filename = this.getNewFileName();
+//			String path = rootRealPath + "res/photo/" + filename;
+//			photo.write( new File(path) );
+//		}
 		
 		Member member = new Member()
-										.setEmail( (String) params.get("email") )
-										.setName( (String) params.get("name") )
-										.setPassword( (String) params.get("password") )
-										.setTel( (String) params.get("tel") )
-										.setPhotos( new String[] {filename} );
+										.setEmail( (String) params.get("email")[0] )
+										.setName( (String) params.get("name")[0] )
+										.setPassword( (String) params.get("password")[0] )
+										.setTel( (String) params.get("tel")[0] );
+//										.setPhotos( new String[] {filename} );
 										
 		int count = memberService.signUp(member);
 		HttpSession session = (HttpSession) model.get("session");

@@ -3,7 +3,7 @@
 <jsp:useBean id="member" scope="session" type="net.bitacademy.java41.vo.Member"/>
 <jsp:useBean id="projectService" scope="application" type="net.bitacademy.java41.services.ProjectService"/>
 <%
-pageContext.setAttribute("projectList", projectService.getMyProjects(member.getEmail()));
+	pageContext.setAttribute("projectList", projectService.getMyProjectList(member.getEmail()));
 %>
 <!-- Side Menu Start -->
         <div class="grid_2">

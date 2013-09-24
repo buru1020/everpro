@@ -1,26 +1,19 @@
 package net.bitacademy.java41.services;
 
-import java.sql.Connection;
 import java.util.List;
 
 import net.bitacademy.java41.annotation.Component;
 import net.bitacademy.java41.dao.MemberDao;
 import net.bitacademy.java41.dao.ProjectDao;
-import net.bitacademy.java41.util.DBConnectionPool;
 import net.bitacademy.java41.vo.Project;
 import net.bitacademy.java41.vo.ProjectEx;
 import net.bitacademy.java41.vo.ProjectMember;
 
 @Component
 public class ProjectService {
-	DBConnectionPool conPool;
 	ProjectDao projectDao;
 	MemberDao memberDao;
 
-	public ProjectService setConPool(DBConnectionPool conPool) {
-		this.conPool = conPool;
-		return this;
-	}
 	public ProjectService setProjectDao(ProjectDao projectDao) {
 		this.projectDao = projectDao;
 		return this;
@@ -31,7 +24,7 @@ public class ProjectService {
 	}
 
 	
-	public List<ProjectEx> getMyProjects(String email) throws Exception {
+	public List<ProjectEx> getMyProjectList(String email) throws Exception {
 		return projectDao.getUserProjectList(email);
 	}
 
@@ -40,7 +33,7 @@ public class ProjectService {
 	}
 	
 	public ProjectEx getProjectInfo(int no) throws Exception {
-		return projectDao.getProjectInfol(no);
+		return projectDao.getProjectInfo(no);
 	}
 	
 	public List<ProjectMember> getProjectMemberList(int no) throws Exception {
@@ -48,61 +41,15 @@ public class ProjectService {
 	}
 	
 	public void resisterProject(Project project) throws Exception {
-		Connection con = conPool.getConnection();
-		con.setAutoCommit(false);
-		
-		try {
-			projectDao.add(project);
-			con.commit();
-			
-		} catch (Exception e) {
-			con.rollback();
-			throw e;
-			
-		} finally {
-			con.setAutoCommit(true);
-			conPool.returnConnection(con);
-		}
+		projectDao.add(project);
 	}
 	
 	public int deleteProject(int no) throws Exception {
-		Connection con = conPool.getConnection();
-		con.setAutoCommit(false);
-		int count = 0;
-		try {
-			count = projectDao.delete(no);
-			con.commit();
-			
-		} catch (Exception e) {
-			con.rollback();
-			throw e;
-			
-		} finally {
-			con.setAutoCommit(true);
-			conPool.returnConnection(con);
-		}
-		
-		return count;
+		return projectDao.delete(no);
 	}
 	
 	public int projectUpdate(ProjectEx project) throws Exception {
-		Connection con = conPool.getConnection();
-		con.setAutoCommit(false);
-		int count = 0;
-		try {
-			count = projectDao.update(project);
-			con.commit();
-			
-		} catch (Exception e) {
-			con.rollback();
-			throw e;
-			
-		} finally {
-			con.setAutoCommit(true);
-			conPool.returnConnection(con);
-		}
-		
-		return count;
+		return projectDao.update(project);
 	}
 
 	

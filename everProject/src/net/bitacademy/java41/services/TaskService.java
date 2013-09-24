@@ -1,6 +1,5 @@
 package net.bitacademy.java41.services;
 
-import java.sql.Connection;
 import java.util.List;
 
 import net.bitacademy.java41.annotation.Component;
@@ -31,58 +30,40 @@ public class TaskService {
 	}
 	
 	public int taskUpdate(Task task) throws Exception {
-		Connection con = conPool.getConnection();
-		con.setAutoCommit(false);
 		int count = 0;
 		try {
 			count = taskDao.update(task);
-			con.commit();
 			
 		} catch (Exception e) {
-			con.rollback();
 			throw e;
 			
 		} finally {
-			con.setAutoCommit(true);
-			conPool.returnConnection(con);
 		}
 		
 		return count;
 	}
 	public int taskAdd(Task task) throws Exception {
-		Connection con = conPool.getConnection();
-		con.setAutoCommit(false);
 		int count = 0;
 		try {
 			count = taskDao.add(task);
-			con.commit();
 			
 		} catch (Exception e) {
-			con.rollback();
 			throw e;
 			
 		} finally {
-			con.setAutoCommit(true);
-			conPool.returnConnection(con);
 		}
 		
 		return count;
 	}
 	public int taskDelete(int projectNo, int taskNo) throws Exception {
-		Connection con = conPool.getConnection();
-		con.setAutoCommit(false);
 		int count = 0;
 		try {
 			count = taskDao.delete(projectNo, taskNo);
-			con.commit();
 			
 		} catch (Exception e) {
-			con.rollback();
 			throw e;
 			
 		} finally {
-			con.setAutoCommit(true);
-			conPool.returnConnection(con);
 		}
 		
 		return count;

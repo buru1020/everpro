@@ -33,7 +33,7 @@ public class ContextLoaderListener implements ServletContextListener {
 		objTable.put("rootRealPath", ctx.getRealPath("/"));
 		
 		try {
-			loadProperties( ctx.getRealPath("/WEB-INF/db.properties") );
+//			loadProperties( ctx.getRealPath("/WEB-INF/db.properties") );
 			prepareMybatis();
 			prepareObjects( new File(ctx.getRealPath("/WEB-INF/classes")) );
 			
@@ -117,7 +117,7 @@ public class ContextLoaderListener implements ServletContextListener {
 	private Object findInstanceByClass(Class paramClass) {
 		Collection<Object> instanceList = objTable.values();
 		for( Object obj : instanceList ) {
-			if (obj.getClass() == paramClass) {
+			if (paramClass.isInstance(obj)) {
 				return obj;
 			}
 		}

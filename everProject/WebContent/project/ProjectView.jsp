@@ -78,7 +78,7 @@
 		<!-- Content -->
 		<div class="grid_10">
 			<div class="box round first grid">
-
+				<h2>프로젝트 정보</h2>
 				<div class="block ">
 
 					<div>
@@ -94,20 +94,18 @@
 					
 						<table class="form">
 							<tr>
-								<td><label>프로젝트 명</label></td>
-								<td><input type="text" class="mini"
-									value="${project.title}" disabled /></td>
+								<td><label>프로젝트 번호</label></td>
+								<td>${project.no}</td>
 							</tr>
 							<tr>
-								<td><label>번호</label></td>
-								<td><input type="text" class="mini"
-									value="${project.no}" disabled /></td>
+								<td><label>프로젝트 명</label></td>
+								<td>${project.title}</td>
 							</tr>
 							<tr>
 								<td><label>PL</label></td>
 								<td><c:choose>
 										<c:when test="${project.plName == ''}">없음</c:when>
-										<c:otherwise>${project.plName}</c:otherwise>
+										<c:otherwise>${project.plName} ( ${project.plEmail} )</c:otherwise>
 									</c:choose></td>
 							</tr>
 							<tr>
