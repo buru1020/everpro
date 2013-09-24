@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE configuration
+PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-config.dtd">
+<configuration>
+	<!-- 설정파일에서 사용할 properties파일의 경로 지저이: classpath -->
+	<properties resource="net/bitacademy/java41/dao/db.properties" />
+	
+	<settings>
+		<setting name="logImpl" value="LOG4J"/>
+	</settings>
+	
+	<!-- 자주 사용하는 클래스는 별도로 별명을 지정한 다음 사용하면 편하다. -->
+	<typeAliases>
+		<typeAlias type="net.bitacademy.java41.vo.Member" alias="Member"/>
+		<typeAlias type="net.bitacademy.java41.vo.Project" alias="Project"/>
+		<typeAlias type="net.bitacademy.java41.vo.ProjectEx" alias="ProjectEx"/>
+		<typeAlias type="net.bitacademy.java41.vo.Task" alias="Task"/>
+		<typeAlias type="net.bitacademy.java41.vo.ProjectMember" alias="ProjectMember"/>
+		<typeAlias type="net.bitacademy.java41.vo.Photo" alias="Photo"/>
+	</typeAliases>
+	
+	<!-- DBMS 관련 정보 설정 
+		. default 속성: 프레임워크에서 사용할 DB 환경을 지정한다.
+						<environment>의 id 값
+	-->
+	<environments default="development">
+		<!-- 개발 DBMS에 대한 정보 설정 -->
+		<environment id="development">
+			<!-- 트랜잭션 관리자 
+				. JDBC : mybatis에서 트랜젝션 관리
+				. MANAGED : JavaEE 컨테이너에서 관리
+			-->
+			<transactionManager type="JDBC" />
+			
+			<!-- 사용할 DB Connection Pool  설정
+				. UNPOOLED : DB Connection을 Pooling하지 않음을 지정. 매번 필요할 때 마다 생성.
+				. POOLED : mybatis에서 제공하는 DB Connection Pool을 사용하겠다는 의미
+				. JNDI : JavaEE 컨테이너에서 제공하는 DB Connection Pool 사용.
+			-->
+			<dataSource type="POOLED">
+				<property name="driver" value="${driver}" />
+				<property name="url" value="${url}" />
+				<property name="username" value="${username}" />
+				<property name="password" value="${password}" />
+			</dataSource>
+		</environment>
+	</environments>
+	
+	<!-- SQL문이 들어있는 파일을 지정 -->
+	<mappers>
+		<mapper resource="net/bitacademy/java41/dao/MemberMapper.xml" />
+		<mapper resource="net/bitacademy/java41/dao/ProjectMapper.xml" />
+	</mappers>
+</configuration>

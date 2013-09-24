@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+		PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+		"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="net.bitacademy.java41.dao.ProjectMapper">
+<!-- 	<select id="listByMember" parameterType="string" resultType="MemberProject">
+		select t1.PNO as no, t1.TITLE, t2.LEVEL
+		from SPMS_PRJS t1, SPMS_PRJMEMB t2
+		where t1.PNO = t2.PNO and t2.EMAIL = #{value}
+	</select>
+	
+	<select id="list" resultType="Project">
+		select 
+			PNO as no,
+			TITLE,
+			START_DATE as startDate,
+			END_DATE as endDate
+		from SPMS_PRJS
+		order by PNO desc
+	</select>
+	
+	<select id="get" parameterType="int" resultType="Project">
+		select 
+			PNO as no, 
+			TITLE, 
+			CONTENT, 
+			START_DATE as startDate, 
+			END_DATE as endDate, 
+			TAG
+		from SPMS_PRJS
+		where PNO = #{value}
+	</select>
+	
+	<insert id="add" parameterType="Project" useGeneratedKeys="true" keyProperty="no">
+		insert into SPMS_PRJS( TITLE,CONTENT,START_DATE,END_DATE,TAG )
+		values( #{title}, #{content}, #{startDate}, #{endDate}, #{tag} )
+	</insert>
+	
+	<insert id="addProjectMember" parameterType="map" >
+		insert into SPMS_PRJMEMB( EMAIL, PNO, LEVEL )
+		values( #{email}, #{projectNo}, #{memberLevel} )
+	</insert>
+	
+	<update id="update" parameterType="Project">
+		update SMPS_PRJS
+		<set>
+			<if test="title != null">TITLE = #{title},</if>
+			<if test="content != null">CONTENT = #{content},</if>
+			<if test="startDate != null">START_DATE = #{startDate},</if>
+			<if test="endDate != null">END_DATE = #{endDate},</if>
+			<if test="tag != ''">TAG = #{tag}</if>
+		</set>
+	</update> -->
+	
+</mapper>
+
+

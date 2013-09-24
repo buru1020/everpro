@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+		PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+		"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="net.bitacademy.java41.dao.MemberMapper">
+
+<!-- " select EMAIL, MNAME, PWD, TEL, BLOG, REG_DATE, UPDATE_DATE, ANO, DET_ADDR, TAG, LEVEL"
+					+ " from SPMS_MEMBS"
+					+ " where EMAIL=?"
+					+ "		and PWD=? -->
+					
+					
+<!-- 	<select id="getMember" parameterType="map" resultType="Member">
+		select EMAIL, MNAME as name, TEL, LEVEL 
+		from SPMS_MEMBS
+		<where>
+			<trim prefixOverrides="AND|OR">
+				<if test="tel != null">
+					TEL = #{tel}
+				</if>
+				<if test="email != null">
+					and EMAIL = #{email}
+				</if>
+				<if test="password != null">
+					and PWD = #{password}
+				</if>
+			</trim>
+		</where>
+	</select>
+	
+	<insert id="add" parameterType="Member">
+		insert into SPMS_MEMBS( EMAIL, MNAME, PWD, TEL, BLOG, REG_DATE, UPDATE_DATE, DET_ADDR, TAG, LEVEL )
+		values(#{email}, #{name}, #{password}, #{tel}, #{blog}, now(), now(), #{detailAddress}, #{tag}, #{level})
+	</insert>
+	
+	<insert id="addPhoto" parameterType="map">
+		insert into SPMS_MEMIMG( EMAIL, IMGURL )
+		values( #{email}, #{path} )
+	</insert>
+	 -->
+</mapper>
+
+

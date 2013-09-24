@@ -1,0 +1,19 @@
+-- SPMS_TASKS 테스트 데이터
+-- 0:등록 1:진행, 2:완료, 3:지연
+insert into spms_tasks (PNO, TITLE, UIPROTOURL, CONTENT, START_DATE, END_DATE, STATUS ) 
+values (1, '1-1테스트 태스크', 'test.test.com', '1-1태스크내용', '2012-01-02', '2013-09-10', 0);
+insert into spms_tasks (PNO, TITLE, UIPROTOURL, CONTENT, START_DATE, END_DATE, STATUS ) 
+values (1, '1-2테스트 태스크', 'test.test.com', '1-1태스크내용', '2012-01-02', '2013-09-10', 1);
+insert into spms_tasks (PNO, TITLE, UIPROTOURL, CONTENT, START_DATE, END_DATE, STATUS ) 
+values (1, '1-3테스트 태스크', 'test.test.com', '1-1태스크내용', '2012-01-02', '2013-09-10', 1);
+insert into spms_tasks (PNO, TITLE, UIPROTOURL, CONTENT, START_DATE, END_DATE, STATUS ) 
+values (1, '1-4테스트 태스크', 'test.test.com', '1-1태스크내용', '2012-01-02', '2013-09-10', 2);
+insert into spms_tasks (PNO, TITLE, UIPROTOURL, CONTENT, START_DATE, END_DATE, STATUS ) 
+values (1, '1-5테스트 태스크', 'test.test.com', '1-1태스크내용', '2012-01-02', '2013-09-10', 3);
+
+insert into spms_tasks (PNO, TITLE, UIPROTOURL, CONTENT, START_DATE, END_DATE, STATUS ) 
+values (2, '2-1테스트 태스크', 'test.test.com', '1-1태스크내용', '2012-01-02', '2013-09-10', 0);
+insert into spms_tasks (PNO, TITLE, UIPROTOURL, CONTENT, START_DATE, END_DATE, STATUS ) 
+values (2, '2-2테스트 태스크', 'test.test.com', '1-1태스크내용', '2012-01-02', '2013-09-10', 1);
+insert into spms_tasks (PNO, TITLE, UIPROTOURL, CONTENT, START_DATE, END_DATE, STATUS ) 
+values (2, '2-3테스트 태스크', 'test.test.com', '1-1태스크내용', '2012-01-02', '2013-09-10', 2);
