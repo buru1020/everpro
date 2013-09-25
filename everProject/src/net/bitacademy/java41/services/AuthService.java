@@ -2,19 +2,17 @@ package net.bitacademy.java41.services;
 
 import java.util.List;
 
-import net.bitacademy.java41.annotation.Component;
 import net.bitacademy.java41.dao.MemberDao;
 import net.bitacademy.java41.vo.Member;
 import net.bitacademy.java41.vo.Photo;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
+
 @Component
 public class AuthService {
-	MemberDao memberDao;
+	@Autowired MemberDao memberDao;
 
-	public AuthService setMemberDao(MemberDao memberDao) {
-		this.memberDao = memberDao;
-		return this;
-	}
 
 	public Member getUserInfo(String email, String password) throws Exception {
 		Member member = memberDao.getMember(email, password);

@@ -5,26 +5,24 @@ import java.util.Map;
 
 import javax.servlet.http.HttpSession;
 
-import net.bitacademy.java41.annotation.Component;
 import net.bitacademy.java41.controls.PageControl;
 import net.bitacademy.java41.services.MemberService;
 import net.bitacademy.java41.vo.Member;
 
 import org.apache.commons.fileupload.FileItem;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 
 @Component("/member/myInfoUpdate.do")
 public class MyInfoUpdateControl implements PageControl {
+	@Autowired MemberService memberService;
+
 	String rootRealPath;
-	MemberService memberService;
 	long curTime = 0;
 	int count = 0;
 	
 	public void setRootRealPath(String rootRealPath) {
 		this. rootRealPath = rootRealPath;
-	}
-	public MyInfoUpdateControl setMemberService(MemberService memberService) {
-		this.memberService = memberService;
-		return this;
 	}
 	
 

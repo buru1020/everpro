@@ -2,26 +2,20 @@ package net.bitacademy.java41.controls.task;
 
 import java.util.Map;
 
-import net.bitacademy.java41.annotation.Component;
 import net.bitacademy.java41.controls.PageControl;
 import net.bitacademy.java41.services.ProjectService;
 import net.bitacademy.java41.services.TaskService;
 import net.bitacademy.java41.vo.Project;
 import net.bitacademy.java41.vo.Task;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
+
 @Component("/task/view.do")
 public class TaskViewControl implements PageControl {
-	TaskService taskService;
-	ProjectService projectService;
+	@Autowired TaskService taskService;
+	@Autowired ProjectService projectService;
 	
-	public TaskViewControl setTaskService(TaskService taskService) {
-		this.taskService = taskService;
-		return this;
-	}
-	public TaskViewControl setProjectService(ProjectService projectService) {
-		this.projectService = projectService;
-		return this;
-	}
 	
 	@Override
 	public String execute(Map<String, Object> model) throws Exception {

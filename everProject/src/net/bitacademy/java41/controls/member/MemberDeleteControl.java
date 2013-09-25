@@ -4,18 +4,16 @@ import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 
-import net.bitacademy.java41.annotation.Component;
 import net.bitacademy.java41.controls.PageControl;
 import net.bitacademy.java41.services.MemberService;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
+
 @Component("/member/delete.do")
 public class MemberDeleteControl implements PageControl {
-	MemberService memberService;
+	@Autowired MemberService memberService;
 	
-	public MemberDeleteControl setMemberService(MemberService memberService) {
-		this.memberService = memberService;
-		return this;
-	}
 	
 	@Override
 	public String execute(Map<String, Object> model) throws Exception {

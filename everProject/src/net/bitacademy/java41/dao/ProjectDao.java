@@ -3,22 +3,19 @@ package net.bitacademy.java41.dao;
 import java.util.HashMap;
 import java.util.List;
 
-import net.bitacademy.java41.annotation.Component;
 import net.bitacademy.java41.vo.Project;
 import net.bitacademy.java41.vo.ProjectEx;
 
 import org.apache.ibatis.session.SqlSession;
 import org.apache.ibatis.session.SqlSessionFactory;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 
 @Component
 public class ProjectDao {
-	SqlSessionFactory sqlSessionFactory;
+	@Autowired SqlSessionFactory sqlSessionFactory;
 	
 	public ProjectDao() {}
-	
-	public void setSqlSessionFactory(SqlSessionFactory sqlSessionFactory) {
-		this.sqlSessionFactory = sqlSessionFactory;
-	}
 	
 	
 	public List<ProjectEx> getProjectList() throws Exception {

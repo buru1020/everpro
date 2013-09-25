@@ -2,24 +2,16 @@ package net.bitacademy.java41.services;
 
 import java.util.List;
 
-import net.bitacademy.java41.annotation.Component;
 import net.bitacademy.java41.dao.TaskDao;
-import net.bitacademy.java41.util.DBConnectionPool;
 import net.bitacademy.java41.vo.Task;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 
 @Component
 public class TaskService {
-	TaskDao taskDao;
-	DBConnectionPool conPool;
+	@Autowired TaskDao taskDao;
 	
-	public TaskService setTaskDao(TaskDao taskDao){
-		this.taskDao = taskDao;
-		return this;
-	}
-	public TaskService setDBConnectionPool(DBConnectionPool conPool) {
-		this.conPool = conPool;
-		return this;
-	}
 
 	public List<Task> getTaskList(int no) throws Exception {
 		return taskDao.getTaskList(no);

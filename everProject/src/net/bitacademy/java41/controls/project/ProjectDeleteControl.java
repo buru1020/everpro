@@ -4,18 +4,16 @@ import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 
-import net.bitacademy.java41.annotation.Component;
 import net.bitacademy.java41.controls.PageControl;
 import net.bitacademy.java41.services.ProjectService;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
+
 @Component("/project/delete.do")
 public class ProjectDeleteControl implements PageControl {
-	ProjectService projectService;
+	@Autowired ProjectService projectService;
 	
-	public ProjectDeleteControl setProjectService(ProjectService projectService) {
-		this.projectService = projectService;
-		return this;
-	}
 	
 	@Override
 	public String execute(Map<String, Object> model) throws Exception {

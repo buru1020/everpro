@@ -2,26 +2,20 @@ package net.bitacademy.java41.services;
 
 import java.util.List;
 
-import net.bitacademy.java41.annotation.Component;
 import net.bitacademy.java41.dao.MemberDao;
 import net.bitacademy.java41.dao.ProjectDao;
 import net.bitacademy.java41.vo.Member;
 import net.bitacademy.java41.vo.Photo;
 import net.bitacademy.java41.vo.ProjectEx;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
+
 @Component
 public class MemberService {
-	MemberDao memberDao;
-	ProjectDao projectDao;
+	@Autowired MemberDao memberDao;
+	@Autowired ProjectDao projectDao;
 
-	public MemberService setMemberDao(MemberDao memberDao) {
-		this.memberDao = memberDao;
-		return this;
-	}
-	public MemberService setProjectDao(ProjectDao projectDao) {
-		this.projectDao = projectDao;
-		return this;
-	}
 
 	public int signUp(Member member) throws Exception {
 		int count = 0;

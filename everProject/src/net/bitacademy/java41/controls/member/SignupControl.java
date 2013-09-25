@@ -4,25 +4,23 @@ import java.util.Map;
 
 import javax.servlet.http.HttpSession;
 
-import net.bitacademy.java41.annotation.Component;
 import net.bitacademy.java41.controls.PageControl;
 import net.bitacademy.java41.services.MemberService;
 import net.bitacademy.java41.vo.Member;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
+
 @Component("/member/signup.do")
 public class SignupControl implements PageControl {
+	@Autowired MemberService memberService;
+
 	String rootRealPath;
-	MemberService memberService;
 	int count = 0;
 	long curTime = 0;
-	
 
 	public SignupControl setRootRealPath(String rootRealPath) {
 		this.rootRealPath = rootRealPath;
-		return this;
-	}
-	public SignupControl setMemberService(MemberService memberService) {
-		this.memberService = memberService;
 		return this;
 	}
 

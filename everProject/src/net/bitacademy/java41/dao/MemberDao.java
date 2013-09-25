@@ -3,23 +3,20 @@ package net.bitacademy.java41.dao;
 import java.util.HashMap;
 import java.util.List;
 
-import net.bitacademy.java41.annotation.Component;
 import net.bitacademy.java41.vo.Member;
 import net.bitacademy.java41.vo.Photo;
 import net.bitacademy.java41.vo.ProjectMember;
 
 import org.apache.ibatis.session.SqlSession;
 import org.apache.ibatis.session.SqlSessionFactory;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 
 @Component
 public class MemberDao {
-	SqlSessionFactory sqlSessionFactory;
+	@Autowired SqlSessionFactory sqlSessionFactory;
 	
 	public MemberDao() {	}
-
-	public void setSqlSessionFactory(SqlSessionFactory sqlSessionFactory) {
-		this.sqlSessionFactory = sqlSessionFactory;
-	}
 
 
 	public Member getMember(String email, String password) throws Exception {

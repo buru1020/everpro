@@ -4,28 +4,27 @@ import java.io.File;
 import java.sql.Date;
 import java.util.Map;
 
-import org.apache.commons.fileupload.FileItem;
-
-import net.bitacademy.java41.annotation.Component;
 import net.bitacademy.java41.controls.PageControl;
 import net.bitacademy.java41.services.TaskService;
 import net.bitacademy.java41.vo.Task;
 
+import org.apache.commons.fileupload.FileItem;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
+
 @Component("/task/add.do")
 public class TaskAddControl implements PageControl {
+	@Autowired TaskService taskService;
+	
 	String rootRealPath;
-	TaskService taskService;
 	long curTime = 0;
 	int count = 0;
 	
 	public void setRootRealPath(String rootRealPath) {
 		this. rootRealPath = rootRealPath;
 	}
-	public TaskAddControl setTaskService(TaskService taskService) {
-		this.taskService = taskService;
-		return this;
-	}
 
+	
 	@Override
 	public String execute(Map<String, Object> model) throws Exception {
 		@SuppressWarnings("unchecked")

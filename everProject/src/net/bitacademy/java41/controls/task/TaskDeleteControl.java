@@ -4,18 +4,16 @@ import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 
-import net.bitacademy.java41.annotation.Component;
 import net.bitacademy.java41.controls.PageControl;
 import net.bitacademy.java41.services.TaskService;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
+
 @Component("/task/delete.do")
 public class TaskDeleteControl implements PageControl {
-	TaskService taskService;
+	@Autowired TaskService taskService;
 	
-	public TaskDeleteControl setTaskService(TaskService taskService) {
-		this.taskService = taskService;
-		return this;
-	}
 	
 	@Override
 	public String execute(Map<String, Object> model) throws Exception {

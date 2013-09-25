@@ -2,7 +2,7 @@ package net.bitacademy.java41.controls;
 
 import java.util.Map;
 
-import net.bitacademy.java41.annotation.Component;
+import org.springframework.stereotype.Component;
 
 @Component("/main.do")
 public class MainControl implements PageControl {

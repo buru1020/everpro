@@ -5,20 +5,18 @@ import java.util.Map;
 
 import javax.servlet.http.HttpSession;
 
-import net.bitacademy.java41.annotation.Component;
 import net.bitacademy.java41.controls.PageControl;
 import net.bitacademy.java41.services.ProjectService;
 import net.bitacademy.java41.vo.Member;
 import net.bitacademy.java41.vo.Project;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
+
 @Component("/project/add.do")
 public class ProjectAddControl implements PageControl {
-	ProjectService projectService;
+	@Autowired ProjectService projectService;
 	
-	public ProjectAddControl setProjectService(ProjectService projectService) {
-		this.projectService = projectService;
-		return this;
-	}
 	
 	@Override
 	public String execute(Map<String, Object> model) throws Exception {

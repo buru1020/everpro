@@ -2,18 +2,16 @@ package net.bitacademy.java41.controls.member;
 
 import java.util.Map;
 
-import net.bitacademy.java41.annotation.Component;
 import net.bitacademy.java41.controls.PageControl;
 import net.bitacademy.java41.services.MemberService;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
+
 @Component("/member/passwordChange.do")
 public class PasswordChangeControl implements PageControl{
-	MemberService memberService;
+	@Autowired MemberService memberService;
 	
-	public PasswordChangeControl setMemberService(MemberService memberService) {
-		this.memberService = memberService;
-		return this;
-	}
 	
 	@Override
 	public String execute(Map<String, Object> model) throws Exception {

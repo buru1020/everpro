@@ -37,6 +37,11 @@
         </div>
         <div class="grid_12">
             <ul class="nav main">
+            	<li class="ic-typography"><a href="${rootPath}/main.do"><span>Main</span></a></li>
+            	<li class="ic-form-style"><a href="${rootPath}/feed/list.do"><span>Feed</span></a></li>
+            	<li class="ic-dashboard"><a href="${rootPath}/project/list.do"><span>Project</span></a></li>
+            	<li class="ic-notifications"><a href="${rootPath}/member/list.do"><span>Member</span></a></li>
+            	<!-- 
                 <li class="ic-dashboard"><a href="dashboard.html"><span>Dashboard</span></a> </li>
                 <li class="ic-form-style"><a href="javascript:"><span>Controls</span></a>
                     <ul>
@@ -56,7 +61,7 @@
                     </ul>
                 </li>
                 <li class="ic-notifications"><a href="notifications.html"><span>Notifications</span></a></li>
-
+ 				-->
             </ul>
         </div>
         <div class="clear">

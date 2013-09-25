@@ -2,26 +2,19 @@ package net.bitacademy.java41.services;
 
 import java.util.List;
 
-import net.bitacademy.java41.annotation.Component;
 import net.bitacademy.java41.dao.MemberDao;
 import net.bitacademy.java41.dao.ProjectDao;
 import net.bitacademy.java41.vo.Project;
 import net.bitacademy.java41.vo.ProjectEx;
 import net.bitacademy.java41.vo.ProjectMember;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
+
 @Component
 public class ProjectService {
-	ProjectDao projectDao;
-	MemberDao memberDao;
-
-	public ProjectService setProjectDao(ProjectDao projectDao) {
-		this.projectDao = projectDao;
-		return this;
-	}
-	public ProjectService setMemberDao(MemberDao memberDao) {
-		this.memberDao = memberDao;
-		return this;
-	}
+	@Autowired ProjectDao projectDao;
+	@Autowired MemberDao memberDao;
 
 	
 	public List<ProjectEx> getMyProjectList(String email) throws Exception {

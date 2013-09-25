@@ -6,26 +6,24 @@ import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 
-import net.bitacademy.java41.annotation.Component;
 import net.bitacademy.java41.controls.PageControl;
 import net.bitacademy.java41.services.TaskService;
 import net.bitacademy.java41.vo.Task;
 
 import org.apache.commons.fileupload.FileItem;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 
 @Component("/task/update.do")
 public class TaskUpdateControl implements PageControl {
+	@Autowired TaskService taskService;
+	
 	String rootRealPath;
-	TaskService taskService;
 	int count;
 	long curTime;
 	
 	public void setRootRealPath(String rootRealPath) {
 		this. rootRealPath = rootRealPath;
-	}
-	public TaskUpdateControl setTaskService(TaskService taskService) {
-		this.taskService = taskService;
-		return this;
 	}
 	
 	@Override

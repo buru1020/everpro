@@ -8,19 +8,16 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import net.bitacademy.java41.annotation.Component;
 import net.bitacademy.java41.controls.PageControl;
 import net.bitacademy.java41.services.AuthService;
 import net.bitacademy.java41.vo.Member;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
+
 @Component("/auth/login.do")
 public class LoginControl implements PageControl {
-	AuthService authService;
-
-	public LoginControl setAuthService(AuthService authService) {
-		this.authService = authService;
-		return this;
-	}
+	@Autowired AuthService authService;
 
 
 	@Override
