@@ -36,9 +36,13 @@ public class DispatcherServlet extends HttpServlet {
 			} else {
 				model.put("params", request.getParameterMap());
 			}
+			model.put("application", request.getServletContext());
 			model.put("session", request.getSession());
 			model.put("request", request);
 			model.put("response", response);
+			model.put("rootPath", request.getServletContext().getContextPath());
+			model.put("rootRealPath", request.getServletContext().getRealPath("/"));
+			
 		
 			String viewUrl = null;
 			PageControl control = (PageControl) request.getServletContext().getAttribute(request.getServletPath());
@@ -88,7 +92,12 @@ public class DispatcherServlet extends HttpServlet {
 			HashMap<String, Object> model) {
 		Set<String> keys = model.keySet();
 		for( String key : keys ) {
-			if (!key.equals("cookies") && !key.equals("params")) {
+			if (!key.equals("cookies") &&
+					!key.equals("params") && 
+					!key.equals("application") && 
+					!key.equals("session") &&
+					!key.equals("request") &&
+					!key.equals("response") ) {
 				request.setAttribute(key, model.get(key));
 			}
 		}

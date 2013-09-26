@@ -17,14 +17,8 @@ import org.springframework.stereotype.Component;
 public class MemberUpdateControl implements PageControl {
 	@Autowired MemberService memberService;
 	
-	String rootRealPath;
 	long curTime = 0;
 	int count = 0;
-	
-	public void setRootRealPath(String rootRealPath) {
-		this. rootRealPath = rootRealPath;
-	}
-	
 	
 	
 	@Override
@@ -36,7 +30,7 @@ public class MemberUpdateControl implements PageControl {
 		String[] photos = null;
 		if (photo.getSize() > 0) {
 			String filename = this.getNewFileName();
-			String path = rootRealPath + "res/photo/" + filename;
+			String path = model.get("rootRealPath") + "res/photo/" + filename;
 			photo.write(new File(path));
 			photos = new String[]{ filename };
 		}

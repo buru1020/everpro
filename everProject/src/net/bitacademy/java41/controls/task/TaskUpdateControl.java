@@ -18,13 +18,9 @@ import org.springframework.stereotype.Component;
 public class TaskUpdateControl implements PageControl {
 	@Autowired TaskService taskService;
 	
-	String rootRealPath;
 	int count;
 	long curTime;
 	
-	public void setRootRealPath(String rootRealPath) {
-		this. rootRealPath = rootRealPath;
-	}
 	
 	@Override
 	public String execute(Map<String, Object> model) throws Exception {
@@ -35,7 +31,7 @@ public class TaskUpdateControl implements PageControl {
 		String filename = null;
 		if (fileItem.getSize() > 0) {
 			filename = getNewFileName();
-			String path = rootRealPath + "res/ui/" + filename;
+			String path = model.get("rootRealPath") + "res/ui/" + filename;
 			fileItem.write( new File(path) );
 		}
 		

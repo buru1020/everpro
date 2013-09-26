@@ -93,8 +93,8 @@
                             </td>
                             <td>
                                <c:choose>
-							<c:when test="${member.photos[0] != null}">
-								<img src="${rootPath}/res/photo/${member.photos[0]}" alt="Profile Pic" class="content_member_photo_img" >
+							<c:when test="${memberInfo.photos[0] != null}">
+								<img src="${rootPath}/res/photo/${memberInfo.photos[0]}" alt="Profile Pic" class="content_member_photo_img" >
 							</c:when>
 							<c:otherwise>
 								<img src="${rootPath}/img/img-profile.jpg" alt="Profile Pic" class="content_member_photo_img" >

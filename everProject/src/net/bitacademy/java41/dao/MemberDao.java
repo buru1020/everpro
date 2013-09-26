@@ -160,8 +160,9 @@ public class MemberDao {
 			paramMap.put("email", email);
 			paramMap.put("path", path);
 			
-			int count =sqlSession.insert("net.bitacademy.java41.dao.MemberMapper.addPhoto", paramMap);
+			int count = sqlSession.insert("net.bitacademy.java41.dao.MemberMapper.addPhoto", paramMap);
 			sqlSession.commit();
+			
 			return count;
 			
 		} catch (Exception e) {
@@ -176,10 +177,7 @@ public class MemberDao {
 	public List<Photo> listPhoto(String email) throws Exception {
 		SqlSession sqlSession = sqlSessionFactory.openSession();
 		try{
-			List<Photo> list=
-			sqlSession.selectList("net.bitacademy.java41.dao.MemberMapper.listPhoto", email);
-					sqlSession.commit();
-			return list;
+			return sqlSession.selectList("net.bitacademy.java41.dao.MemberMapper.listPhoto", email);
 			
 		} catch (Exception e) {
 			sqlSession.rollback();

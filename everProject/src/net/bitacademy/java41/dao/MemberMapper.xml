@@ -92,13 +92,13 @@
 
 	<insert id="addPhoto" parameterType="map">
 		insert into SPMS_MEMIMG(EMAIL,IMGURL)
-		values(#{email},#{path})
+		values( #{email}, #{path} )
 	</insert>	
 
 	<select id="listPhoto" parameterType="String" resultType="Photo">
    		select INO as no, IMGURL as filename
 		from SPMS_MEMIMG
-		where EMAIL=#{value}
+		where EMAIL = #{value}
 		order by INO desc
 	</select>
 </mapper>

@@ -15,14 +15,9 @@ import org.springframework.stereotype.Component;
 public class SignupControl implements PageControl {
 	@Autowired MemberService memberService;
 
-	String rootRealPath;
 	int count = 0;
 	long curTime = 0;
 
-	public SignupControl setRootRealPath(String rootRealPath) {
-		this.rootRealPath = rootRealPath;
-		return this;
-	}
 
 	@Override
 	public String execute(Map<String, Object> model) throws Exception {
@@ -33,7 +28,7 @@ public class SignupControl implements PageControl {
 //		String filename = null;
 //		if (photo != null) {
 //			filename = this.getNewFileName();
-//			String path = rootRealPath + "res/photo/" + filename;
+//			String path = model.get("rootRealPath") + "res/photo/" + filename;
 //			photo.write( new File(path) );
 //		}
 		

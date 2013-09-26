@@ -22,7 +22,7 @@ public class AuthService {
 			photos = new String[list.size()];
 			int index = 0;
 			for( Photo photo : list ) {
-				photos[index] = photo.getFilename();
+				photos[index++] = photo.getFilename();
 			}
 		}
 		member.setPhotos(photos);
