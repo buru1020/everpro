@@ -5,7 +5,7 @@ import java.util.Map;
 
 import net.bitacademy.java41.controls.PageControl;
 import net.bitacademy.java41.services.ProjectService;
-import net.bitacademy.java41.vo.ProjectEx;
+import net.bitacademy.java41.vo.Project;
 import net.bitacademy.java41.vo.ProjectMember;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,7 +23,7 @@ public class ProjectViewControl implements PageControl {
 		
 		int no = Integer.parseInt(parmas.get("no")[0]);
 		
-		ProjectEx project = projectService.getProjectInfo(no);
+		Project project = projectService.getProjectInfo(no);
 		List<ProjectMember> memberList = projectService.getProjectMemberList(no);
 		model.put("project", project);
 		model.put("projectMemberList", memberList);

@@ -30,7 +30,9 @@ public class ProjectAddControl implements PageControl {
 													.setStartDate( Date.valueOf(params.get("startDate")[0]) )
 													.setEndDate( Date.valueOf(params.get("endDate")[0]) )
 													.setTag(params.get("tag")[0])
-													.setLeader(member.getEmail())
+													.setPlEmail(member.getEmail())
+													.setPlName(member.getName())
+													.setPlTel(member.getTel())
 												);
 		
 		return "redirect:list.do";

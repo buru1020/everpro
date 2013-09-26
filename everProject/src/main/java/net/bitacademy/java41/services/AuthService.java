@@ -3,6 +3,7 @@ package net.bitacademy.java41.services;
 import java.util.List;
 
 import net.bitacademy.java41.dao.MemberDao;
+import net.bitacademy.java41.dao.MemberImageDao;
 import net.bitacademy.java41.vo.Member;
 import net.bitacademy.java41.vo.Photo;
 
@@ -12,11 +13,12 @@ import org.springframework.stereotype.Component;
 @Component
 public class AuthService {
 	@Autowired MemberDao memberDao;
+	@Autowired MemberImageDao memberImageDao; 
 
 
 	public Member getUserInfo(String email, String password) throws Exception {
 		Member member = memberDao.getMember(email, password);
-		List<Photo> list = memberDao.listPhoto(email);
+		List<Photo> list = memberImageDao.listPhoto(email);
 		String[] photos = null;
 		if (list.size() > 0) {
 			photos = new String[list.size()];

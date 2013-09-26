@@ -1,10 +1,8 @@
 package net.bitacademy.java41.dao;
 
-import java.util.HashMap;
 import java.util.List;
 
 import net.bitacademy.java41.vo.Project;
-import net.bitacademy.java41.vo.ProjectEx;
 
 import org.apache.ibatis.session.SqlSession;
 import org.apache.ibatis.session.SqlSessionFactory;
@@ -18,7 +16,7 @@ public class ProjectDao {
 	public ProjectDao() {}
 	
 	
-	public List<ProjectEx> getProjectList() throws Exception {
+	public List<Project> getProjectList() throws Exception {
 		SqlSession sqlSession = sqlSessionFactory.openSession();
 		try {
 			return sqlSession.selectList("net.bitacademy.java41.dao.ProjectMapper.getProjectList");
@@ -31,7 +29,7 @@ public class ProjectDao {
 		}
 	}
 	
-	public List<ProjectEx> getUserProjectList(String email) throws Exception {
+	public List<Project> getUserProjectList(String email) throws Exception {
 		SqlSession sqlSession = sqlSessionFactory.openSession();
 		try {
 			return sqlSession.selectList("net.bitacademy.java41.dao.ProjectMapper.getUserProjectList", email);
@@ -44,14 +42,14 @@ public class ProjectDao {
 		}
 	}
 	
-	public ProjectEx getProjectInfo(int no) throws Exception {
+	public Project getProjectInfo(int no) throws Exception {
 		SqlSession sqlSession = sqlSessionFactory.openSession();
 		
 		try {
-			ProjectEx projectEx = sqlSession.selectOne("net.bitacademy.java41.dao.ProjectMapper.getProjectInfo", no);
+			Project project = sqlSession.selectOne("net.bitacademy.java41.dao.ProjectMapper.getProjectInfo", no);
 		 	sqlSession.commit();
 		 	
-		 	return projectEx;
+		 	return project;
 		 	
 		} catch (Exception e) {
 			sqlSession.rollback();
@@ -63,25 +61,15 @@ public class ProjectDao {
 		}
 	}
 	
-	public int add(Project project) throws Exception {
+	public int addProject(Project project) throws Exception {
 		SqlSession sqlSession = sqlSessionFactory.openSession();
 		
 		try {
-		
 			sqlSession.insert(
-					"net.bitacademy.java41.dao.ProjectMapper.add", project);
+					"net.bitacademy.java41.dao.ProjectMapper.addProject", project);
+			sqlSession.commit();
 				
-				HashMap<String,Object> paramMap = new HashMap<String,Object>();
-				paramMap.put("email", project.getLeader());
-				paramMap.put("projectNo", project.getNo());
-				paramMap.put("memberLevel", 0);
-				
-				sqlSession.insert(
-					"net.bitacademy.java41.dao.ProjectMapper.addProjectMember", 
-					paramMap);
-				
-				sqlSession.commit();
-				return project.getNo();
+			return project.getNo();
 			
 		} catch (Exception e) {
 			sqlSession.rollback();
@@ -112,19 +100,16 @@ public class ProjectDao {
 		}
 	}
 
-	public int delete(int no) throws Exception {
+	public int deleteProject(int projectNo) throws Exception {
 		SqlSession sqlSession = sqlSessionFactory.openSession();
-		
 		try {
-			sqlSession.delete(
-					"net.bitacademy.java41.dao.ProjectMapper.deleteProjectTask", no);
-			sqlSession.delete(
-					"net.bitacademy.java41.dao.ProjectMapper.deleteProjectMember", no);
 			int count = sqlSession.delete(
-					"net.bitacademy.java41.dao.ProjectMapper.delete", no);
+					"net.bitacademy.java41.dao.ProjectMapper.deleteProject", projectNo);
 			
 			sqlSession.commit();
+			
 			return count;
+			
 		} catch (Exception e) {
 			sqlSession.rollback();
 			throw e;

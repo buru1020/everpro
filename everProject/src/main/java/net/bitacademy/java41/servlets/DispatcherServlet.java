@@ -19,6 +19,8 @@ import org.apache.commons.fileupload.FileItem;
 import org.apache.commons.fileupload.FileItemFactory;
 import org.apache.commons.fileupload.disk.DiskFileItemFactory;
 import org.apache.commons.fileupload.servlet.ServletFileUpload;
+import org.springframework.web.context.WebApplicationContext;
+import org.springframework.web.context.support.WebApplicationContextUtils;
 
 @SuppressWarnings("serial")
 public class DispatcherServlet extends HttpServlet {
@@ -45,7 +47,9 @@ public class DispatcherServlet extends HttpServlet {
 			
 		
 			String viewUrl = null;
-			PageControl control = (PageControl) request.getServletContext().getAttribute(request.getServletPath());
+			
+			WebApplicationContext ctx = WebApplicationContextUtils.getWebApplicationContext(request.getServletContext());
+			PageControl control = (PageControl) ctx.getBean(request.getServletPath());
 			
 			if (control != null) {
 				viewUrl = control.execute(model);

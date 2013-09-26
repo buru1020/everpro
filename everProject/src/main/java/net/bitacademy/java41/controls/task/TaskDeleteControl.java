@@ -26,7 +26,7 @@ public class TaskDeleteControl implements PageControl {
 		HttpServletRequest request = (HttpServletRequest) model.get("request");
 		String returnUrl = request.getServletContext().getContextPath() + "/main.do";
 		String resutlStatus = "";
-		if (taskService.taskDelete(projectNo, taskNo) > 0) {
+		if (taskService.deleteTask(projectNo, taskNo) > 0) {
 			returnUrl = request.getServletContext().getContextPath() + "/task/list.do?projectNo=" + projectNo;
 			resutlStatus = "DELETE_SUCCESS";
 		} else {

@@ -7,7 +7,7 @@ import javax.servlet.http.HttpServletRequest;
 
 import net.bitacademy.java41.controls.PageControl;
 import net.bitacademy.java41.services.ProjectService;
-import net.bitacademy.java41.vo.ProjectEx;
+import net.bitacademy.java41.vo.Project;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -35,7 +35,7 @@ public class ProjectUpdateControl implements PageControl {
 		
 		int no = Integer.parseInt( params.get("no")[0] );
 		
-		ProjectEx project = projectService.getProjectInfo(no);
+		Project project = projectService.getProjectInfo(no);
 		model.put("project", project);
 		
 		return "/project/ProjectUpdateForm.jsp";
@@ -52,7 +52,7 @@ public class ProjectUpdateControl implements PageControl {
 		Date endDate = Date.valueOf( params.get("endDate")[0] );
 		String tag = params.get("tag")[0];
 
-		ProjectEx project = projectService.getProjectInfo(no);
+		Project project = projectService.getProjectInfo(no);
 		project.setTitle(!"".equals(title) ? title : project.getTitle());
 		project.setContent(!"".equals(content) ? content : project.getContent());
 		project.setStartDate(!"".equals(startDate) ? startDate : project.getStartDate());

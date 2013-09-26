@@ -4,7 +4,6 @@ import java.util.HashMap;
 import java.util.List;
 
 import net.bitacademy.java41.vo.Member;
-import net.bitacademy.java41.vo.Photo;
 import net.bitacademy.java41.vo.ProjectMember;
 
 import org.apache.ibatis.session.SqlSession;
@@ -98,23 +97,6 @@ public class MemberDao {
 		}
 	}
 
-	public int deleteProjectMember(String email) {
-		SqlSession sqlSession = sqlSessionFactory.openSession();
-		try {
-			int count = sqlSession.delete("net.bitacademy.java41.dao.MemberMapper.deleteProjectMember", email); 
-			sqlSession.commit();
-			
-			return count;
-			
-		} catch (Exception e) {
-			sqlSession.rollback();
-			throw e;
-			
-		} finally {
-			try {sqlSession.close();} catch(Exception e) {}
-		}
-	}	
-	
 	public int deleteMember(String email) {
 		SqlSession sqlSession = sqlSessionFactory.openSession();
 		try {
@@ -153,39 +135,5 @@ public class MemberDao {
 		}
 	}
 	
-	public int addPhoto(String email, String path) throws Exception {
-		SqlSession sqlSession = sqlSessionFactory.openSession();
-		try {
-			HashMap<String,Object> paramMap = new HashMap<String,Object>();
-			paramMap.put("email", email);
-			paramMap.put("path", path);
-			
-			int count = sqlSession.insert("net.bitacademy.java41.dao.MemberMapper.addPhoto", paramMap);
-			sqlSession.commit();
-			
-			return count;
-			
-		} catch (Exception e) {
-			sqlSession.rollback();
-			throw e;
-			
-		} finally {
-			try {sqlSession.close();} catch(Exception e) {}
-		}
-	}
-
-	public List<Photo> listPhoto(String email) throws Exception {
-		SqlSession sqlSession = sqlSessionFactory.openSession();
-		try{
-			return sqlSession.selectList("net.bitacademy.java41.dao.MemberMapper.listPhoto", email);
-			
-		} catch (Exception e) {
-			sqlSession.rollback();
-			throw e;
-		} finally {
-			try {sqlSession.close();} catch (Exception e) {}
-		}
-	}	
-
 
 }

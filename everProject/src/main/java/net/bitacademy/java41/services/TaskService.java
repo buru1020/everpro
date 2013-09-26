@@ -21,10 +21,10 @@ public class TaskService {
 		return taskDao.getTask(projectNo, taskNo);
 	}
 	
-	public int taskUpdate(Task task) throws Exception {
+	public int updateTask(Task task) throws Exception {
 		int count = 0;
 		try {
-			count = taskDao.update(task);
+			count = taskDao.updateTask(task);
 			
 		} catch (Exception e) {
 			throw e;
@@ -34,10 +34,10 @@ public class TaskService {
 		
 		return count;
 	}
-	public int taskAdd(Task task) throws Exception {
+	public int addTask(Task task) throws Exception {
 		int count = 0;
 		try {
-			count = taskDao.add(task);
+			count = taskDao.addTask(task);
 			
 		} catch (Exception e) {
 			throw e;
@@ -47,15 +47,14 @@ public class TaskService {
 		
 		return count;
 	}
-	public int taskDelete(int projectNo, int taskNo) throws Exception {
+	
+	public int deleteTask(int projectNo, int taskNo) throws Exception {
 		int count = 0;
 		try {
-			count = taskDao.delete(projectNo, taskNo);
+			count = taskDao.deleteTask(projectNo, taskNo);
 			
 		} catch (Exception e) {
 			throw e;
-			
-		} finally {
 		}
 		
 		return count;

@@ -1,4 +1,4 @@
-<%@page import="net.bitacademy.java41.vo.ProjectEx"%>
+<%@page import="net.bitacademy.java41.vo.Project"%>
 <%@page import="net.bitacademy.java41.vo.Member"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>

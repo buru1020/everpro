@@ -54,7 +54,7 @@ public class TaskUpdateControl implements PageControl {
 		HttpServletRequest request = (HttpServletRequest) model.get("request");
 		String returnUrl = request.getServletContext().getContextPath() + "/main.do";
 		String resutlStatus = "";
-		if (taskService.taskUpdate(task) > 0) {
+		if (taskService.updateTask(task) > 0) {
 			returnUrl = request.getServletContext().getContextPath() + "/task/view.do?projectNo=" + projectNo + "&taskNo=" + taskNo;
 			resutlStatus = "UPDATE_SUCCESS";
 		} else {

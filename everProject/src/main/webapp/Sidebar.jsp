@@ -1,9 +1,14 @@
+<%@page import="net.bitacademy.java41.services.ProjectService"%>
+<%@page import="org.springframework.web.context.WebApplicationContext"%>
+<%@page import="org.springframework.web.context.support.WebApplicationContextUtils"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <jsp:useBean id="member" scope="session" type="net.bitacademy.java41.vo.Member"/>
-<jsp:useBean id="projectService" scope="application" type="net.bitacademy.java41.services.ProjectService"/>
 <%
-	pageContext.setAttribute("projectList", projectService.getMyProjectList(member.getEmail()));
+WebApplicationContext ctx = WebApplicationContextUtils.getWebApplicationContext(request.getServletContext());
+ProjectService projectService = (ProjectService) ctx.getBean("projectService");
+
+pageContext.setAttribute("projectList", projectService.getMyProjectList(member.getEmail()));
 %>
 <!-- Side Menu Start -->
         <div class="grid_2">

@@ -12,7 +12,11 @@ public class Project implements Serializable {
 	protected Date 		startDate;
 	protected Date 		endDate;
 	protected String		tag;
-	protected String 	leader;
+	protected String 	plEmail;
+	protected String 	plName;
+	protected String 	plTel;
+	protected int		 	level;
+	
 	
 	public int getNo() {
 		return no;
@@ -56,13 +60,36 @@ public class Project implements Serializable {
 		this.tag = tag;
 		return this;
 	}
-	public String getLeader() {
-		return leader;
+	public String getPlEmail() {
+		return plEmail;
 	}
-	public Project setLeader(String leader) {
-		this.leader = leader;
+	public Project setPlEmail(String plEmail) {
+		this.plEmail = plEmail;
 		return this;
 	}
+	public String getPlName() {
+		return plName;
+	}
+	public Project setPlName(String plName) {
+		this.plName = plName;
+		return this;
+	}
+	public String getPlTel() {
+		return plTel;
+	}
+	public Project setPlTel(String plTel) {
+		this.plTel = plTel;
+		return this;
+	}
+	
+	public int getLevel() {
+		return level;
+	}
+	public Project setLevel(int level) {
+		this.level = level;
+		return this;
+	}
+	
 	
 	public Project clone() {
 		Project obj = new Project();
@@ -72,7 +99,10 @@ public class Project implements Serializable {
 		obj.startDate = this.startDate;
 		obj.endDate = this.endDate;
 		obj.tag = this.tag;
-		obj.leader = this.leader;
+		obj.plEmail = this.plEmail;
+		obj.plName = this.plName;
+		obj.plTel = this.plTel;
+		obj.level = this.level;
 		
 		return obj;
 	}

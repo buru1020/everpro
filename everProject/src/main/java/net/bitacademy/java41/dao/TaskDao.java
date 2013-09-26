@@ -60,7 +60,7 @@ public class TaskDao {
 		}
 	}
 
-	public int update(Task task) throws Exception {
+	public int updateTask(Task task) throws Exception {
 		SqlSession sqlSession = sqlSessionFactory.openSession();
 		
 		try {
@@ -77,14 +77,15 @@ public class TaskDao {
 		}
 	}
 
-	public int add(Task task) throws Exception {
+	public int addTask(Task task) throws Exception {
 		SqlSession sqlSession = sqlSessionFactory.openSession();
 		
 		try {
 			int count = sqlSession.insert(
-					"net.bitacademy.java41.dao.TaskMapper.add", task);
-				sqlSession.commit();
-				return count;
+					"net.bitacademy.java41.dao.TaskMapper.addTask", task);
+			sqlSession.commit();
+			
+			return count;
 			
 		} catch (Exception e) {
 			sqlSession.rollback();
@@ -95,14 +96,14 @@ public class TaskDao {
 		}
 	}
 
-	public int delete(int projectNo, int taskNo) throws Exception {
+	public int deleteTask(int projectNo, int taskNo) throws Exception {
 		SqlSession sqlSession = sqlSessionFactory.openSession();
 		HashMap<String,Object> paramMap = new HashMap<String,Object>();
 		paramMap.put("projectNo", projectNo);
 		paramMap.put("taskNo", taskNo);
 		try {
 			int count = sqlSession.delete(
-					"net.bitacademy.java41.dao.TaskMapper.delete", paramMap);
+					"net.bitacademy.java41.dao.TaskMapper.deleteTask", paramMap);
 			sqlSession.commit();
 			return count;
 

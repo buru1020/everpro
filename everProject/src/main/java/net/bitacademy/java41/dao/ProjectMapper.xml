@@ -4,7 +4,7 @@
 		"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="net.bitacademy.java41.dao.ProjectMapper">
 
-	<select id="getUserProjectList" parameterType="string" resultType="ProjectEx">
+	<select id="getUserProjectList" parameterType="string" resultType="Project">
 		select a.PNO as no
 			, a.TITLE
 			, a.CONTENT
@@ -27,7 +27,7 @@
 		 order by a.PNO desc
 	</select>
 	
-	<select id="getProjectList" resultType="ProjectEx">
+	<select id="getProjectList" resultType="Project">
 		select a.PNO as no
 			, a.TITLE
 			, a.CONTENT
@@ -49,7 +49,7 @@
 		 order by a.PNO desc
 	</select>
 	
-	<select id="getProjectInfo" resultType="ProjectEx" parameterType="int">
+	<select id="getProjectInfo" resultType="Project" parameterType="int">
  	    select a.PNO as no, a.TITLE, a.CONTENT, a.START_DATE as startDate,  
  	     		a.END_DATE as endDate, a.TAG, b.LEVEL, b.EMAIL as plEmail,  
  	     		b.MNAME as plName, b.TEL as plTel 
@@ -64,91 +64,26 @@
  		order by a.PNO desc 
 	</select>
 	
-	<insert id="add" parameterType="Project"
+	<insert id="addProject" parameterType="Project"
 		useGeneratedKeys="true" keyProperty="no">
-		insert into SPMS_PRJS(TITLE,CONTENT,START_DATE,END_DATE,TAG)
-		values(#{title},#{content},#{startDate},#{endDate},#{tag})
-	</insert>
-	
-	<insert id="addProjectMember" parameterType="map">
-		insert into SPMS_PRJMEMB(EMAIL,PNO,LEVEL)
-		values(#{email},#{projectNo},#{memberLevel})
+		insert into SPMS_PRJS( TITLE, CONTENT, START_DATE, END_DATE, TAG )
+		values( #{title}, #{content}, #{startDate}, #{endDate}, #{tag} )
 	</insert>
 	
 	<update id="update" parameterType="Project">
 		update SPMS_PRJS set
-			TITLE=#{title},
-			CONTENT=#{content},
-	 		START_DATE=#{startDate},
-			END_DATE=#{endDate},
-			TAG=#{tag}
-		where PNO=#{no}
+			TITLE = #{title},
+			CONTENT = #{content},
+	 		START_DATE = #{startDate},
+			END_DATE = #{endDate},
+			TAG = #{tag}
+		where PNO = #{no}
 	</update>
 	
-	<delete id="delete" parameterType="int">
+	<delete id="deleteProject" parameterType="int">
 		delete from SPMS_PRJS 
-		where PNO=#{value}
-	</delete>
-	
-	<delete id="deleteProjectMember" parameterType="int">
-		delete from SPMS_PRJMEMB 
-		where PNO=#{value}
-	</delete>
-	
-	<delete id="deleteProjectTask" parameterType="int">
-		delete from SPMS_TASKS
-		where PNO=#{value}
-	</delete>
-
-
-<!-- 	<select id="listByMember" parameterType="string" resultType="MemberProject">
-		select t1.PNO as no, t1.TITLE, t2.LEVEL
-		from SPMS_PRJS t1, SPMS_PRJMEMB t2
-		where t1.PNO = t2.PNO and t2.EMAIL = #{value}
-	</select>
-	
-	<select id="list" resultType="Project">
-		select 
-			PNO as no,
-			TITLE,
-			START_DATE as startDate,
-			END_DATE as endDate
-		from SPMS_PRJS
-		order by PNO desc
-	</select>
-	
-	<select id="get" parameterType="int" resultType="Project">
-		select 
-			PNO as no, 
-			TITLE, 
-			CONTENT, 
-			START_DATE as startDate, 
-			END_DATE as endDate, 
-			TAG
-		from SPMS_PRJS
 		where PNO = #{value}
-	</select>
-	
-	<insert id="add" parameterType="Project" useGeneratedKeys="true" keyProperty="no">
-		insert into SPMS_PRJS( TITLE,CONTENT,START_DATE,END_DATE,TAG )
-		values( #{title}, #{content}, #{startDate}, #{endDate}, #{tag} )
-	</insert>
-	
-	<insert id="addProjectMember" parameterType="map" >
-		insert into SPMS_PRJMEMB( EMAIL, PNO, LEVEL )
-		values( #{email}, #{projectNo}, #{memberLevel} )
-	</insert>
-	
-	<update id="update" parameterType="Project">
-		update SMPS_PRJS
-		<set>
-			<if test="title != null">TITLE = #{title},</if>
-			<if test="content != null">CONTENT = #{content},</if>
-			<if test="startDate != null">START_DATE = #{startDate},</if>
-			<if test="endDate != null">END_DATE = #{endDate},</if>
-			<if test="tag != ''">TAG = #{tag}</if>
-		</set>
-	</update> -->
+	</delete>
 	
 </mapper>
 

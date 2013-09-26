@@ -73,12 +73,6 @@
 		where EMAIL=#{email}
 	</update>
 	
-	
-	<delete id="deleteProjectMember" parameterType="string">
-		delete from SPMS_PRJMEMB
-		where EMAIL = #{value}
-	</delete>
-	
 	<delete id="deleteMember" parameterType="string">
 		delete from SPMS_MEMBS
 		where EMAIL = #{value}

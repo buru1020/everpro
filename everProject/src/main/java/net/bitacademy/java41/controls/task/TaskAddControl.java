@@ -43,7 +43,7 @@ public class TaskAddControl implements PageControl {
 								.setStatus( Integer.parseInt((String) params.get("status")) )
 								;
 		
-		taskService.taskAdd(task);
+		taskService.addTask(task);
 			
 		return "redirect:../task/list.do?projectNo=" + task.getProjectNo();
 	}
