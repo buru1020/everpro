@@ -56,60 +56,53 @@
 <jsp:include page="/header.jsp"></jsp:include>
         
 <!-- Sidebar -->
-
 <jsp:include page="/sidebar.do"></jsp:include>
-
 
 <!-- Content -->
    
    
    
 	<!-- Container Start -->
-
-
-
-	<div class="grid_10">
+	
+	 <div class="grid_10">
             <div class="box round first grid">
-             
-			 <h2>작업 목록</h2>
-			
-                <div class="block ">
-      
- 
-		           <p>${project.title}</p>
-		    <table class="data display datatable" id="example">
+                <h2>화원 목록</h2>
+                <div class="block">
+                    <table class="data display datatable" id="example">
 					<thead>
-						<tr><th class="sorting_asc" rowspan="1" colspan="1" style="width: 253px;">작업명</th>
+						<tr><th class="sorting_asc" rowspan="1" colspan="1" style="width: 253px;">프로젝트 명</th>
 						<th class="sorting" rowspan="1" colspan="1" style="width: 313px;">시작일</th>
 						<th class="sorting" rowspan="1" colspan="1" style="width: 294px;">종료일</th>
-						<th class="sorting" rowspan="1" colspan="1" style="width: 212px;">상태</th>
+						<th class="sorting" rowspan="1" colspan="1" style="width: 212px;">PL</th>
+						<th class="sorting" rowspan="1" colspan="1" style="width: 153px;">등급</th>
 						</tr>
 					</thead>
+					
 					<tbody>
-						<c:forEach var="task" items="${taskList}">			
-					<tr onclick="document.location.href='view.do?projectNo=${task.projectNo}&taskNo=${task.taskNo}'">
-						<td>${task.title}</td>
-						<td>${task.startDate}</td>
-						<td>${task.endDate}</td>
+						<c:forEach var="project" items="${totalProjectList}">			
+					<tr onclick="document.location.href='${rootPath}/project/view.do?no=${project.no}'">
+						<td style="text-align: left;">${project.title}</td>
+						<td>${project.startDate}</td>
+						<td>${project.endDate}</td>
 						<td><c:choose>
-						<c:when test="${task.status == 0}">등록</c:when>
-						<c:when test="${task.status == 1}">진행</c:when>
-						<c:when test="${task.status == 2}">완료</c:when>
-						<c:when test="${task.status == 3}">지연</c:when>
-					</c:choose></td>
-						
+							<c:when test="${project.plName != ''}">${project.plName}</c:when>
+							<c:otherwise>-</c:otherwise>
+						</c:choose></td>
+						<td><c:if test="${project.plEmail == sessionScope.member.email}">★</c:if></td>
 					</tr>
-					</c:forEach>
-					</tbody>
-			</table>
-			<div class="table_bottom_btns_div">
-				 <button class="btn-icon btn-green btn-person" 
-							onclick="document.location.href='${rootPath}/task/add.do?projectNo=${project.no}';"><span></span>새 작업 등록</button>
-			</div>
+</c:forEach>
+						
+					</tbody></table>
+				<div class="table_bottom_btns_div">
+					 <c:if test="${!(member.level == 1)}">
+					 <button class="btn-icon btn-green btn-person" 
+							onclick="document.location.href='${rootPath}/project/add.do';"><span></span>신규 프로젝트 등록</button>
+					</c:if> 
+				</div>
+                    
                 </div>
             </div>
         </div>
-	
 <!-- //Content -->
 
 
@@ -122,3 +115,4 @@
 </body>
 </html>
 				
+

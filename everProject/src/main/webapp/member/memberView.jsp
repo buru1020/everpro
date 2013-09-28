@@ -1,6 +1,5 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -65,7 +64,6 @@
         }
     </style>
     
-    
     <!-- 추가  CSS-->
     <link rel="stylesheet" type="text/css" href="${rootPath}/css/header.css" />
     <link rel="stylesheet" type="text/css" href="${rootPath}/css/sidebar.css"/>
@@ -85,53 +83,153 @@
         <div class="grid_10">
             <div class="box round first fullpage">
                 <h2>
-					회원정보 변경</h2>
+					회원정보</h2>
                 <div class="block ">
-                    <form action="passwordChange.do" method="post">
                     <table class="form">
-                        <tr>
+                    <tr>
                             <td>
                                 <label>
-                                    	이메일</label>
+                                    	</label>
                             </td>
                             <td>
-                                <input type="text" class="mini" name="email" value="${member.email}" readonly>
+                               <c:choose>
+							<c:when test="${memberInfo.photos[0] != null}">
+								<img src="${rootPath}/res/photo/${memberInfo.photos[0]}" alt="Profile Pic" class="content_member_photo_img" >
+							</c:when>
+							<c:otherwise>
+								<img src="${rootPath}/img/img-profile.jpg" alt="Profile Pic" class="content_member_photo_img" >
+							</c:otherwise>
+							</c:choose>
                             </td>
                         </tr>
                         <tr>
                             <td>
                                 <label>
-                                    	이전 비밀번호</label>
+                                    	구분</label>
                             </td>
                             <td>
-                                <input type="password" class="mini" name="password" required>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>
-                                <label>
-                                    	새 비밀번호</label>
-                            </td>
-                            <td>
-                                <input type="password" class="mini" name="newPassword" required>
+                                <c:choose>
+									<c:when test="${memberInfo.level == 0}">일반</c:when>
+									<c:when test="${memberInfo.level == 1}">관리자</c:when>
+									<c:when test="${memberInfo.level == 2}">PM강사</c:when>
+									<c:when test="${memberInfo.level == 9}">손님</c:when>
+								</c:choose>
                             </td>
                         </tr>
                         <tr>
                             <td>
                                 <label>
-                                    	새 비밀번호(확인)</label>
+                                    	이름</label>
                             </td>
                             <td>
-                                <input type="password" class="mini" name="newPassword2" required>
+                                <input type="text" class="mini" value="${memberInfo.name}" disabled />
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <label>
+                                   		이메일</label>
+                            </td>
+                            <td>
+                                <input type="text" class="mini" value="${memberInfo.email}" disabled />
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <label>
+										전화</label>
+                            </td>
+                            <td>
+                                <input type="text" class="mini" value="${memberInfo.tel}" disabled />
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <label>
+										블로그</label>
+                            </td>
+                            <td>
+                                <input type="text" class="mini" value="${memberInfo.blog}" disabled />
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <label>
+                                    	우편번호</label>
+                            </td>
+                            <td>
+                                <input type="text" class="mini" value="${memberInfo.postNo}" disabled />
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <label>
+                                    	기본주소</label>
+                            </td>
+                            <td>
+                                <input type="text" class="mini" value="" disabled />
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <label>
+                                   	  	상세주소</label>
+                            </td>
+                            <td>
+                                <input type="text" class="mini" value="${memberInfo.detailAddress}" disabled />
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <label>
+                                    	태그</label>
+                            </td>
+                            <td>
+                                <input type="text" class="mini" value="${memberInfo.tag}" disabled />
                             </td>
                         </tr>
                     </table>
                     <div class="form_submit_div">
-						<input type="submit" value="변경" class="btn btn-green submit">
-						<input type="button" value="취소" class="btn btn-grey reset"
-								onclick="document.location.href='myInfoUpdate.do?email=${member.email}'">
+                   
+                    	<button class="btn btn-orange" 
+                    			onclick="document.location.href='list.do';">목록</button>
+<c:if test="${member.level == 1}">                     			
+                    	<button class="btn btn-green" 
+                    			onclick="document.location.href='update.do?email=${memberInfo.email}';">변경</button>
+                    	<button class="btn btn-grey" 
+                    			onclick="document.location.href='delete.do?email=${memberInfo.email}';">삭제</button>
+</c:if>                    			
 					</div>
-                    </form>
+                </div>
+            </div>
+            
+			<div class="box round">
+                <h2>
+					참여 프로젝트</h2>
+                <div class="block">
+                    <table class="data display datatable" id="example">
+					<thead>
+						<tr>
+							<th>프로젝트명</th>
+							<th>PL</th>
+							<th>구분</th>
+							<th> </th>
+							<th> </th>
+						</tr>
+					</thead>
+					<tbody>
+<c:forEach var="userProject" items="${projectList}">				
+					<tr class="odd gradeX">
+						<td >${userProject.title}</td>
+						<td>${userProject.plName}</td>
+						<td><c:if test="${userProject.level == 0}">★</c:if></td>
+						<td> </td>
+						<td> </td>
+					</tr>
+</c:forEach>
+						
+					</tbody>
+				</table>
                 </div>
             </div>
         </div>

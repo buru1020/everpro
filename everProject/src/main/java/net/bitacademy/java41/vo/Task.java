@@ -3,16 +3,15 @@ package net.bitacademy.java41.vo;
 import java.sql.Date;
 
 public class Task {
-	
 	/*
-	 * TNO`        INTEGER      NOT NULL COMMENT '태스크번호', -- 태스크번호
-	`PNO`        INTEGER      NOT NULL COMMENT '프로젝트번호', -- 프로젝트번호
-	`TITLE`      VARCHAR(255) NOT NULL COMMENT '작업명', -- 작업명
-	`UIPROTOURL` VARCHAR(255) NULL     COMMENT 'UI프로토타입', -- UI프로토타입
-	`CONTENT`    TEXT         NULL     COMMENT '내용', -- 내용
-	`START_DATE` DATETIME     NULL     COMMENT '착수일', -- 착수일
-	`END_DATE`   DATETIME     NULL     COMMENT '종료일', -- 종료일
-	`STATUS`     INTEGER      NULL     DEFAULT 0 COMMENT '상태' -- 상태
+	`TNO`       			INTEGER      		NOT NULL 	COMMENT '태스크번호', -- 태스크번호
+	`PNO`        		INTEGER      		NOT NULL 	COMMENT '프로젝트번호', -- 프로젝트번호
+	`TITLE`      		VARCHAR(255) 	NOT NULL 	COMMENT '작업명', -- 작업명
+	`UIPROTOURL` 	VARCHAR(255) 	NULL     		COMMENT 'UI프로토타입', -- UI프로토타입
+	`CONTENT`    		TEXT         		NULL     		COMMENT '내용', -- 내용
+	`START_DATE` 	DATETIME     		NULL     		COMMENT '착수일', -- 착수일
+	`END_DATE`   		DATETIME     		NULL     		COMMENT '종료일', -- 종료일
+	`STATUS`     		INTEGER      		NULL     		DEFAULT 0 COMMENT '상태' -- 상태
 	 * */
 	protected int taskNo;
 	protected int projectNo;

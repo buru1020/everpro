@@ -64,7 +64,7 @@ public class TaskDao {
 		SqlSession sqlSession = sqlSessionFactory.openSession();
 		
 		try {
-			int count =sqlSession.update("net.bitacademy.java41.dao.TaskMapper.update",task);
+			int count =sqlSession.update("net.bitacademy.java41.dao.TaskMapper.updateTask",task);
 			sqlSession.commit();
 			return count;
 

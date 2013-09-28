@@ -77,10 +77,10 @@
 <body>
     <div class="container_12">
 <!-- Header -->
-<jsp:include page="/Header.jsp"></jsp:include>
+<jsp:include page="/header.jsp"></jsp:include>
         
 <!-- Sidebar -->
-<jsp:include page="/Sidebar.jsp"></jsp:include>
+<jsp:include page="/sidebar.do"></jsp:include>
 
 <!-- Content -->
         <div class="grid_10">
@@ -88,7 +88,7 @@
                 <h2>
 					회원정보 변경</h2>
                 <div class="block ">
-                    <form action="myInfoUpdate.do" method="post" enctype="multipart/form-data">
+                    <form action="updateMyInfo.do" method="post" enctype="multipart/form-data">
                     <table class="form">
                         <tr>
                             <td>
@@ -105,9 +105,9 @@
                                     	비밀번호</label>
                             </td>
                             <td>
-                                <input type="password" class="mini" name="password">
-                                <input type="button" value="비밀번호 변경" 
-										onclick="document.location.href='${rootPath}/member/passwordChange.do'" class="btn btn-small btn-grey">
+                                <input type="password" class="mini" name="password" required>
+                                <input type="button" class="btn btn-small btn-grey" value="비밀번호 변경" 
+										onclick="document.location.href='${rootPath}/member/passwordChange.do'">
                             </td>
                         </tr>
                         <tr>
@@ -116,7 +116,7 @@
                                     	이름</label>
                             </td>
                             <td>
-                                <input type="text" class="mini" name="name" value="${member.name}">
+                                <input type="text" class="mini" name="name" value="${member.name}" required>
                             </td>
                         </tr>
                         <tr>
@@ -125,7 +125,7 @@
                                     	전화</label>
                             </td>
                             <td>
-                                <input type="text" class="mini" name="tel" value="${member.tel}">
+                                <input type="text" class="mini" name="tel" value="${member.tel}" required>
                             </td>
                         </tr>
                         <tr>
@@ -152,7 +152,7 @@
                                     	우편변호</label>
                             </td>
                             <td>
-                                <input type="text"class="mini"  name="postno" value="">
+                                <input type="text"class="mini"  name="postNo" value="${member.postNo}">
 								<input type="button" value="우편번호 찾기" class="btn btn-small btn-grey"
 								onclick="">
                             </td>
@@ -163,7 +163,7 @@
                                    	  	기본주소</label>
                             </td>
                             <td>
-                                <input type="text" class="mini" name="basicAddr" value="">
+                                <input type="text" class="mini" name="basicAddress" value="">
                             </td>
                         </tr>
                         <tr>
@@ -172,7 +172,7 @@
                                     	상세주소</label>
                             </td>
                             <td>
-                                <input type="text" class="mini" name="detailAddr" value="">
+                                <input type="text" class="mini" name="detailAddress" value="${member.detailAddress}">
                             </td>
                         </tr>
                         <tr>
@@ -217,7 +217,7 @@
         </div>
     </div>
 <!-- Tail -->
-<jsp:include page="/Tail.jsp"></jsp:include>
+<jsp:include page="/tail.jsp"></jsp:include>
 
 </body>
 </html>

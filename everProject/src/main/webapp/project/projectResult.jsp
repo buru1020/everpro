@@ -1,3 +1,5 @@
+<%@page import="net.bitacademy.java41.vo.Project"%>
+<%@page import="net.bitacademy.java41.vo.Member"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <!-- <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"> -->
@@ -67,11 +69,11 @@
                 <div class="block ">
 					<c:choose>
 					<%-- 프로젝트 수정 --%>
-					<c:when test="${resultStatus == 'UPDATE_FAIL'}">작업 정보 변경 실패하였습니다..</c:when>
-					<c:when test="${resultStatus == 'UPDATE_SUCCESS'}">작업 정보가 변경되었습니다.</c:when>
+					<c:when test="${status == 'UPDATE_FAIL'}">프로젝트 정보 변경 실패하였습니다..</c:when>
+					<c:when test="${status == 'UPDATE_SUCCESS'}">프로젝트 정보가 변경되었습니다.</c:when>
 					<%-- 프로젝트 삭제 --%>
-					<c:when test="${resultStatus == 'DELETE_FAIL'}">작업이 삭제 실패하였습니다.</c:when>
-					<c:when test="${resultStatus == 'DELETE_SUCCESS'}">작업이 삭제되었습니다.</c:when>
+					<c:when test="${status == 'DELETE_FAIL'}">프로젝트 삭제 실패하였습니다.</c:when>
+					<c:when test="${status == 'DELETE_SUCCESS'}">프로젝트 삭제되었습니다.</c:when>
 					<c:otherwise>오류상황</c:otherwise>
 					</c:choose><br>
                 </div>

@@ -75,10 +75,10 @@
 <body>
     <div class="container_12">
 <!-- Header -->
-<jsp:include page="/Header.jsp"></jsp:include>
+<jsp:include page="/header.jsp"></jsp:include>
         
 <!-- Sidebar -->
-<jsp:include page="/Sidebar.jsp"></jsp:include>
+<jsp:include page="/sidebar.do"></jsp:include>
 
 <!-- Content -->
         <div class="grid_10">
@@ -115,6 +115,7 @@
                             </td>
                             <td>
                                 <input type="file" name="uiProto" >
+                                <input type="hidden" name="tmpFilename" value="${task.uiProtoUrl}">
                             </td>
                         </tr>
                         <tr>
@@ -177,8 +178,7 @@
         </div>
     </div>
 <!-- Tail -->
-<jsp:include page="/Tail.jsp"></jsp:include>
+<jsp:include page="/tail.jsp"></jsp:include>
 
 </body>
 </html>
-

@@ -42,8 +42,16 @@
         });
     </script>
     
+    <!-- /TinyMCE -->
+    <style type="text/css">
+        #progress-bar
+        {
+            width: 400px;
+        }
+    </style>
     
-    <!-- 추가  CSS-->
+    
+     <!-- 추가  CSS-->
     <link rel="stylesheet" type="text/css" href="${rootPath}/css/header.css" />
     <link rel="stylesheet" type="text/css" href="${rootPath}/css/sidebar.css"/>
     <link rel="stylesheet" type="text/css" href="${rootPath}/css/content.css"/>
@@ -56,60 +64,59 @@
 <jsp:include page="/header.jsp"></jsp:include>
         
 <!-- Sidebar -->
-
 <jsp:include page="/sidebar.do"></jsp:include>
-
 
 <!-- Content -->
    
    
    
 	<!-- Container Start -->
-
-
-
 	<div class="grid_10">
             <div class="box round first grid">
-             
-			 <h2>작업 목록</h2>
-			
+                <h2>
+                    신규 프로젝트 등록</h2>
                 <div class="block ">
-      
+                    <form action="add.do" method="post">
+                    <table class="form">
+                        <tbody><tr>
+                            <td class="col1"><label>프로젝트명 </label></td>
+                            <td class="col2"><input type="text" class="mini" name="title" required/><br></td>
+                        </tr>
+                        <tr>
+                            <td><label>내용</label></td>
+                            <td><textarea rows="4" cols="50" class="mini" name="content" required></textarea><br></td>
+                        </tr>
+                        <tr>
+                            <td><label>시작일</label></td>
+                            <td> <input type="text" class="mini" name="startDate" placeholder="예)2013-4-5" required/>
+                           <br></td>
+                        </tr>
+                        <tr>
+                            <td><label>종료일</label></td>
+                            <td> <input type="text" class="mini" name="endDate" placeholder="예)2013-4-5" required/>
+                            <br></td>
+                        </tr>
+                           <tr>
+                            <td><label>태그</label></td>
+                            <td> <input type="text" class="mini" name="tag" placeholder="예)태그1 태그2 태그3 (공백으로 구분)"/>
+                            <br></td>
+                        </tr>
+                     
+                    </tbody></table>
+              
+                 <div class="form_submit_div">
+						<input type="submit" value="등록" class="btn btn-green submit">
+						<input type="reset" value="취소" class="btn btn-grey reset">
+						<input type="reset" value="목록" 
+								onclick="document.location.href='${rootPath}/project/list.do';" class="btn btn-yello reset">
+					</div>
+				
+
+                    </form>
  
-		           <p>${project.title}</p>
-		    <table class="data display datatable" id="example">
-					<thead>
-						<tr><th class="sorting_asc" rowspan="1" colspan="1" style="width: 253px;">작업명</th>
-						<th class="sorting" rowspan="1" colspan="1" style="width: 313px;">시작일</th>
-						<th class="sorting" rowspan="1" colspan="1" style="width: 294px;">종료일</th>
-						<th class="sorting" rowspan="1" colspan="1" style="width: 212px;">상태</th>
-						</tr>
-					</thead>
-					<tbody>
-						<c:forEach var="task" items="${taskList}">			
-					<tr onclick="document.location.href='view.do?projectNo=${task.projectNo}&taskNo=${task.taskNo}'">
-						<td>${task.title}</td>
-						<td>${task.startDate}</td>
-						<td>${task.endDate}</td>
-						<td><c:choose>
-						<c:when test="${task.status == 0}">등록</c:when>
-						<c:when test="${task.status == 1}">진행</c:when>
-						<c:when test="${task.status == 2}">완료</c:when>
-						<c:when test="${task.status == 3}">지연</c:when>
-					</c:choose></td>
-						
-					</tr>
-					</c:forEach>
-					</tbody>
-			</table>
-			<div class="table_bottom_btns_div">
-				 <button class="btn-icon btn-green btn-person" 
-							onclick="document.location.href='${rootPath}/task/add.do?projectNo=${project.no}';"><span></span>새 작업 등록</button>
-			</div>
                 </div>
             </div>
         </div>
-	
 <!-- //Content -->
 
 
@@ -121,4 +128,4 @@
 
 </body>
 </html>
-				
+			

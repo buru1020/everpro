@@ -10,8 +10,12 @@
 		<param-value>classpath:net/bitacademy/java41/conf/application-context*.xml</param-value>
 	</context-param>
 
+	<!-- 리스너 등록 -->
 	<listener>
 		<listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
+	</listener>
+	<listener>
+		<listener-class>net.bitacademy.java41.listeners.WebAppListener</listener-class>
 	</listener>
 
 	<!-- 필터 선언 -->
@@ -37,8 +41,14 @@
 	<!-- 서블릿 선언 -->
 	<servlet>
 		<servlet-name>dispatcher</servlet-name>
-		<servlet-class>net.bitacademy.java41.servlets.DispatcherServlet</servlet-class>
+		<servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class>
+		<init-param>
+			<param-name>contextConfigLocation</param-name>
+			<param-value>/WEB-INF/dispatcher-servlet.xml</param-value>
+		</init-param>
+		<load-on-startup>0</load-on-startup>
 	</servlet>
+	
 	<!-- 서블릿 URL 설정 -->
 	<servlet-mapping>
 		<servlet-name>dispatcher</servlet-name>

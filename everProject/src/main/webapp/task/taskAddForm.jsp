@@ -67,11 +67,11 @@
 <body>
 	<div class="container_12">
 		<!-- Header -->
-		<jsp:include page="/Header.jsp"></jsp:include>
+		<jsp:include page="/header.jsp"></jsp:include>
 
 		<!-- Sidebar -->
 
-		<jsp:include page="/Sidebar.jsp"></jsp:include>
+		<jsp:include page="/sidebar.do"></jsp:include>
 
 
 		<!-- Content -->
@@ -85,7 +85,7 @@
 		<div class="grid_10">
 			<div class="box round first grid">
 
-				<h1>작업변경</h1>
+				<h1>작업등록</h1>
 
 				<div class="block ">
 					<form action="add.do" method="post" enctype="multipart/form-data">
@@ -103,7 +103,7 @@
 								<tr>
 									<td class="col1"><label>작업명 </label></td>
 									<td class="col2"><input type="text" name="title"
-										class="mini" value=" "><br></td>
+										class="mini" value="" required="required"><br></td>
 								</tr>
 								<tr>
 									<td class="col1"><label>UI프로토타입 </label></td>
@@ -112,17 +112,17 @@
 								</tr>
 								<tr>
 									<td><label>내용</label></td>
-									<td><textarea name="content" rows="6" cols="50"></textarea><br></td>
+									<td><textarea name="content" rows="6" cols="50" required="required"></textarea><br></td>
 								</tr>
 								<tr>
 									<td><label>시작일</label></td>
 									<td><input type="text" class="mini" name="startDate"
-										placeholder="예)2013-4-5"> <br></td>
+										placeholder="예)2013-4-5" required="required"> <br></td>
 								</tr>
 								<tr>
 									<td><label>종료일</label></td>
 									<td><input type="text" class="mini" name="endDate"
-										placeholder="예)2013-4-5"> <br></td>
+										placeholder="예)2013-4-5" required="required"> <br></td>
 								</tr>
 								<tr>
 									<td class="col1"><label>상태 </label></td>
@@ -157,6 +157,6 @@
 			<div class="clear"></div>
 		</div>
 		<!-- Tail -->
-		<jsp:include page="/Tail.jsp"></jsp:include>
+		<jsp:include page="/tail.jsp"></jsp:include>
 </body>
 </html>

@@ -12,7 +12,7 @@
 			, BLOG
 			, REG_DATE as regDate
 			, UPDATE_DATE as updateDate
-			, ANO as addressNo
+			, ANO as postNo
 			, DET_ADDR as detailAddress
 			, TAG
 			, LEVEL
@@ -38,7 +38,7 @@
 	    			b.MNAME as name, 
 	    			b.TEL, 
 	    			b.BLOG, 
-	    			b.ANO as addressNo, 
+	    			b.ANO as postNo, 
 	    			b.DET_ADDR as detailAddress, 
 	    			b.TAG, 
 	    			b.LEVEL
@@ -59,7 +59,7 @@
 			, MNAME as name
 			, TEL
 			, BLOG
-			, ANO as addressNo
+			, ANO as postNo
 			, DET_ADDR as detailAddress
 			, TAG
 			, LEVEL
@@ -69,7 +69,15 @@
 	
 	<update id="updateMember" parameterType="Member">
 		update SPMS_MEMBS 
-		set MNAME=#{name}, TEL=#{tel}, BLOG=#{blog}, TAG=#{tag}, UPDATE_DATE=now()
+		set MNAME = #{name},
+			PWD = #{password},
+			TEL = #{tel},
+			BLOG = #{blog},
+			REG_DATE = #{regDate},
+			UPDATE_DATE = now(), 
+			DET_ADDR = #{detailAddress}, 
+			TAG = #{tag},
+			LEVEL = #{level}
 		where EMAIL=#{email}
 	</update>
 	

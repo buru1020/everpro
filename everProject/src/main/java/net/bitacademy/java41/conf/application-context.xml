@@ -13,7 +13,7 @@
 	
 	<!-- 자동으로 등록할 컴포넌트가 있는 패키지를 지정한다. -->
 	<context:component-scan base-package="net.bitacademy.java41">
-		<context:exclude-filter type="regex" expression="net.bitacademy.java41.test.*"/>
+		<context:exclude-filter type="regex" expression="net.bitacademy.java41.controls.*"/>
 	</context:component-scan>
 	
 	

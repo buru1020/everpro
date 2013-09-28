@@ -18,16 +18,18 @@ public class AuthService {
 
 	public Member getUserInfo(String email, String password) throws Exception {
 		Member member = memberDao.getMember(email, password);
-		List<Photo> list = memberImageDao.listPhoto(email);
-		String[] photos = null;
-		if (list.size() > 0) {
-			photos = new String[list.size()];
-			int index = 0;
-			for( Photo photo : list ) {
-				photos[index++] = photo.getFilename();
+		if (member != null) {
+	 		List<Photo> list = memberImageDao.listPhoto(email);
+			String[] photos = null;
+			if (list.size() > 0) {
+				photos = new String[list.size()];
+				int index = 0;
+				for( Photo photo : list ) {
+					photos[index++] = photo.getFilename();
+				}
 			}
+			member.setPhotos(photos);
 		}
-		member.setPhotos(photos);
 		return member;
 	}
 

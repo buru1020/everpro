@@ -1,4 +1,7 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@page import="net.bitacademy.java41.vo.Project"%>
+<%@page import="net.bitacademy.java41.vo.Member"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+	pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml">
@@ -62,6 +65,7 @@
 	href="${rootPath}/css/content.css" />
 
 <!-- //추가 CSs-->
+
 </head>
 <body>
 	<div class="container_12">
@@ -69,78 +73,110 @@
 		<jsp:include page="/header.jsp"></jsp:include>
 
 		<!-- Sidebar -->
-
 		<jsp:include page="/sidebar.do"></jsp:include>
 
-
 		<!-- Content -->
-
-
-
-		<!-- Container Start -->
 		<div class="grid_10">
 			<div class="box round first grid">
-				<h2>작업 정보</h2>
+				<h2>프로젝트 정보</h2>
 				<div class="block ">
+
 					<div>
+						<div id="submenu">
+							<input type="submit" value="기본정보" class="btn btn-yellow btn-small"
+								onclick="document.location.href='${rootPath}/project/view.do?no=${project.no}';">
+							<input type="submit" value="작업들" class="btn btn-yellow btn-small"
+								onclick="document.location.href='${rootPath}/task/list.do?projectNo=${project.no}';">
+							<input type="submit" value="게시판" class="btn btn-yellow btn-small"
+								onclick="document.location.href='${rootPath}/feed/list.do?projectNo=${project.no}';">
+						</div>
+
+					
 						<table class="form">
 							<tr>
-								<td><label>작업명</label></td>
-								<td>${task.title}</td>
+								<td><label>프로젝트 번호</label></td>
+								<td>${project.no}</td>
 							</tr>
 							<tr>
-								<td><label>프로젝트명</label></td>
-								<td> ${project.title}</td>
+								<td><label>프로젝트 명</label></td>
+								<td>${project.title}</td>
 							</tr>
 							<tr>
-								<td><label>내용</label></td>
-								<td>${task.content}</td>
-							</tr>
-							<tr>
-								<td><label>시작일</label></td>
-								<td>${task.startDate} </td>
-							</tr>
-							<tr>
-								<td><label>종료일</label></td>
-								<td>${task.endDate}</td>
-							</tr>
-							<tr>
-								<td><label>상태</label></td>
+								<td><label>PL</label></td>
 								<td><c:choose>
-										<c:when test="${task.status == 0}">등록</c:when>
-										<c:when test="${task.status == 1}">진행</c:when>
-										<c:when test="${task.status == 2}">완료</c:when>
-										<c:when test="${task.status == 3}">지연</c:when>
+										<c:when test="${project.plName == ''}">없음</c:when>
+										<c:otherwise>${project.plName} ( ${project.plEmail} )</c:otherwise>
 									</c:choose></td>
 							</tr>
 							<tr>
-								<td><label>UI프로토타입</label></td>
-								<td></td>
+								<td><label>내용</label></td>
+								<td><input type="text" class="mini"
+									value="${project.content}" disabled /></td>
+							
 							</tr>
 							<tr>
-								<td><label></label></td>
-								<td><c:if test="${task.uiProtoUrl != null}">
-										<img src="${rootPath}/res/ui/${task.uiProtoUrl}">
-									</c:if></td>
+								<td><label>시작일</label></td>
+								<td><input type="text" class="mini"
+									value="${project.startDate}" disabled /></td>
+							</tr>
+							<tr>
+								<td><label>종료일</label></td>
+								<td><input type="text" class="mini"
+									value="${project.endDate}" disabled /></td>
+							</tr>
+							<tr>
+								<td><label>태그</label></td>
+								<td><input type="text" class="mini"
+									value="${project.tag}" disabled /></td>
 							</tr>
 						</table>
-							
-						<div class="form_submit_div">
-							<input type="submit" value="작업목록" class="btn btn-orange"
-								onclick="document.location.href='${rootPath}/task/list.do?projectNo=${task.projectNo}';">
-							<input type="submit" value="변경" class="btn btn-green submit"
-								onclick="document.location.href='${rootPath}/task/update.do?projectNo=${task.projectNo}&taskNo=${task.taskNo}';">
-							<input type="reset" value="삭제" class="btn btn-grey"
-								onclick="document.location.href='${rootPath}/task/delete.do?projectNo=${task.projectNo}&taskNo=${task.taskNo}';">
-						</div>
-						</div>
-					
-					</div>
 
+						<div class="form_submit_div">
+							<input type="submit" value="목록" class="btn btn-yello"
+								onclick="document.location.href='${rootPath}/project/list.do';">
+							<input type="submit" value="변경" class="btn btn-green submit"
+								onclick="document.location.href='${rootPath}/project/update.do?no=${project.no}';">
+							<input type="reset" value="삭제" class="btn btn-grey"
+								onclick="document.location.href='${rootPath}/project/delete.do?no=${project.no}';">
+						</div>
+					</div>
+				</div>
+				</div>
+
+
+				<div class="box round">
+					<h2>프로젝트 멤버</h2>
+					<div class="block">
+						<table class="data display datatable" id="example">
+							<thead>
+								<tr>
+									<th>이름</th>
+									<th>이메일</th>
+									<th>전화</th>
+									<th>블로그</th>
+
+								</tr>
+							</thead>
+							<tbody>
+								<c:forEach var="projectMember" items="${projectMemberList}">
+									<tr class="odd gradeX">
+										<td>${projectMember.name}<c:if
+												test="${projectMember.projectLevel == 0}">★</c:if></td>
+										<td>${projectMember.email}</td>
+										<td>${projectMember.tel}</td>
+										<td><c:choose>
+												<c:when test="${projectMember.blog != ''}">${projectMember.blog}</c:when>
+												<c:otherwise>-</c:otherwise>
+											</c:choose></td>
+
+									</tr>
+								</c:forEach>
+
+							</tbody>
+						</table>
+					</div>
 				</div>
 			</div>
-
-
 			<!-- //Content -->
 
 

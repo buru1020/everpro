@@ -27,16 +27,35 @@ public class MemberService {
 
 
 	public int signUp(Member member) throws Exception {
-		int count = 0;
-		count = memberDao.addMember(member);
+		int count = memberDao.addMember(member);
 			
 		return count;
 	}
 
 	public int addMember(Member member) throws Exception {
-		int count = memberDao.addMember(member);
+		DefaultTransactionDefinition def = new DefaultTransactionDefinition();
+		def.setName("getMemberInfoTx");
+		def.setPropagationBehavior(TransactionDefinition.PROPAGATION_REQUIRED);
 		
-		return count;
+		TransactionStatus txStatus = txManager.getTransaction(def);
+		try {
+			int count = memberDao.addMember(member);
+			String[] photos = member.getPhotos();
+			if (photos != null) {
+				for( String path : photos ) {
+					memberImageDao.addPhoto(member.getEmail(), path);
+				}
+			}
+			
+			txManager.commit(txStatus);
+			
+			return count;
+			
+		} catch (Exception e) {
+			txManager.rollback(txStatus);
+			throw e;
+			
+		}
 	}
 
 	public List<Member> getTotalMemberList() throws Exception {
@@ -75,6 +94,7 @@ public class MemberService {
 		TransactionStatus txStatus = txManager.getTransaction(def);
 		try {
 			int count = memberDao.updateMember(member);
+			memberImageDao.deletePhoto(member.getEmail());
 			String[] photos = member.getPhotos();
 			if (photos != null) {
 				for( String path : photos ) {

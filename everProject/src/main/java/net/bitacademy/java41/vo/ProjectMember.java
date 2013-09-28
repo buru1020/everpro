@@ -43,8 +43,8 @@ public class ProjectMember extends Member {
 		this.updateDate = updateDate;
 		return this;
 	}
-	public ProjectMember setAddressNo(int addressNo) {
-		this.addressNo = addressNo;
+	public ProjectMember setPostNo(int addressNo) {
+		this.postNo = addressNo;
 		return this;
 	}
 	public ProjectMember setDetailAddress(String detailAddress) {

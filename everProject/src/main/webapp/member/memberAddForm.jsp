@@ -1,6 +1,7 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@page import="net.bitacademy.java41.vo.Project"%>
+<%@page import="net.bitacademy.java41.vo.Member"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -85,51 +86,128 @@
         <div class="grid_10">
             <div class="box round first fullpage">
                 <h2>
-					회원정보 변경</h2>
+					회원등록</h2>
                 <div class="block ">
-                    <form action="passwordChange.do" method="post">
+                    <form action="add.do" method="post" enctype="multipart/form-data">
                     <table class="form">
                         <tr>
                             <td>
                                 <label>
-                                    	이메일</label>
+                                    *이메일</label>
                             </td>
                             <td>
-                                <input type="text" class="mini" name="email" value="${member.email}" readonly>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>
-                                <label>
-                                    	이전 비밀번호</label>
-                            </td>
-                            <td>
-                                <input type="password" class="mini" name="password" required>
+                                <input type="text" class="mini" name="email" required/>
                             </td>
                         </tr>
                         <tr>
                             <td>
                                 <label>
-                                    	새 비밀번호</label>
+                                    *비밀번호</label>
                             </td>
                             <td>
-                                <input type="password" class="mini" name="newPassword" required>
+                                <input type="password" class="mini" name="password" required/>
                             </td>
                         </tr>
                         <tr>
                             <td>
                                 <label>
-                                    	새 비밀번호(확인)</label>
+                                    *비밀번호(확인)</label>
                             </td>
                             <td>
-                                <input type="password" class="mini" name="newPassword2" required>
+                                <input type="password" class="mini" name="password2" required/>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <label>
+                                    *이름</label>
+                            </td>
+                            <td>
+                                <input type="text" class="mini" name="name" required/>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <label>
+                                    *전화</label>
+                            </td>
+                            <td>
+                                <input type="text" class="mini" name="tel" required/>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <label>
+                                    	사진</label>
+                            </td>
+                            <td>
+                                <input type="file" class="mini" name="photo">
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <label>
+                                    	블로그</label>
+                            </td>
+                            <td>
+                                <input type="text" class="mini" name="blog"/>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <label>
+                                    	우편변호</label>
+                            </td>
+                            <td>
+                                <input type="text" class="mini" name="postno"/>
+                                <input type="button" value="우편번호찾기">
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <label>
+                                   	  	기본주소</label>
+                            </td>
+                            <td>
+                                <input type="text" class="mini" name="basicAddress"/>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <label>
+                                    	상세주소</label>
+                            </td>
+                            <td>
+                                <input type="text" class="mini" name="detailAddress"/>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <label>
+                                    	태그</label>
+                            </td>
+                            <td>
+                                <input type="text" class="mini" name="tag"/>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <label>
+                                    	권한</label>
+                            </td>
+                            <td>
+                                <select id="select" name="level">
+                                	<option value="0" selected>일반회원</option>
+									<option value="1">관리자</option>
+									<option value="2">PM</option>
+									<option value="9">손님</option>
+                                </select>
                             </td>
                         </tr>
                     </table>
                     <div class="form_submit_div">
-						<input type="submit" value="변경" class="btn btn-green submit">
-						<input type="button" value="취소" class="btn btn-grey reset"
-								onclick="document.location.href='myInfoUpdate.do?email=${member.email}'">
+						<input type="submit" value="등록" class="btn btn-green submit">
+						<input type="reset" value="취소" class="btn btn-grey reset">
 					</div>
                     </form>
                 </div>

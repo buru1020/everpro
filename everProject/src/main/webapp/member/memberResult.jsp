@@ -1,10 +1,10 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <!DOCTYPE html>
 <html>
 <head>
     <meta charset="UTF-8"/>
+    <meta http-equiv="Refresh" content="2;url=${returnUrl}">
     <title>EverProject</title>
     <link rel="icon" type="image/png" href="${rootPath}/res/logo_sim.png">
     
@@ -85,53 +85,18 @@
         <div class="grid_10">
             <div class="box round first fullpage">
                 <h2>
-					회원정보 변경</h2>
+					처리결과</h2>
                 <div class="block ">
-                    <form action="passwordChange.do" method="post">
-                    <table class="form">
-                        <tr>
-                            <td>
-                                <label>
-                                    	이메일</label>
-                            </td>
-                            <td>
-                                <input type="text" class="mini" name="email" value="${member.email}" readonly>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>
-                                <label>
-                                    	이전 비밀번호</label>
-                            </td>
-                            <td>
-                                <input type="password" class="mini" name="password" required>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>
-                                <label>
-                                    	새 비밀번호</label>
-                            </td>
-                            <td>
-                                <input type="password" class="mini" name="newPassword" required>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>
-                                <label>
-                                    	새 비밀번호(확인)</label>
-                            </td>
-                            <td>
-                                <input type="password" class="mini" name="newPassword2" required>
-                            </td>
-                        </tr>
-                    </table>
-                    <div class="form_submit_div">
-						<input type="submit" value="변경" class="btn btn-green submit">
-						<input type="button" value="취소" class="btn btn-grey reset"
-								onclick="document.location.href='myInfoUpdate.do?email=${member.email}'">
-					</div>
-                    </form>
+					<c:choose>
+					<%-- 회원 수정 --%>
+					<c:when test="${status == 'PASSWORD_WRONG'}">암호가 일치하지 않습니다.</c:when>
+					<c:when test="${status == 'UPDATE_FAIL'}">회원 정보 변경 실패하였습니다..</c:when>
+					<c:when test="${status == 'UPDATE_SUCCESS'}">회원 정보가 변경되었습니다.</c:when>
+					<%-- 회원 삭제 --%>
+					<c:when test="${status == 'DELETE_FAIL'}">회원 삭제 실패하였습니다.</c:when>
+					<c:when test="${status == 'DELETE_SUCCESS'}">회원 삭제되었습니다.</c:when>
+					<c:otherwise>오류상황</c:otherwise>
+					</c:choose><br>
                 </div>
             </div>
         </div>

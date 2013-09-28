@@ -4,7 +4,7 @@
 <html>
 <head>
     <meta charset="UTF-8"/>
-    <meta http-equiv="Refresh" content="2;url=myInfoUpdateForm.do?email=${param.email}">
+    <meta http-equiv="Refresh" content="2;url=updateMyInfo.do?email=${param.email}">
     <title>EverProject</title>
     <link rel="icon" type="image/png" href="${rootPath}/res/logo_sim.png">
     
@@ -76,10 +76,10 @@
 <body>
     <div class="container_12">
 <!-- Header -->
-<jsp:include page="/Header.jsp"></jsp:include>
+<jsp:include page="/header.jsp"></jsp:include>
         
 <!-- Sidebar -->
-<jsp:include page="/Sidebar.jsp"></jsp:include>
+<jsp:include page="/sidebar.do"></jsp:include>
 
 <!-- Content -->
         <div class="grid_10">
@@ -103,7 +103,7 @@
         </div>
     </div>
 <!-- Tail -->
-<jsp:include page="/Tail.jsp"></jsp:include>
+<jsp:include page="/tail.jsp"></jsp:include>
 
 </body>
 </html>
