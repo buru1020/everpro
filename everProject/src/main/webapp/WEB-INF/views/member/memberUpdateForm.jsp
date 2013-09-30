@@ -1,0 +1,216 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8"/>
+    <title>EverProject</title>
+    <link rel="icon" type="image/png" href="${rootPath}/res/logo_sim.png">
+    
+    <link rel="stylesheet" type="text/css" href="${rootPath}/css/reset.css" media="screen" />
+    <link rel="stylesheet" type="text/css" href="${rootPath}/css/text.css" media="screen" />
+    <link rel="stylesheet" type="text/css" href="${rootPath}/css/grid.css" media="screen" />
+    <link rel="stylesheet" type="text/css" href="${rootPath}/css/layout.css" media="screen" />
+    <link rel="stylesheet" type="text/css" href="${rootPath}/css/nav.css" media="screen" />
+    <!--[if IE 6]><link rel="stylesheet" type="text/css" href="${rootPath}/css/ie6.css" media="screen" /><![endif]-->
+    <!--[if IE 7]><link rel="stylesheet" type="text/css" href="${rootPath}/css/ie.css" media="screen" /><![endif]-->
+    <link href="${rootPath}/css/fancy-button/fancy-button.css" rel="stylesheet" type="text/css" />
+    <!--Jquery UI CSS-->
+    <link href="${rootPath}/css/themes/base/jquery.ui.all.css" rel="stylesheet" type="text/css" />
+    <!-- BEGIN: load jquery -->
+    <script src="${rootPath}/js/jquery-1.6.4.min.js" type="text/javascript"></script>
+    <script type="text/javascript" src="${rootPath}/js/jquery-ui/jquery.ui.core.min.js"></script>
+    <script src="${rootPath}/js/jquery-ui/jquery.ui.widget.min.js" type="text/javascript"></script>
+    <script src="${rootPath}/js/jquery-ui/jquery.ui.accordion.min.js" type="text/javascript"></script>
+    <script src="${rootPath}/js/jquery-ui/jquery.effects.core.min.js" type="text/javascript"></script>
+    <script src="${rootPath}/js/jquery-ui/jquery.effects.slide.min.js" type="text/javascript"></script>
+    <!-- END: load jquery -->
+    <!--jQuery Date Picker-->
+    <script src="${rootPath}/js/jquery-ui/jquery.ui.widget.min.js" type="text/javascript"></script>
+    <script src="${rootPath}/js/jquery-ui/jquery.ui.datepicker.min.js" type="text/javascript"></script>
+    <script src="${rootPath}/js/jquery-ui/jquery.ui.progressbar.min.js" type="text/javascript"></script>
+    <!-- jQuery dialog related-->
+    <script src="${rootPath}/js/jquery-ui/external/jquery.bgiframe-2.1.2.js" type="text/javascript"></script>
+    <script src="${rootPath}/js/jquery-ui/jquery.ui.mouse.min.js" type="text/javascript"></script>
+    <script src="${rootPath}/js/jquery-ui/jquery.ui.draggable.min.js" type="text/javascript"></script>
+    <script src="${rootPath}/js/jquery-ui/jquery.ui.position.min.js" type="text/javascript"></script>
+    <script src="${rootPath}/js/jquery-ui/jquery.ui.resizable.min.js" type="text/javascript"></script>
+    <script src="${rootPath}/js/jquery-ui/jquery.ui.dialog.min.js" type="text/javascript"></script>
+    <script src="${rootPath}/js/jquery-ui/jquery.effects.core.min.js" type="text/javascript"></script>
+    <script src="${rootPath}/js/jquery-ui/jquery.effects.blind.min.js" type="text/javascript"></script>
+    <script src="${rootPath}/js/jquery-ui/jquery.effects.explode.min.js" type="text/javascript"></script>
+    <!-- jQuery dialog end here-->
+    <script src="${rootPath}/js/jquery-ui/jquery.ui.accordion.min.js" type="text/javascript"></script>
+    <!--Fancy Button-->
+    <script src="${rootPath}/js/fancy-button/fancy-button.js" type="text/javascript"></script>
+    <script src="${rootPath}/js/setup.js" type="text/javascript"></script>
+    <!-- Load TinyMCE -->
+    <script src="${rootPath}/js/tiny-mce/jquery.tinymce.js" type="text/javascript"></script>
+    <script type="text/javascript">
+        $(document).ready(function () {
+            setupTinyMCE();
+            setupProgressbar('progress-bar');
+            setDatePicker('date-picker');
+            setupDialogBox('dialog', 'opener');
+            $('input[type="checkbox"]').fancybutton();
+            $('input[type="radio"]').fancybutton();
+        });
+    </script>
+    <!-- /TinyMCE -->
+    <style type="text/css">
+        #progress-bar
+        {
+            width: 400px;
+        }
+    </style>
+    
+    
+    <!-- 추가  CSS-->
+    <link rel="stylesheet" type="text/css" href="${rootPath}/css/header.css" />
+    <link rel="stylesheet" type="text/css" href="${rootPath}/css/sidebar.css"/>
+    <link rel="stylesheet" type="text/css" href="${rootPath}/css/content.css"/>
+    
+    <!-- //추가 CSs-->
+</head>
+<body>
+    <div class="container_12">
+<!-- Header -->
+<jsp:include page="/header.do"></jsp:include>
+        
+<!-- Sidebar -->
+<jsp:include page="/sidebar.do"></jsp:include>
+
+<!-- Content -->
+        <div class="grid_10">
+            <div class="box round first fullpage">
+                <h2>
+					회원정보 변경</h2>
+                <div class="block ">
+                    <form action="update.do" method="post" enctype="multipart/form-data">
+                    <table class="form">
+                        <tr>
+                            <td>
+                                <label>
+                                    	이메일</label>
+                            </td>
+                            <td>
+                                <input type="text" class="mini" name="email" value="${memberInfo.email}" readonly>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <label>
+                                    	비밀번호</label>
+                            </td>
+                            <td>
+                                <input type="password" class="mini" name="password">
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <label>
+                                    	이름</label>
+                            </td>
+                            <td>
+                                <input type="text" class="mini" name="name" value="${memberInfo.name}" required>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <label>
+                                    	전화</label>
+                            </td>
+                            <td>
+                                <input type="text" class="mini" name="tel" value="${memberInfo.tel}" required>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <label>
+										사진</label>
+                            </td>
+                            <td>
+                                <input type="file" class="mini" name="photo">
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <label>
+                                    	블로그</label>
+                            </td>
+                            <td>
+                                <input type="text" class="mini" name="blog" value="${memberInfo.blog}">
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <label>
+                                    	우편변호</label>
+                            </td>
+                            <td>
+                                <input type="text"class="mini"  name="postno" value="${memberInfo.postNo}">
+								<input type="button" value="우편번호찾기">
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <label>
+                                   	  	기본주소</label>
+                            </td>
+                            <td>
+                                <input type="text" class="mini" name="basicAddress" value="">
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <label>
+                                    	상세주소</label>
+                            </td>
+                            <td>
+                                <input type="text" class="mini" name="detailAddress" value="${memberInfo.detailAddress}">
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <label>
+                                    	태그</label>
+                            </td>
+                            <td>
+                                <input type="text" name="tag" class="mini" value="${memberInfo.tag}">
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <label>
+                                    	권한</label>
+                            </td>
+                            <td>
+                                <select id="select" name="level">
+									<option value="0" <c:if test="${memberInfo.level == 0}">selected</c:if>>일반회원</option>
+									<option value="1" <c:if test="${memberInfo.level == 1}">selected</c:if> >관리자</option>
+									<option value="2" <c:if test="${memberInfo.level == 2}">selected</c:if> >PM</option>
+									<option value="9" <c:if test="${memberInfo.level == 3}">selected</c:if> >손님</option>
+                                </select>
+                            </td>
+                        </tr>
+                    </table>
+                    <div class="form_submit_div">
+						<input type="submit" value="변경" class="btn btn-green submit">
+						<input type="button" value="취소" class="btn btn-grey reset"
+								onclick="document.location.href='${rootPath}/member/view.do?email=${memberInfo.email}'">
+					</div>
+                    </form>
+                </div>
+            </div>
+        </div>
+<!-- //Content -->
+
+
+        <div class="clear">
+        </div>
+    </div>
+<!-- Tail -->
+<jsp:include page="/tail.do"></jsp:include>
+
+</body>
+</html>

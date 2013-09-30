@@ -9,7 +9,7 @@ public class MainControl {
 	
 	@RequestMapping
 	public String main() throws Exception {
-		return "/mainForm.jsp";
+		return "mainForm";
 	}
 
 }

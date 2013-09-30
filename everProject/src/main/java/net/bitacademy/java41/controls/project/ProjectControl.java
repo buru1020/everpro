@@ -3,7 +3,6 @@ package net.bitacademy.java41.controls.project;
 import java.util.List;
 
 import javax.servlet.ServletContext;
-import javax.servlet.http.HttpSession;
 
 import net.bitacademy.java41.services.ProjectService;
 import net.bitacademy.java41.vo.Member;
@@ -13,11 +12,14 @@ import net.bitacademy.java41.vo.ProjectMember;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.SessionAttributes;
 
 @Controller
+@SessionAttributes("member")
 @RequestMapping("/project")
 public class ProjectControl {
 	@Autowired ServletContext sc;
@@ -27,19 +29,18 @@ public class ProjectControl {
 	@RequestMapping("/list")
 	public String list(Model model) throws Exception {
 		model.addAttribute("totalProjectList", projectService.getTotalProjectList());
-		return "/project/projectList.jsp";
+		return "project/projectList";
 	}
 	
 	@RequestMapping(value="/add", method=RequestMethod.GET)
 	public String addForm() throws Exception {
-		return "/project/projectAddForm.jsp";
+		return "project/projectAddForm";
 	}
 	
 	@RequestMapping(value="/add", method=RequestMethod.POST)
 	public String add(
 			Project project,
-			HttpSession session ) throws Exception {
-		Member member = (Member) session.getAttribute("member");
+			@ModelAttribute("member") Member member ) throws Exception {
 		project.setPlEmail(member.getEmail())
 				.setPlName(member.getName())
 				.setPlTel(member.getTel());
@@ -57,7 +58,7 @@ public class ProjectControl {
 		model.addAttribute("project", project);
 		model.addAttribute("projectMemberList", projectMemberList);
 		
-		return "/project/projectView.jsp";
+		return "project/projectView";
 	}
 	
 	@RequestMapping(value="/update", method=RequestMethod.GET)
@@ -67,7 +68,7 @@ public class ProjectControl {
 		Project project = projectService.getProjectInfo(projectNo);
 		model.addAttribute("project", project);
 		
-		return "/project/projectUpdateForm.jsp";
+		return "project/projectUpdateForm";
 	}
 	
 	@RequestMapping(value="/update", method=RequestMethod.POST)
@@ -88,7 +89,7 @@ public class ProjectControl {
 		model.addAttribute("returnUrl", returnUrl);
 		model.addAttribute("status", status);
 		
-		return "/project/projectResult.jsp";
+		return "project/projectResult";
 	}
 	
 	
@@ -108,6 +109,6 @@ public class ProjectControl {
 		model.addAttribute("returnUrl", returnUrl);
 		model.addAttribute("status", status);
 		
-		return "/project/projectResult.jsp";
+		return "project/projectResult";
 	}
 }

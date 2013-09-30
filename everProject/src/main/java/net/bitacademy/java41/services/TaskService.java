@@ -2,62 +2,18 @@ package net.bitacademy.java41.services;
 
 import java.util.List;
 
-import net.bitacademy.java41.dao.TaskDao;
 import net.bitacademy.java41.vo.Task;
 
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Component;
+public interface TaskService {
 
-@Component
-public class TaskService {
-	@Autowired TaskDao taskDao;
+	List<Task> getTaskList(int no) throws Exception;
 	
-
-	public List<Task> getTaskList(int no) throws Exception {
-		return taskDao.getTaskList(no);
-	}
+	Task getTask(int projectNo, int taskNo)throws Exception;
 	
-	public Task getTask(int projectNo, int taskNo)throws Exception{
-		return taskDao.getTask(projectNo, taskNo);
-	}
+	int updateTask(Task task) throws Exception;
 	
-	public int updateTask(Task task) throws Exception {
-		int count = 0;
-		try {
-			count = taskDao.updateTask(task);
-			
-		} catch (Exception e) {
-			throw e;
-			
-		} finally {
-		}
-		
-		return count;
-	}
-	public int addTask(Task task) throws Exception {
-		int count = 0;
-		try {
-			count = taskDao.addTask(task);
-			
-		} catch (Exception e) {
-			throw e;
-			
-		} finally {
-		}
-		
-		return count;
-	}
+	int addTask(Task task) throws Exception;
 	
-	public int deleteTask(int projectNo, int taskNo) throws Exception {
-		int count = 0;
-		try {
-			count = taskDao.deleteTask(projectNo, taskNo);
-			
-		} catch (Exception e) {
-			throw e;
-		}
-		
-		return count;
-	}
-
+	int deleteTask(int projectNo, int taskNo) throws Exception;
+	
 }

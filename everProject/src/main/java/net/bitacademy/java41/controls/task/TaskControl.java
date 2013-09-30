@@ -38,7 +38,7 @@ public class TaskControl {
 		model.addAttribute("project", project);
 		model.addAttribute("taskList", taskList);
 		
-		return "/task/taskList.jsp";
+		return "task/taskList";
 	}
 	
 	@RequestMapping(value="/add", method=RequestMethod.GET)
@@ -48,7 +48,7 @@ public class TaskControl {
 		Project project = projectService.getProjectInfo(projectNo);
 		model.addAttribute("project", project);
 		
-		return "/task/taskAddForm.jsp";
+		return "task/taskAddForm";
 	}
 	
 	@RequestMapping(value="/add", method=RequestMethod.POST)
@@ -78,7 +78,7 @@ public class TaskControl {
 		model.addAttribute("project", project);
 		model.addAttribute("task", task);
 		
-		return "/task/taskView.jsp";
+		return "task/taskView";
 	}
 	
 	@RequestMapping(value="/update", method=RequestMethod.GET)
@@ -92,7 +92,7 @@ public class TaskControl {
 		model.addAttribute("project", project);
 		model.addAttribute("task", task);
 		
-		return "/task/taskUpdateForm.jsp";
+		return "task/taskUpdateForm";
 	}
 	
 	@RequestMapping(value="/update", method=RequestMethod.POST)
@@ -127,7 +127,7 @@ public class TaskControl {
 		model.addAttribute("returnUrl", returnUrl);
 		model.addAttribute("resultStatus", resutlStatus);
 		
-		return "/task/taskResult.jsp";
+		return "task/taskResult";
 	}
 	
 	@RequestMapping("/delete")
@@ -147,7 +147,7 @@ public class TaskControl {
 		
 		model.addAttribute("returnUrl", returnUrl);
 		model.addAttribute("resultStatus", resutlStatus);
-		return "/task/taskResult.jsp";
+		return "task/taskResult";
 	}
 	
 

@@ -4,7 +4,6 @@ import java.io.File;
 import java.util.List;
 
 import javax.servlet.ServletContext;
-import javax.servlet.http.HttpSession;
 
 import net.bitacademy.java41.services.MemberService;
 import net.bitacademy.java41.vo.Member;
@@ -13,12 +12,16 @@ import net.bitacademy.java41.vo.Project;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.SessionAttributes;
+import org.springframework.web.bind.support.SessionStatus;
 import org.springframework.web.multipart.MultipartFile;
 
 @Controller
+@SessionAttributes("member")
 @RequestMapping("/member")
 public class MemberControl {
 	@Autowired ServletContext sc;
@@ -32,12 +35,12 @@ public class MemberControl {
 		List<Member> memberList = memberService.getTotalMemberList();
 		model.addAttribute("memberList", memberList);
 		
-		return "/member/memberList.jsp";
+		return "member/memberList";
 	}
 	
 	@RequestMapping(value="/add", method=RequestMethod.GET)
 	public String addForm() {
-		return "/member/memberAddForm.jsp";
+		return "member/memberAddForm";
 	}
 	
 	@RequestMapping(value="/add", method=RequestMethod.POST)
@@ -66,7 +69,7 @@ public class MemberControl {
 		model.addAttribute("memberInfo", member);
 		model.addAttribute("projectList", projectList);
 		
-		return "/member/memberView.jsp";
+		return "member/memberView";
 	}
 	
 	@RequestMapping(value="/update", method=RequestMethod.GET)
@@ -76,7 +79,7 @@ public class MemberControl {
 		Member member = memberService.getMemberInfo(email);
 		model.addAttribute("memberInfo", member);
 		
-		return "/member/memberUpdateForm.jsp";
+		return "member/memberUpdateForm";
 	}
 	
 	@RequestMapping(value="/update", method=RequestMethod.POST)
@@ -106,7 +109,7 @@ public class MemberControl {
 		}
 		model.addAttribute("returnUrl", returnUrl);
 		model.addAttribute("status", status);
-		return "/member/memberResult.jsp";
+		return "member/memberResult";
 	}
 	
 	@RequestMapping("/delete")
@@ -122,43 +125,43 @@ public class MemberControl {
 		model.addAttribute("returnUrl", returnUrl);
 		model.addAttribute("status", status);
 		
-		return "/member/memberResult.jsp";
+		return "member/memberResult";
 	}
 	
 	@RequestMapping(value="/signup", method=RequestMethod.GET)
 	public String signUpForm() throws Exception {
-		return "/member/signupForm.jsp";
+		return "member/signupForm";
 	}
 	
 	@RequestMapping(value="/signup", method=RequestMethod.POST)
 	public String signUp(
 				Member member,
-				HttpSession session ) throws Exception {
+				Model model, 
+				SessionStatus status) throws Exception {
 		int result = memberService.signUp(member);
 		if (result > 0) {
-			session.setAttribute("member", member);
-			return "/member/signupSuccess.jsp";
+			model.addAttribute("member", member);
+			return "member/signupSuccess";
 		} else {
-			session.invalidate();
-			return "/member/signupFail.jsp";
+			status.setComplete();
+			return "member/signupFail";
 		}
 		
 	}
 	
 	@RequestMapping(value="/updateMyInfo", method=RequestMethod.GET)
 	public String updateMyInfoForm() throws Exception {
-		return "/member/myInfoUpdate.jsp";
+		return "member/myInfoUpdate";
 	}
 	
 	@RequestMapping(value="/updateMyInfo", method=RequestMethod.POST)
 	public String updateMyInfo(
 			Member member,
 			MultipartFile photo,
-			HttpSession session,
+			@ModelAttribute("member") Member sessionMember,
 			Model model ) throws Exception {
 		String returnUrl = null;
 		String status = null;
-		Member sessionMember = (Member) session.getAttribute("member");
 		if (member.getPassword().equals(sessionMember.getPassword())) {
 			String[] photos = null;
 			if (photo.getSize() > 0) {
@@ -175,7 +178,7 @@ public class MemberControl {
 			
 			int result = memberService.updateMemberInfo(member); 
 			if (result > 0) {
-				session.setAttribute("member", member);
+				model.addAttribute("member", member);
 				returnUrl = sc.getAttribute("rootPath") + "/main.do";
 				status = "UPDATE_SUCCESS";
 			} else {
@@ -189,12 +192,12 @@ public class MemberControl {
 		model.addAttribute("returnUrl", returnUrl);
 		model.addAttribute("status", status);
 		
-		return "/member/memberResult.jsp";
+		return "member/memberResult";
 	}
 	
 	@RequestMapping(value="/passwordChange", method=RequestMethod.GET)
 	protected String form() {
-		return "/member/passwordForm.jsp";
+		return "member/passwordForm";
 	}
 	
 	@RequestMapping(value="/passwordChange", method=RequestMethod.POST)
@@ -203,12 +206,11 @@ public class MemberControl {
 			@RequestParam("password") String oldPassword,
 			String newPassword,
 			String newPassword2,
-			HttpSession session,
 			Model model ) throws Exception {
 		if (newPassword.equals(newPassword2)) {
 			int result = memberService.isChangePassword(email, oldPassword, newPassword);
 			if (result > 0) {
-				session.setAttribute("member", memberService.getMemberInfo(email));
+				model.addAttribute("member", memberService.getMemberInfo(email));
 				model.addAttribute("status", "SUCCESS");
 			} else {
 				model.addAttribute("status", "OLD_PASSWORD_ERROR");
@@ -217,7 +219,7 @@ public class MemberControl {
 			model.addAttribute("status", "NEW_PASSWORD_ERROR");
 		}
 		
-		return "/member/passwordChangeResult.jsp";
+		return "member/passwordChangeResult";
 			
 	}
 	

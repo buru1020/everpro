@@ -2,7 +2,6 @@ package net.bitacademy.java41.controls.auth;
 
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 
 import net.bitacademy.java41.services.AuthService;
 import net.bitacademy.java41.vo.Member;
@@ -12,14 +11,18 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.CookieValue;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.SessionAttributes;
+import org.springframework.web.bind.support.SessionStatus;
 
 
 @Controller
+@SessionAttributes("member")
 @RequestMapping("/auth")
 public class AuthControl {
 	@Autowired AuthService authService;
 
-	@RequestMapping("/loginForm")
+	@RequestMapping(value="/login", method=RequestMethod.GET)
 	public String loginForm(
 			boolean isSaveId,
 			@CookieValue(value="email", required=false) String email,
@@ -31,16 +34,17 @@ public class AuthControl {
 		
 		model.addAttribute("email", email);
 		model.addAttribute("isSaveId", isSaveId);
-		return "/auth/loginForm.jsp";
+		return "auth/loginForm";
 	}
 	
-	@RequestMapping("/login")
+	@RequestMapping(value="/login", method=RequestMethod.POST)
 	public String login(
 				String email,
 				String password,
 				String saveId, 
-				HttpSession session,
-				HttpServletResponse response) throws Exception {
+				HttpServletResponse response, 
+				Model model, 
+				SessionStatus status ) throws Exception {
 		
 		Member member = authService.getUserInfo(email, password);
 		if(saveId != null) {
@@ -57,20 +61,20 @@ public class AuthControl {
 		}
 			
 		if (member != null) {
-			session.setAttribute("member", member);
+			model.addAttribute("member", member);
 			return "redirect:../main.do";
 			
 		} else {
-			session.invalidate();
-			return "/auth/loginFail.jsp";
+			status.setComplete();
+			return "auth/loginFail";
 		}
 	
 	}
 	
 	@RequestMapping("/logout")
-	public String execute(HttpSession session) throws Exception {
-		session.invalidate();
-		return "redirect:loginForm.do";
+	public String logout(SessionStatus status) throws Exception {
+		status.setComplete();
+		return "redirect:login.do";
 	}
 
 	
