@@ -89,12 +89,12 @@
 								onclick="document.location.href='${rootPath}/task/list.do?projectNo=${project.no}';">								
 					<c:forEach var="projectMember" items="${projectMemberList}"> 					
 						<c:if test="${projectMember.email == sessionScope.member.email}"> 								
-							<input type="submit" value="게시판" class="btn btn-yellow btn-small"
+							<input type="submit" value="피드" class="btn btn-yellow btn-small"
 								onclick="document.location.href='${rootPath}/feed/list.do?projectNo=${project.no}';">
 						</c:if>
 					</c:forEach>			
 						<c:if test="${sessionScope.member.level == 1}"> 
-							<input type="submit" value="게시판" class="btn btn-yellow btn-small"
+							<input type="submit" value="피드" class="btn btn-yellow btn-small"
 								onclick="document.location.href='${rootPath}/feed/list.do?projectNo=${project.no}';">
 						</c:if>						
 						</div>

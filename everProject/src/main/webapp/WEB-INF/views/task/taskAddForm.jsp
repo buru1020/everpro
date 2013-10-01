@@ -79,13 +79,10 @@
 
 
 		<!-- Container Start -->
-
-
-
 		<div class="grid_10">
 			<div class="box round first grid">
 
-				<h1>작업등록</h1>
+				<h2>작업등록</h2>
 
 				<div class="block ">
 					<form action="add.do" method="post" enctype="multipart/form-data">

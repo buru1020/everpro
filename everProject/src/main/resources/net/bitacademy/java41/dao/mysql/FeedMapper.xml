@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="net.bitacademy.java41.dao.FeedDao">
+
+	<select id="getFeedList" parameterType="int" resultType="Feed">
+		select a.FNO as feedNo
+			, a.PNO as projectNo
+			, a.EMAIL
+			, a.CONTENT
+			, a.REG_DATE as regDate
+			, c.MNAME as name
+			, d.IMGURL as photoUrl
+			, b.LEVEL as prjMembLevel
+		from SPMS_FEEDS a
+			, SPMS_PRJMEMB b
+			, SPMS_MEMBS c
+			, (
+				select EMAIL, IMGURL
+				from SPMS_MEMIMG
+				where 1=1
+					and EMAIL = 'm01@test.com'
+				order by INO desc limit 0, 1
+				) d
+		where 1=1
+			and a.PNO = b.PNO
+			and a.EMAIL = b.EMAIL
+			and b.EMAIL = c.EMAIL
+			and c.EMAIL = d.EMAIL
+			and a.PNO = #{value}
+	</select>
+<!-- 
+	<select id="getTaskList" resultType="Task" parameterType="int">
+		select TNO as taskNo, 
+				PNO as projectNo, 
+				TITLE, 
+				UIPROTOURL, 
+				CONTENT, 
+				START_DATE as startDate,
+				END_DATE as endDate, 
+				STATUS
+	 	from SPMS_TASKS 
+	 	where 1=1
+	 		and PNO = #{value} 
+	 	order by TNO desc
+	</select>
+	
+	
+	<insert id="addTask" parameterType="Task">
+		insert into SPMS_TASKS( PNO, TITLE, UIPROTOURL, CONTENT, START_DATE, END_DATE, STATUS )
+		values(#{projectNo}, #{title}, #{uiProtoUrl}, #{content}, #{startDate}, #{endDate}, #{status})
+	</insert>
+	
+	
+	<update id="updateTask" parameterType="Task">
+		update SPMS_TASKS 
+		set
+			TITLE = #{title}, 
+			UIPROTOURL = #{uiProtoUrl}, 
+			CONTENT = #{content},
+			START_DATE = #{startDate}, 
+			END_DATE = #{endDate}, 
+			STATUS = #{status}
+		where 1=1
+			and PNO = #{projectNo} 
+			and TNO = #{taskNo}
+	</update>
+	
+	<delete id="deleteTask" parameterType="map">
+		delete from SPMS_TASKS 
+		<where>
+			<trim prefixOverrides="AND|OR">
+			<if test="projectNo != 0">
+				PNO = #{projectNo} 
+			</if>
+			<if test="taskNo != 0">
+				and TNO = #{taskNo}
+			</if>
+			</trim>
+		</where> 
+	</delete> -->
+	
+	
+	
+</mapper> 
+
+
+
+
+
+
