@@ -1,331 +1,331 @@
--- ¸â¹ö»çÁø
+-- ë©¤ë²„ì‚¬ì§„
 DROP TABLE IF EXISTS `SPMS_MEMIMG` RESTRICT;
--- ÀÛ¾÷ÇÒ´ç
+-- ì‘ì—…í• ë‹¹
 DROP TABLE IF EXISTS `SPMS_MEMBTASK` RESTRICT;
--- ÇÇµåÆÄÀÏ
+-- í”¼ë“œíŒŒì¼
 DROP TABLE IF EXISTS `SPMS_FEEDFILE` RESTRICT;
--- ÇÇµå
+-- í”¼ë“œ
 DROP TABLE IF EXISTS `SPMS_FEEDS` RESTRICT;
--- Ã·ºÎÆÄÀÏ
+-- ì²¨ë¶€íŒŒì¼
 DROP TABLE IF EXISTS `SPMS_FILES` RESTRICT;
--- ÅÂ½ºÅ©
+-- íƒœìŠ¤í¬
 DROP TABLE IF EXISTS `SPMS_TASKS` RESTRICT;
--- ÇÁ·ÎÁ§Æ®¸â¹ö
+-- í”„ë¡œì íŠ¸ë©¤ë²„
 DROP TABLE IF EXISTS `SPMS_PRJMEMB` RESTRICT;
--- ¸â¹ö
+-- ë©¤ë²„
 DROP TABLE IF EXISTS `SPMS_MEMBS` RESTRICT;
--- ÇÁ·ÎÁ§Æ®
+-- í”„ë¡œì íŠ¸
 DROP TABLE IF EXISTS `SPMS_PRJS` RESTRICT;
--- ÁÖ¼ÒÁ¤º¸
+-- ì£¼ì†Œì •ë³´
 DROP TABLE IF EXISTS `SPMS_ADDR` RESTRICT;
 
--- ¸â¹ö
+-- ë©¤ë²„
 CREATE TABLE `SPMS_MEMBS` (
-	`EMAIL`       VARCHAR(50)  NOT NULL COMMENT 'ÀÌ¸ŞÀÏ', -- ÀÌ¸ŞÀÏ
-	`MNAME`       VARCHAR(50)  NOT NULL COMMENT 'ÀÌ¸§', -- ÀÌ¸§
-	`PWD`         VARCHAR(40)  NOT NULL COMMENT '¾ÏÈ£', -- ¾ÏÈ£
-	`TEL`         VARCHAR(30)  NOT NULL COMMENT 'ÀüÈ­¹øÈ£', -- ÀüÈ­¹øÈ£
-	`BLOG`        VARCHAR(255) NULL     COMMENT 'ºí·Î±×', -- ºí·Î±×
-	`REG_DATE`    DATETIME     NULL     COMMENT '°¡ÀÔÀÏ', -- °¡ÀÔÀÏ
-	`UPDATE_DATE` DATETIME     NULL     COMMENT 'º¯°æÀÏ', -- º¯°æÀÏ
-	`ANO`         INTEGER      NULL     COMMENT 'ÁÖ¼Ò¹øÈ£', -- ÁÖ¼Ò¹øÈ£
-	`DET_ADDR`    VARCHAR(255) NULL     COMMENT '»ó¼¼ÁÖ¼Ò', -- »ó¼¼ÁÖ¼Ò
-	`TAG`         VARCHAR(255) NULL     COMMENT 'ÅÂ±×' -- ÅÂ±×
+	`EMAIL`       VARCHAR(50)  NOT NULL COMMENT 'ì´ë©”ì¼', -- ì´ë©”ì¼
+	`MNAME`       VARCHAR(50)  NOT NULL COMMENT 'ì´ë¦„', -- ì´ë¦„
+	`PWD`         VARCHAR(40)  NOT NULL COMMENT 'ì•”í˜¸', -- ì•”í˜¸
+	`TEL`         VARCHAR(30)  NOT NULL COMMENT 'ì „í™”ë²ˆí˜¸', -- ì „í™”ë²ˆí˜¸
+	`BLOG`        VARCHAR(255) NULL     COMMENT 'ë¸”ë¡œê·¸', -- ë¸”ë¡œê·¸
+	`REG_DATE`    DATETIME     NULL     COMMENT 'ê°€ì…ì¼', -- ê°€ì…ì¼
+	`UPDATE_DATE` DATETIME     NULL     COMMENT 'ë³€ê²½ì¼', -- ë³€ê²½ì¼
+	`ANO`         INTEGER      NULL     COMMENT 'ì£¼ì†Œë²ˆí˜¸', -- ì£¼ì†Œë²ˆí˜¸
+	`DET_ADDR`    VARCHAR(255) NULL     COMMENT 'ìƒì„¸ì£¼ì†Œ', -- ìƒì„¸ì£¼ì†Œ
+	`TAG`         VARCHAR(255) NULL     COMMENT 'íƒœê·¸' -- íƒœê·¸
 )
-COMMENT '¸â¹ö';
+COMMENT 'ë©¤ë²„';
 
--- ¸â¹ö
+-- ë©¤ë²„
 ALTER TABLE `SPMS_MEMBS`
-	ADD CONSTRAINT `PK_SPMS_MEMBS` -- ¸â¹ö ±âº»Å°
+	ADD CONSTRAINT `PK_SPMS_MEMBS` -- ë©¤ë²„ ê¸°ë³¸í‚¤
 		PRIMARY KEY (
-			`EMAIL` -- ÀÌ¸ŞÀÏ
+			`EMAIL` -- ì´ë©”ì¼
 		);
 
--- ¸â¹ö»çÁø
+-- ë©¤ë²„ì‚¬ì§„
 CREATE TABLE `SPMS_MEMIMG` (
-	`INO`    INTEGER      NOT NULL COMMENT '»çÁø¹øÈ£', -- »çÁø¹øÈ£
-	`EMAIL`  VARCHAR(50)  NOT NULL COMMENT 'ÀÌ¸ŞÀÏ', -- ÀÌ¸ŞÀÏ
-	`IMGURL` VARCHAR(255) NOT NULL COMMENT '»çÁø°æ·Î' -- »çÁø°æ·Î
+	`INO`    INTEGER      NOT NULL COMMENT 'ì‚¬ì§„ë²ˆí˜¸', -- ì‚¬ì§„ë²ˆí˜¸
+	`EMAIL`  VARCHAR(50)  NOT NULL COMMENT 'ì´ë©”ì¼', -- ì´ë©”ì¼
+	`IMGURL` VARCHAR(255) NOT NULL COMMENT 'ì‚¬ì§„ê²½ë¡œ' -- ì‚¬ì§„ê²½ë¡œ
 )
-COMMENT '¸â¹ö»çÁø';
+COMMENT 'ë©¤ë²„ì‚¬ì§„';
 
--- ¸â¹ö»çÁø
+-- ë©¤ë²„ì‚¬ì§„
 ALTER TABLE `SPMS_MEMIMG`
-	ADD CONSTRAINT `PK_SPMS_MEMIMG` -- ¸â¹ö»çÁø ±âº»Å°
+	ADD CONSTRAINT `PK_SPMS_MEMIMG` -- ë©¤ë²„ì‚¬ì§„ ê¸°ë³¸í‚¤
 		PRIMARY KEY (
-			`INO` -- »çÁø¹øÈ£
+			`INO` -- ì‚¬ì§„ë²ˆí˜¸
 		);
 
 ALTER TABLE `SPMS_MEMIMG`
-	MODIFY COLUMN `INO` INTEGER NOT NULL AUTO_INCREMENT COMMENT '»çÁø¹øÈ£';
+	MODIFY COLUMN `INO` INTEGER NOT NULL AUTO_INCREMENT COMMENT 'ì‚¬ì§„ë²ˆí˜¸';
 
--- ÁÖ¼ÒÁ¤º¸
+-- ì£¼ì†Œì •ë³´
 CREATE TABLE `SPMS_ADDR` (
-	`ANO`      INTEGER      NOT NULL COMMENT 'ÁÖ¼Ò¹øÈ£', -- ÁÖ¼Ò¹øÈ£
-	`POSTNO`   VARCHAR(10)  NOT NULL COMMENT '¿ìÆí¹øÈ£', -- ¿ìÆí¹øÈ£
-	`BAS_ADDR` VARCHAR(255) NOT NULL COMMENT '±âº»ÁÖ¼Ò' -- ±âº»ÁÖ¼Ò
+	`ANO`      INTEGER      NOT NULL COMMENT 'ì£¼ì†Œë²ˆí˜¸', -- ì£¼ì†Œë²ˆí˜¸
+	`POSTNO`   VARCHAR(10)  NOT NULL COMMENT 'ìš°í¸ë²ˆí˜¸', -- ìš°í¸ë²ˆí˜¸
+	`BAS_ADDR` VARCHAR(255) NOT NULL COMMENT 'ê¸°ë³¸ì£¼ì†Œ' -- ê¸°ë³¸ì£¼ì†Œ
 )
-COMMENT 'ÁÖ¼ÒÁ¤º¸';
+COMMENT 'ì£¼ì†Œì •ë³´';
 
--- ÁÖ¼ÒÁ¤º¸
+-- ì£¼ì†Œì •ë³´
 ALTER TABLE `SPMS_ADDR`
-	ADD CONSTRAINT `PK_SPMS_ADDR` -- ÁÖ¼ÒÁ¤º¸ ±âº»Å°
+	ADD CONSTRAINT `PK_SPMS_ADDR` -- ì£¼ì†Œì •ë³´ ê¸°ë³¸í‚¤
 		PRIMARY KEY (
-			`ANO` -- ÁÖ¼Ò¹øÈ£
+			`ANO` -- ì£¼ì†Œë²ˆí˜¸
 		);
 
 ALTER TABLE `SPMS_ADDR`
-	MODIFY COLUMN `ANO` INTEGER NOT NULL AUTO_INCREMENT COMMENT 'ÁÖ¼Ò¹øÈ£';
+	MODIFY COLUMN `ANO` INTEGER NOT NULL AUTO_INCREMENT COMMENT 'ì£¼ì†Œë²ˆí˜¸';
 
--- ÇÁ·ÎÁ§Æ®
+-- í”„ë¡œì íŠ¸
 CREATE TABLE `SPMS_PRJS` (
-	`PNO`        INTEGER      NOT NULL COMMENT 'ÇÁ·ÎÁ§Æ®¹øÈ£', -- ÇÁ·ÎÁ§Æ®¹øÈ£
-	`TITLE`      VARCHAR(255) NOT NULL COMMENT 'Á¦¸ñ', -- Á¦¸ñ
-	`CONTENT`    MEDIUMTEXT   NOT NULL COMMENT '³»¿ë', -- ³»¿ë
-	`START_DATE` DATETIME     NOT NULL COMMENT '½ÃÀÛÀÏ', -- ½ÃÀÛÀÏ
-	`END_DATE`   DATETIME     NOT NULL COMMENT 'Á¾·áÀÏ', -- Á¾·áÀÏ
-	`TAG`        VARCHAR(255) NULL     COMMENT 'ÅÂ±×' -- ÅÂ±×
+	`PNO`        INTEGER      NOT NULL COMMENT 'í”„ë¡œì íŠ¸ë²ˆí˜¸', -- í”„ë¡œì íŠ¸ë²ˆí˜¸
+	`TITLE`      VARCHAR(255) NOT NULL COMMENT 'ì œëª©', -- ì œëª©
+	`CONTENT`    MEDIUMTEXT   NOT NULL COMMENT 'ë‚´ìš©', -- ë‚´ìš©
+	`START_DATE` DATETIME     NOT NULL COMMENT 'ì‹œì‘ì¼', -- ì‹œì‘ì¼
+	`END_DATE`   DATETIME     NOT NULL COMMENT 'ì¢…ë£Œì¼', -- ì¢…ë£Œì¼
+	`TAG`        VARCHAR(255) NULL     COMMENT 'íƒœê·¸' -- íƒœê·¸
 )
-COMMENT 'ÇÁ·ÎÁ§Æ®';
+COMMENT 'í”„ë¡œì íŠ¸';
 
--- ÇÁ·ÎÁ§Æ®
+-- í”„ë¡œì íŠ¸
 ALTER TABLE `SPMS_PRJS`
-	ADD CONSTRAINT `PK_SPMS_PRJS` -- ÇÁ·ÎÁ§Æ® ±âº»Å°
+	ADD CONSTRAINT `PK_SPMS_PRJS` -- í”„ë¡œì íŠ¸ ê¸°ë³¸í‚¤
 		PRIMARY KEY (
-			`PNO` -- ÇÁ·ÎÁ§Æ®¹øÈ£
+			`PNO` -- í”„ë¡œì íŠ¸ë²ˆí˜¸
 		);
 
 ALTER TABLE `SPMS_PRJS`
-	MODIFY COLUMN `PNO` INTEGER NOT NULL AUTO_INCREMENT COMMENT 'ÇÁ·ÎÁ§Æ®¹øÈ£';
+	MODIFY COLUMN `PNO` INTEGER NOT NULL AUTO_INCREMENT COMMENT 'í”„ë¡œì íŠ¸ë²ˆí˜¸';
 
--- ÇÁ·ÎÁ§Æ®¸â¹ö
+-- í”„ë¡œì íŠ¸ë©¤ë²„
 CREATE TABLE `SPMS_PRJMEMB` (
-	`EMAIL` VARCHAR(50) NOT NULL COMMENT 'ÀÌ¸ŞÀÏ', -- ÀÌ¸ŞÀÏ
-	`PNO`   INTEGER     NOT NULL COMMENT 'ÇÁ·ÎÁ§Æ®¹øÈ£', -- ÇÁ·ÎÁ§Æ®¹øÈ£
-	`LEVEL` INTEGER     NULL     DEFAULT 1 COMMENT '·¹º§' -- ·¹º§
+	`EMAIL` VARCHAR(50) NOT NULL COMMENT 'ì´ë©”ì¼', -- ì´ë©”ì¼
+	`PNO`   INTEGER     NOT NULL COMMENT 'í”„ë¡œì íŠ¸ë²ˆí˜¸', -- í”„ë¡œì íŠ¸ë²ˆí˜¸
+	`LEVEL` INTEGER     NULL     DEFAULT 1 COMMENT 'ë ˆë²¨' -- ë ˆë²¨
 )
-COMMENT 'ÇÁ·ÎÁ§Æ®¸â¹ö';
+COMMENT 'í”„ë¡œì íŠ¸ë©¤ë²„';
 
--- ÇÁ·ÎÁ§Æ®¸â¹ö
+-- í”„ë¡œì íŠ¸ë©¤ë²„
 ALTER TABLE `SPMS_PRJMEMB`
-	ADD CONSTRAINT `PK_SPMS_PRJMEMB` -- ÇÁ·ÎÁ§Æ®¸â¹ö ±âº»Å°
+	ADD CONSTRAINT `PK_SPMS_PRJMEMB` -- í”„ë¡œì íŠ¸ë©¤ë²„ ê¸°ë³¸í‚¤
 		PRIMARY KEY (
-			`EMAIL`, -- ÀÌ¸ŞÀÏ
-			`PNO`    -- ÇÁ·ÎÁ§Æ®¹øÈ£
+			`EMAIL`, -- ì´ë©”ì¼
+			`PNO`    -- í”„ë¡œì íŠ¸ë²ˆí˜¸
 		);
 
--- ÅÂ½ºÅ©
+-- íƒœìŠ¤í¬
 CREATE TABLE `SPMS_TASKS` (
-	`TNO`        INTEGER      NOT NULL COMMENT 'ÅÂ½ºÅ©¹øÈ£', -- ÅÂ½ºÅ©¹øÈ£
-	`PNO`        INTEGER      NOT NULL COMMENT 'ÇÁ·ÎÁ§Æ®¹øÈ£', -- ÇÁ·ÎÁ§Æ®¹øÈ£
-	`TITLE`      VARCHAR(255) NOT NULL COMMENT 'ÀÛ¾÷¸í', -- ÀÛ¾÷¸í
-	`UIPROTOURL` VARCHAR(255) NULL     COMMENT 'UIÇÁ·ÎÅäÅ¸ÀÔ', -- UIÇÁ·ÎÅäÅ¸ÀÔ
-	`CONTENT`    TEXT         NULL     COMMENT '³»¿ë', -- ³»¿ë
-	`START_DATE` DATETIME     NULL     COMMENT 'Âø¼öÀÏ', -- Âø¼öÀÏ
-	`END_DATE`   DATETIME     NULL     COMMENT 'Á¾·áÀÏ', -- Á¾·áÀÏ
-	`STATUS`     INTEGER      NULL     DEFAULT 0 COMMENT '»óÅÂ' -- »óÅÂ
+	`TNO`        INTEGER      NOT NULL COMMENT 'íƒœìŠ¤í¬ë²ˆí˜¸', -- íƒœìŠ¤í¬ë²ˆí˜¸
+	`PNO`        INTEGER      NOT NULL COMMENT 'í”„ë¡œì íŠ¸ë²ˆí˜¸', -- í”„ë¡œì íŠ¸ë²ˆí˜¸
+	`TITLE`      VARCHAR(255) NOT NULL COMMENT 'ì‘ì—…ëª…', -- ì‘ì—…ëª…
+	`UIPROTOURL` VARCHAR(255) NULL     COMMENT 'UIí”„ë¡œí† íƒ€ì…', -- UIí”„ë¡œí† íƒ€ì…
+	`CONTENT`    TEXT         NULL     COMMENT 'ë‚´ìš©', -- ë‚´ìš©
+	`START_DATE` DATETIME     NULL     COMMENT 'ì°©ìˆ˜ì¼', -- ì°©ìˆ˜ì¼
+	`END_DATE`   DATETIME     NULL     COMMENT 'ì¢…ë£Œì¼', -- ì¢…ë£Œì¼
+	`STATUS`     INTEGER      NULL     DEFAULT 0 COMMENT 'ìƒíƒœ' -- ìƒíƒœ
 )
-COMMENT 'ÅÂ½ºÅ©';
+COMMENT 'íƒœìŠ¤í¬';
 
--- ÅÂ½ºÅ©
+-- íƒœìŠ¤í¬
 ALTER TABLE `SPMS_TASKS`
-	ADD CONSTRAINT `PK_SPMS_TASKS` -- ÅÂ½ºÅ© ±âº»Å°
+	ADD CONSTRAINT `PK_SPMS_TASKS` -- íƒœìŠ¤í¬ ê¸°ë³¸í‚¤
 		PRIMARY KEY (
-			`TNO` -- ÅÂ½ºÅ©¹øÈ£
+			`TNO` -- íƒœìŠ¤í¬ë²ˆí˜¸
 		);
 
 ALTER TABLE `SPMS_TASKS`
-	MODIFY COLUMN `TNO` INTEGER NOT NULL AUTO_INCREMENT COMMENT 'ÅÂ½ºÅ©¹øÈ£';
+	MODIFY COLUMN `TNO` INTEGER NOT NULL AUTO_INCREMENT COMMENT 'íƒœìŠ¤í¬ë²ˆí˜¸';
 
--- ÀÛ¾÷ÇÒ´ç
+-- ì‘ì—…í• ë‹¹
 CREATE TABLE `SPMS_MEMBTASK` (
-	`TNO`   INTEGER     NOT NULL COMMENT 'ÅÂ½ºÅ©¹øÈ£', -- ÅÂ½ºÅ©¹øÈ£
-	`EMAIL` VARCHAR(50) NOT NULL COMMENT 'ÀÌ¸ŞÀÏ', -- ÀÌ¸ŞÀÏ
-	`PNO`   INTEGER     NOT NULL COMMENT 'ÇÁ·ÎÁ§Æ®¹øÈ£' -- ÇÁ·ÎÁ§Æ®¹øÈ£
+	`TNO`   INTEGER     NOT NULL COMMENT 'íƒœìŠ¤í¬ë²ˆí˜¸', -- íƒœìŠ¤í¬ë²ˆí˜¸
+	`EMAIL` VARCHAR(50) NOT NULL COMMENT 'ì´ë©”ì¼', -- ì´ë©”ì¼
+	`PNO`   INTEGER     NOT NULL COMMENT 'í”„ë¡œì íŠ¸ë²ˆí˜¸' -- í”„ë¡œì íŠ¸ë²ˆí˜¸
 )
-COMMENT 'ÀÛ¾÷ÇÒ´ç';
+COMMENT 'ì‘ì—…í• ë‹¹';
 
--- ÀÛ¾÷ÇÒ´ç
+-- ì‘ì—…í• ë‹¹
 ALTER TABLE `SPMS_MEMBTASK`
-	ADD CONSTRAINT `PK_SPMS_MEMBTASK` -- ÀÛ¾÷ÇÒ´ç ±âº»Å°
+	ADD CONSTRAINT `PK_SPMS_MEMBTASK` -- ì‘ì—…í• ë‹¹ ê¸°ë³¸í‚¤
 		PRIMARY KEY (
-			`TNO`,   -- ÅÂ½ºÅ©¹øÈ£
-			`EMAIL`, -- ÀÌ¸ŞÀÏ
-			`PNO`    -- ÇÁ·ÎÁ§Æ®¹øÈ£
+			`TNO`,   -- íƒœìŠ¤í¬ë²ˆí˜¸
+			`EMAIL`, -- ì´ë©”ì¼
+			`PNO`    -- í”„ë¡œì íŠ¸ë²ˆí˜¸
 		);
 
--- ÇÇµå
+-- í”¼ë“œ
 CREATE TABLE `SPMS_FEEDS` (
-	`FNO`      INTEGER     NOT NULL COMMENT 'ÇÇµå¹øÈ£', -- ÇÇµå¹øÈ£
-	`CONTENT`  TEXT        NOT NULL COMMENT '³»¿ë', -- ³»¿ë
-	`REG_DATE` DATETIME    NOT NULL COMMENT 'ÀÛ¼ºÀÏ', -- ÀÛ¼ºÀÏ
-	`EMAIL`    VARCHAR(50) NOT NULL COMMENT 'ÀÌ¸ŞÀÏ', -- ÀÌ¸ŞÀÏ
-	`PNO`      INTEGER     NOT NULL COMMENT 'ÇÁ·ÎÁ§Æ®¹øÈ£' -- ÇÁ·ÎÁ§Æ®¹øÈ£
+	`FNO`      INTEGER     NOT NULL COMMENT 'í”¼ë“œë²ˆí˜¸', -- í”¼ë“œë²ˆí˜¸
+	`CONTENT`  TEXT        NOT NULL COMMENT 'ë‚´ìš©', -- ë‚´ìš©
+	`REG_DATE` DATETIME    NOT NULL COMMENT 'ì‘ì„±ì¼', -- ì‘ì„±ì¼
+	`EMAIL`    VARCHAR(50) NOT NULL COMMENT 'ì´ë©”ì¼', -- ì´ë©”ì¼
+	`PNO`      INTEGER     NOT NULL COMMENT 'í”„ë¡œì íŠ¸ë²ˆí˜¸' -- í”„ë¡œì íŠ¸ë²ˆí˜¸
 )
-COMMENT 'ÇÇµå';
+COMMENT 'í”¼ë“œ';
 
--- ÇÇµå
+-- í”¼ë“œ
 ALTER TABLE `SPMS_FEEDS`
-	ADD CONSTRAINT `PK_SPMS_FEEDS` -- ÇÇµå ±âº»Å°
+	ADD CONSTRAINT `PK_SPMS_FEEDS` -- í”¼ë“œ ê¸°ë³¸í‚¤
 		PRIMARY KEY (
-			`FNO` -- ÇÇµå¹øÈ£
+			`FNO` -- í”¼ë“œë²ˆí˜¸
 		);
 
 ALTER TABLE `SPMS_FEEDS`
-	MODIFY COLUMN `FNO` INTEGER NOT NULL AUTO_INCREMENT COMMENT 'ÇÇµå¹øÈ£';
+	MODIFY COLUMN `FNO` INTEGER NOT NULL AUTO_INCREMENT COMMENT 'í”¼ë“œë²ˆí˜¸';
 
--- Ã·ºÎÆÄÀÏ
+-- ì²¨ë¶€íŒŒì¼
 CREATE TABLE `SPMS_FILES` (
-	`FNO`      INTEGER      NOT NULL COMMENT 'ÆÄÀÏ¹øÈ£', -- ÆÄÀÏ¹øÈ£
-	`FILEID`   VARCHAR(50)  NOT NULL COMMENT 'ÆÄÀÏ¾ÆÀÌµğ', -- ÆÄÀÏ¾ÆÀÌµğ
-	`TITLE`    VARCHAR(255) NOT NULL COMMENT 'ÆÄÀÏ¸í', -- ÆÄÀÏ¸í
-	`FSIZE`    VARCHAR(20)  NOT NULL COMMENT 'ÆÄÀÏÅ©±â', -- ÆÄÀÏÅ©±â
-	`REG_DATE` DATETIME     NOT NULL COMMENT 'µî·ÏÀÏ', -- µî·ÏÀÏ
-	`EMAIL`    VARCHAR(50)  NOT NULL COMMENT 'ÀÌ¸ŞÀÏ', -- ÀÌ¸ŞÀÏ
-	`PNO`      INTEGER      NOT NULL COMMENT 'ÇÁ·ÎÁ§Æ®¹øÈ£', -- ÇÁ·ÎÁ§Æ®¹øÈ£
-	`TAG`      VARCHAR(255) NULL     COMMENT 'ÅÂ±×' -- ÅÂ±×
+	`FNO`      INTEGER      NOT NULL COMMENT 'íŒŒì¼ë²ˆí˜¸', -- íŒŒì¼ë²ˆí˜¸
+	`FILEID`   VARCHAR(50)  NOT NULL COMMENT 'íŒŒì¼ì•„ì´ë””', -- íŒŒì¼ì•„ì´ë””
+	`TITLE`    VARCHAR(255) NOT NULL COMMENT 'íŒŒì¼ëª…', -- íŒŒì¼ëª…
+	`FSIZE`    VARCHAR(20)  NOT NULL COMMENT 'íŒŒì¼í¬ê¸°', -- íŒŒì¼í¬ê¸°
+	`REG_DATE` DATETIME     NOT NULL COMMENT 'ë“±ë¡ì¼', -- ë“±ë¡ì¼
+	`EMAIL`    VARCHAR(50)  NOT NULL COMMENT 'ì´ë©”ì¼', -- ì´ë©”ì¼
+	`PNO`      INTEGER      NOT NULL COMMENT 'í”„ë¡œì íŠ¸ë²ˆí˜¸', -- í”„ë¡œì íŠ¸ë²ˆí˜¸
+	`TAG`      VARCHAR(255) NULL     COMMENT 'íƒœê·¸' -- íƒœê·¸
 )
-COMMENT 'Ã·ºÎÆÄÀÏ';
+COMMENT 'ì²¨ë¶€íŒŒì¼';
 
--- Ã·ºÎÆÄÀÏ
+-- ì²¨ë¶€íŒŒì¼
 ALTER TABLE `SPMS_FILES`
-	ADD CONSTRAINT `PK_SPMS_FILES` -- Ã·ºÎÆÄÀÏ ±âº»Å°
+	ADD CONSTRAINT `PK_SPMS_FILES` -- ì²¨ë¶€íŒŒì¼ ê¸°ë³¸í‚¤
 		PRIMARY KEY (
-			`FNO` -- ÆÄÀÏ¹øÈ£
+			`FNO` -- íŒŒì¼ë²ˆí˜¸
 		);
 
 ALTER TABLE `SPMS_FILES`
-	MODIFY COLUMN `FNO` INTEGER NOT NULL AUTO_INCREMENT COMMENT 'ÆÄÀÏ¹øÈ£';
+	MODIFY COLUMN `FNO` INTEGER NOT NULL AUTO_INCREMENT COMMENT 'íŒŒì¼ë²ˆí˜¸';
 
--- ÇÇµåÆÄÀÏ
+-- í”¼ë“œíŒŒì¼
 CREATE TABLE `SPMS_FEEDFILE` (
-	`FEEDNO` INTEGER NOT NULL COMMENT 'ÇÇµå¹øÈ£', -- ÇÇµå¹øÈ£
-	`FILENO` INTEGER NOT NULL COMMENT 'ÆÄÀÏ¹øÈ£' -- ÆÄÀÏ¹øÈ£
+	`FEEDNO` INTEGER NOT NULL COMMENT 'í”¼ë“œë²ˆí˜¸', -- í”¼ë“œë²ˆí˜¸
+	`FILENO` INTEGER NOT NULL COMMENT 'íŒŒì¼ë²ˆí˜¸' -- íŒŒì¼ë²ˆí˜¸
 )
-COMMENT 'ÇÇµåÆÄÀÏ';
+COMMENT 'í”¼ë“œíŒŒì¼';
 
--- ÇÇµåÆÄÀÏ
+-- í”¼ë“œíŒŒì¼
 ALTER TABLE `SPMS_FEEDFILE`
-	ADD CONSTRAINT `PK_SPMS_FEEDFILE` -- ÇÇµåÆÄÀÏ ±âº»Å°
+	ADD CONSTRAINT `PK_SPMS_FEEDFILE` -- í”¼ë“œíŒŒì¼ ê¸°ë³¸í‚¤
 		PRIMARY KEY (
-			`FEEDNO`, -- ÇÇµå¹øÈ£
-			`FILENO`  -- ÆÄÀÏ¹øÈ£
+			`FEEDNO`, -- í”¼ë“œë²ˆí˜¸
+			`FILENO`  -- íŒŒì¼ë²ˆí˜¸
 		);
 
--- ¸â¹ö
+-- ë©¤ë²„
 ALTER TABLE `SPMS_MEMBS`
-	ADD CONSTRAINT `FK_SPMS_ADDR_TO_SPMS_MEMBS` -- ÁÖ¼ÒÁ¤º¸ -> ¸â¹ö
+	ADD CONSTRAINT `FK_SPMS_ADDR_TO_SPMS_MEMBS` -- ì£¼ì†Œì •ë³´ -> ë©¤ë²„
 		FOREIGN KEY (
-			`ANO` -- ÁÖ¼Ò¹øÈ£
+			`ANO` -- ì£¼ì†Œë²ˆí˜¸
 		)
-		REFERENCES `SPMS_ADDR` ( -- ÁÖ¼ÒÁ¤º¸
-			`ANO` -- ÁÖ¼Ò¹øÈ£
+		REFERENCES `SPMS_ADDR` ( -- ì£¼ì†Œì •ë³´
+			`ANO` -- ì£¼ì†Œë²ˆí˜¸
 		);
 
--- ¸â¹ö»çÁø
+-- ë©¤ë²„ì‚¬ì§„
 ALTER TABLE `SPMS_MEMIMG`
-	ADD CONSTRAINT `FK_SPMS_MEMBS_TO_SPMS_MEMIMG` -- ¸â¹ö -> ¸â¹ö»çÁø
+	ADD CONSTRAINT `FK_SPMS_MEMBS_TO_SPMS_MEMIMG` -- ë©¤ë²„ -> ë©¤ë²„ì‚¬ì§„
 		FOREIGN KEY (
-			`EMAIL` -- ÀÌ¸ŞÀÏ
+			`EMAIL` -- ì´ë©”ì¼
 		)
-		REFERENCES `SPMS_MEMBS` ( -- ¸â¹ö
-			`EMAIL` -- ÀÌ¸ŞÀÏ
+		REFERENCES `SPMS_MEMBS` ( -- ë©¤ë²„
+			`EMAIL` -- ì´ë©”ì¼
 		);
 
--- ÇÁ·ÎÁ§Æ®¸â¹ö
+-- í”„ë¡œì íŠ¸ë©¤ë²„
 ALTER TABLE `SPMS_PRJMEMB`
-	ADD CONSTRAINT `FK_SPMS_MEMBS_TO_SPMS_PRJMEMB` -- ¸â¹ö -> ÇÁ·ÎÁ§Æ®¸â¹ö
+	ADD CONSTRAINT `FK_SPMS_MEMBS_TO_SPMS_PRJMEMB` -- ë©¤ë²„ -> í”„ë¡œì íŠ¸ë©¤ë²„
 		FOREIGN KEY (
-			`EMAIL` -- ÀÌ¸ŞÀÏ
+			`EMAIL` -- ì´ë©”ì¼
 		)
-		REFERENCES `SPMS_MEMBS` ( -- ¸â¹ö
-			`EMAIL` -- ÀÌ¸ŞÀÏ
+		REFERENCES `SPMS_MEMBS` ( -- ë©¤ë²„
+			`EMAIL` -- ì´ë©”ì¼
 		);
 
--- ÇÁ·ÎÁ§Æ®¸â¹ö
+-- í”„ë¡œì íŠ¸ë©¤ë²„
 ALTER TABLE `SPMS_PRJMEMB`
-	ADD CONSTRAINT `FK_SPMS_PRJS_TO_SPMS_PRJMEMB` -- ÇÁ·ÎÁ§Æ® -> ÇÁ·ÎÁ§Æ®¸â¹ö
+	ADD CONSTRAINT `FK_SPMS_PRJS_TO_SPMS_PRJMEMB` -- í”„ë¡œì íŠ¸ -> í”„ë¡œì íŠ¸ë©¤ë²„
 		FOREIGN KEY (
-			`PNO` -- ÇÁ·ÎÁ§Æ®¹øÈ£
+			`PNO` -- í”„ë¡œì íŠ¸ë²ˆí˜¸
 		)
-		REFERENCES `SPMS_PRJS` ( -- ÇÁ·ÎÁ§Æ®
-			`PNO` -- ÇÁ·ÎÁ§Æ®¹øÈ£
+		REFERENCES `SPMS_PRJS` ( -- í”„ë¡œì íŠ¸
+			`PNO` -- í”„ë¡œì íŠ¸ë²ˆí˜¸
 		);
 
--- ÅÂ½ºÅ©
+-- íƒœìŠ¤í¬
 ALTER TABLE `SPMS_TASKS`
-	ADD CONSTRAINT `FK_SPMS_PRJS_TO_SPMS_TASKS` -- ÇÁ·ÎÁ§Æ® -> ÅÂ½ºÅ©
+	ADD CONSTRAINT `FK_SPMS_PRJS_TO_SPMS_TASKS` -- í”„ë¡œì íŠ¸ -> íƒœìŠ¤í¬
 		FOREIGN KEY (
-			`PNO` -- ÇÁ·ÎÁ§Æ®¹øÈ£
+			`PNO` -- í”„ë¡œì íŠ¸ë²ˆí˜¸
 		)
-		REFERENCES `SPMS_PRJS` ( -- ÇÁ·ÎÁ§Æ®
-			`PNO` -- ÇÁ·ÎÁ§Æ®¹øÈ£
+		REFERENCES `SPMS_PRJS` ( -- í”„ë¡œì íŠ¸
+			`PNO` -- í”„ë¡œì íŠ¸ë²ˆí˜¸
 		);
 
--- ÀÛ¾÷ÇÒ´ç
+-- ì‘ì—…í• ë‹¹
 ALTER TABLE `SPMS_MEMBTASK`
-	ADD CONSTRAINT `FK_SPMS_TASKS_TO_SPMS_MEMBTASK` -- ÅÂ½ºÅ© -> ÀÛ¾÷ÇÒ´ç
+	ADD CONSTRAINT `FK_SPMS_TASKS_TO_SPMS_MEMBTASK` -- íƒœìŠ¤í¬ -> ì‘ì—…í• ë‹¹
 		FOREIGN KEY (
-			`TNO` -- ÅÂ½ºÅ©¹øÈ£
+			`TNO` -- íƒœìŠ¤í¬ë²ˆí˜¸
 		)
-		REFERENCES `SPMS_TASKS` ( -- ÅÂ½ºÅ©
-			`TNO` -- ÅÂ½ºÅ©¹øÈ£
+		REFERENCES `SPMS_TASKS` ( -- íƒœìŠ¤í¬
+			`TNO` -- íƒœìŠ¤í¬ë²ˆí˜¸
 		);
 
--- ÀÛ¾÷ÇÒ´ç
+-- ì‘ì—…í• ë‹¹
 ALTER TABLE `SPMS_MEMBTASK`
-	ADD CONSTRAINT `FK_SPMS_PRJMEMB_TO_SPMS_MEMBTASK` -- ÇÁ·ÎÁ§Æ®¸â¹ö -> ÀÛ¾÷ÇÒ´ç
+	ADD CONSTRAINT `FK_SPMS_PRJMEMB_TO_SPMS_MEMBTASK` -- í”„ë¡œì íŠ¸ë©¤ë²„ -> ì‘ì—…í• ë‹¹
 		FOREIGN KEY (
-			`EMAIL`, -- ÀÌ¸ŞÀÏ
-			`PNO`    -- ÇÁ·ÎÁ§Æ®¹øÈ£
+			`EMAIL`, -- ì´ë©”ì¼
+			`PNO`    -- í”„ë¡œì íŠ¸ë²ˆí˜¸
 		)
-		REFERENCES `SPMS_PRJMEMB` ( -- ÇÁ·ÎÁ§Æ®¸â¹ö
-			`EMAIL`, -- ÀÌ¸ŞÀÏ
-			`PNO`    -- ÇÁ·ÎÁ§Æ®¹øÈ£
+		REFERENCES `SPMS_PRJMEMB` ( -- í”„ë¡œì íŠ¸ë©¤ë²„
+			`EMAIL`, -- ì´ë©”ì¼
+			`PNO`    -- í”„ë¡œì íŠ¸ë²ˆí˜¸
 		);
 
--- ÇÇµå
+-- í”¼ë“œ
 ALTER TABLE `SPMS_FEEDS`
-	ADD CONSTRAINT `FK_SPMS_PRJMEMB_TO_SPMS_FEEDS` -- ÇÁ·ÎÁ§Æ®¸â¹ö -> ÇÇµå
+	ADD CONSTRAINT `FK_SPMS_PRJMEMB_TO_SPMS_FEEDS` -- í”„ë¡œì íŠ¸ë©¤ë²„ -> í”¼ë“œ
 		FOREIGN KEY (
-			`EMAIL`, -- ÀÌ¸ŞÀÏ
-			`PNO`    -- ÇÁ·ÎÁ§Æ®¹øÈ£
+			`EMAIL`, -- ì´ë©”ì¼
+			`PNO`    -- í”„ë¡œì íŠ¸ë²ˆí˜¸
 		)
-		REFERENCES `SPMS_PRJMEMB` ( -- ÇÁ·ÎÁ§Æ®¸â¹ö
-			`EMAIL`, -- ÀÌ¸ŞÀÏ
-			`PNO`    -- ÇÁ·ÎÁ§Æ®¹øÈ£
+		REFERENCES `SPMS_PRJMEMB` ( -- í”„ë¡œì íŠ¸ë©¤ë²„
+			`EMAIL`, -- ì´ë©”ì¼
+			`PNO`    -- í”„ë¡œì íŠ¸ë²ˆí˜¸
 		);
 
--- Ã·ºÎÆÄÀÏ
+-- ì²¨ë¶€íŒŒì¼
 ALTER TABLE `SPMS_FILES`
-	ADD CONSTRAINT `FK_SPMS_PRJMEMB_TO_SPMS_FILES` -- ÇÁ·ÎÁ§Æ®¸â¹ö -> Ã·ºÎÆÄÀÏ
+	ADD CONSTRAINT `FK_SPMS_PRJMEMB_TO_SPMS_FILES` -- í”„ë¡œì íŠ¸ë©¤ë²„ -> ì²¨ë¶€íŒŒì¼
 		FOREIGN KEY (
-			`EMAIL`, -- ÀÌ¸ŞÀÏ
-			`PNO`    -- ÇÁ·ÎÁ§Æ®¹øÈ£
+			`EMAIL`, -- ì´ë©”ì¼
+			`PNO`    -- í”„ë¡œì íŠ¸ë²ˆí˜¸
 		)
-		REFERENCES `SPMS_PRJMEMB` ( -- ÇÁ·ÎÁ§Æ®¸â¹ö
-			`EMAIL`, -- ÀÌ¸ŞÀÏ
-			`PNO`    -- ÇÁ·ÎÁ§Æ®¹øÈ£
+		REFERENCES `SPMS_PRJMEMB` ( -- í”„ë¡œì íŠ¸ë©¤ë²„
+			`EMAIL`, -- ì´ë©”ì¼
+			`PNO`    -- í”„ë¡œì íŠ¸ë²ˆí˜¸
 		);
 
--- ÇÇµåÆÄÀÏ
+-- í”¼ë“œíŒŒì¼
 ALTER TABLE `SPMS_FEEDFILE`
-	ADD CONSTRAINT `FK_SPMS_FEEDS_TO_SPMS_FEEDFILE` -- ÇÇµå -> ÇÇµåÆÄÀÏ
+	ADD CONSTRAINT `FK_SPMS_FEEDS_TO_SPMS_FEEDFILE` -- í”¼ë“œ -> í”¼ë“œíŒŒì¼
 		FOREIGN KEY (
-			`FEEDNO` -- ÇÇµå¹øÈ£
+			`FEEDNO` -- í”¼ë“œë²ˆí˜¸
 		)
-		REFERENCES `SPMS_FEEDS` ( -- ÇÇµå
-			`FNO` -- ÇÇµå¹øÈ£
+		REFERENCES `SPMS_FEEDS` ( -- í”¼ë“œ
+			`FNO` -- í”¼ë“œë²ˆí˜¸
 		);
 
--- ÇÇµåÆÄÀÏ
+-- í”¼ë“œíŒŒì¼
 ALTER TABLE `SPMS_FEEDFILE`
-	ADD CONSTRAINT `FK_SPMS_FILES_TO_SPMS_FEEDFILE` -- Ã·ºÎÆÄÀÏ -> ÇÇµåÆÄÀÏ
+	ADD CONSTRAINT `FK_SPMS_FILES_TO_SPMS_FEEDFILE` -- ì²¨ë¶€íŒŒì¼ -> í”¼ë“œíŒŒì¼
 		FOREIGN KEY (
-			`FILENO` -- ÆÄÀÏ¹øÈ£
+			`FILENO` -- íŒŒì¼ë²ˆí˜¸
 		)
-		REFERENCES `SPMS_FILES` ( -- Ã·ºÎÆÄÀÏ
-			`FNO` -- ÆÄÀÏ¹øÈ£
+		REFERENCES `SPMS_FILES` ( -- ì²¨ë¶€íŒŒì¼
+			`FNO` -- íŒŒì¼ë²ˆí˜¸
 		);
 		
 		
@@ -357,10 +357,10 @@ values('project5', 'project5', '2013-5-1', '2013-6-2');
 
 
 
-/* m01@test.comÀÇ Âü¿©ÇÁ·ÎÁ§Æ®
-1 - 1ÀÏ¹İ
+/* m01@test.comì˜ ì°¸ì—¬í”„ë¡œì íŠ¸
+1 - 1ì¼ë°˜
 2 - PL
-3 - ÀÏ¹İ
+3 - ì¼ë°˜
 */
 insert into SPMS_PRJMEMB(EMAIL, PNO, LEVEL)
 values('m01@test.com', 1, 1);
@@ -371,11 +371,11 @@ values('m01@test.com', 2, 0);
 insert into SPMS_PRJMEMB(EMAIL, PNO, LEVEL)
 values('m01@test.com', 3, 1);
 
-/* m02@test.comÀÇ Âü¿©ÇÁ·ÎÁ§Æ®
-2 - ÀÏ¹İ
+/* m02@test.comì˜ ì°¸ì—¬í”„ë¡œì íŠ¸
+2 - ì¼ë°˜
 3 - PL
 4 - PL
-5 - ÀÏ¹İ
+5 - ì¼ë°˜
 */
 insert into SPMS_PRJMEMB(EMAIL, PNO, LEVEL)
 values('m02@test.com', 2, 1);
@@ -392,28 +392,33 @@ values('m02@test.com', 5, 1);
 
 alter table SPMS_MEMBS
 	add column LEVEL int null default 0;
+	
+insert into SPMS_MEMBS(EMAIL,MNAME,PWD,TEL,LEVEL)
+values('admin01@test.com','admin01','1111','111-2222',1);	
 
-/* ¸â¹ö ·¹º§ all
-0: ÀÏ¹İ¤¡
-1: °ü¸®ÀÚ
+
+
+/* ë©¤ë²„ ë ˆë²¨
+0: ì¼ë°”
+1: ê´€ë¦¬ì
 2: PM
 */	
 insert into SPMS_MEMBS(EMAIL,MNAME,PWD,TEL,LEVEL)
 values('admin01@test.com','admin01','1111','111-2222',1);	
 
-/* Å×½ºÆ® PM Ãß°¡ */
+/* í…ŒìŠ¤íŠ¸ PM ì¶”ê°€ */
 insert into SPMS_MEMBS(EMAIL,MNAME,PWD,TEL,LEVEL)
 values('pm01@test.com','pm01','1111','111-2222',2);	
 
-/* Å×½ºÆ® FEED Ãß°¡ */
+/* í…ŒìŠ¤íŠ¸ FEED ì¶”ê°€ */
 insert into SPMS_FEEDS (CONTENT, REG_DATE, EMAIL, PNO) 
-values ('Å×½ºÆ® ÇÇµå_1', now(), 'm01@test.com', 2);
+values ('í…ŒìŠ¤íŠ¸_1', now(), 'm01@test.com', 2);
 
 insert into SPMS_FEEDS (CONTENT, REG_DATE, EMAIL, PNO) 
-values ('Å×½ºÆ® ÇÇµå_2', now(), 'm01@test.com', 2);
+values ('í…ŒìŠ¤íŠ¸_2', now(), 'm01@test.com', 2);
 
 
-/* Å×½ºÆ® Å×ÀÌÅÍ Á¶È¸ */
+/* í…ŒìŠ¤íŠ¸ë°ì´í„° ì¡°íšŒ */
 select * from spms_membs;
 select * from spms_prjs;
 select * from spms_prjmemb;
