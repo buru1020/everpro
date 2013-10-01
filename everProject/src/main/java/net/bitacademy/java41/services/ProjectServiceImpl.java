@@ -3,9 +3,11 @@ package net.bitacademy.java41.services;
 import java.util.HashMap;
 import java.util.List;
 
+import net.bitacademy.java41.dao.FeedDao;
 import net.bitacademy.java41.dao.MemberDao;
 import net.bitacademy.java41.dao.ProjectDao;
 import net.bitacademy.java41.dao.ProjectMemberDao;
+import net.bitacademy.java41.vo.Feed;
 import net.bitacademy.java41.vo.Project;
 import net.bitacademy.java41.vo.ProjectMember;
 
@@ -19,6 +21,7 @@ import org.springframework.transaction.annotation.Transactional;
 public class ProjectServiceImpl implements ProjectService {
 	@Autowired TaskService taskService;
 	@Autowired ProjectDao projectDao;
+	@Autowired FeedDao feedDao;
 	@Autowired ProjectMemberDao projectMemberDao;
 	@Autowired MemberDao memberDao;
 	@Autowired PlatformTransactionManager txManager;
@@ -66,7 +69,9 @@ public class ProjectServiceImpl implements ProjectService {
 			HashMap<String, Object> paramMap = new HashMap<String, Object>();
 			paramMap.put("projectNo", projectNo);
 			paramMap.put("email", null);
+			paramMap.put("feedNo", null);
 			
+			feedDao.deleteFeed(paramMap);
 			projectMemberDao.deleteProjectMember(paramMap);
 			int count = projectDao.deleteProject(projectNo);
 			
@@ -79,15 +84,16 @@ public class ProjectServiceImpl implements ProjectService {
 	
 	@Transactional(propagation=Propagation.REQUIRED, rollbackFor=Throwable.class)
 	public int deleteProjectMember(int projectNo) throws Exception {
+		
 		try {
+			
 			HashMap<String, Object> paramMap = new HashMap<String, Object>();
 			paramMap.put("projectNo", projectNo);
 			paramMap.put("email", null);
 			
-			int count = projectMemberDao.deleteProjectMember(paramMap);
-
-			return count;
 			
+			int count = projectMemberDao.deleteProjectMember(paramMap);
+			return count;
 		} catch (Exception e) {
 			throw e;
 		}

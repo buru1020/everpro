@@ -15,7 +15,7 @@
 			<trim prefixOverrides="AND|OR">
 				<if test="projectNo != 0">
 					PNO = #{projectNo}
-				</if>
+			s	</if>
 				<if test="email != null">
 					and EMAIL = #{email}					
 				</if>

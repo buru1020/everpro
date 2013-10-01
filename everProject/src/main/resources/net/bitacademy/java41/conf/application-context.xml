@@ -13,6 +13,7 @@
 		http://www.springframework.org/schema/tx/spring-tx.xsd">
 
 	<context:annotation-config/>
+	
 	<tx:annotation-driven transaction-manager="transactionManager"/>
 	
 	<!-- 자동으로 등록할 컴포넌트가 있는 패키지를 지정한다. -->

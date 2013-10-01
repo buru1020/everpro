@@ -1,6 +1,7 @@
 package net.bitacademy.java41.dao;
 
 import java.util.List;
+import java.util.Map;
 
 import net.bitacademy.java41.vo.Feed;
 
@@ -8,6 +9,8 @@ import net.bitacademy.java41.vo.Feed;
 public interface FeedDao {
 
 	List<Feed> getFeedList(int projectNo) throws Exception;
+
+	int addFeed(Feed feed) throws Exception;
 	
 //	Task getTask(Map<String, Object> paramMap) throws Exception;
 //
@@ -15,7 +18,7 @@ public interface FeedDao {
 //	
 //	int addTask(Task task) throws Exception;
 //
-//	int deleteTask(Map<String, Object> paramMap) throws Exception;
+	int deleteFeed(Map<String, Object> paramMap) throws Exception;
 	
 	
 }

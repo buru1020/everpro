@@ -66,7 +66,10 @@
             <div class="box round first grid">
                 <h2>피드</h2>
                 <div class="block ">
-                    <form action="update.do" method="post">
+                    <form action="add.do" method="post">
+                    <input type="hidden" name="projectNo" value="${ project.no}">
+                    <input type="hidden" name="email" value="${ sessionScope.member.email}">
+                    
                     <c:choose>
 					<c:when test="${sessionScope.member.photos[0] != null}">
 						<img src="${rootPath}/res/photo/${sessionScope.member.photos[0]}" alt="Profile Pic" class="header_member_photo_img" >
@@ -76,15 +79,15 @@
 					</c:otherwise>
 					</c:choose>
 					${sessionScope.member.name}(${sessionScope.member.email}) 
-					
 					<br>
 					<textarea rows="auto" cols="auto" name="content"  placeholder="내용을 입력해주세요."></textarea>
 					<br>
-<c:forEach var="feed" items="#{feedList}">					
+		<c:forEach var="feed" items="#{feedList}">		
+						
 					<div>
 						<div>
 	                    <c:choose>
-						<c:when test="${feed.photoUrl != null}">
+						<c:when test="${feed.photoUrl != ''}">
 							<img src="${rootPath}/res/photo/${feed.photoUrl}" alt="Profile Pic" class="header_member_photo_img" >
 						</c:when>
 						<c:otherwise>
@@ -95,17 +98,21 @@
 							${feed.regDate}
 						</div>
 						<div>
-							${feed.content}
+							${feed.content} ${feed.projectNo}<a href="${rootPath}/feed/delete.do?pno=${feed.projectNo}&fno=${feed.feedNo}"> 삭제</a>
+							<input type="reset" value="삭제" 
+						onclick="document.location.href='${rootPath}/feed/delete.do?projectNo=${feed.projectNo}&feedNo=${feed.feedNo}';"class="btn btn-grey reset">
 						</div>
 					</div>
 </c:forEach>					
                     
                     <div class="form_submit_div">
-						<input type="submit" value="등록" class="btn btn-green submit">
-						<input type="reset" value="취소" 
-						onclick="document.location.href='${rootPath}/project/view.do?no=${project.no}';"class="btn btn-grey reset">
 						<input type="reset" value="목록" 
 						onclick="document.location.href='${rootPath}/project/list.do';" class="btn btn-yello reset">
+						<input type="submit" value="등록" class="btn btn-green submit">
+						<input type="reset" value="취소" 
+						onclick="document.location.href='${rootPath}/feed/list.do?no=${project.no}';"class="btn btn-grey reset">
+						
+					
 					</div>
                    
 				

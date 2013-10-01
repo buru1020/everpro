@@ -13,8 +13,8 @@ public interface FeedService {
 //	
 //	int updateTask(Task task) throws Exception;
 //	
-//	int addTask(Task task) throws Exception;
+	int addFeed(Feed feed) throws Exception;
 //	
-//	int deleteTask(int projectNo, int taskNo) throws Exception;
+	int deleteFeed(int projectNo, int feedNo) throws Exception;
 	
 }
