@@ -1,5 +1,3 @@
-<%@page import="net.bitacademy.java41.vo.Project"%>
-<%@page import="net.bitacademy.java41.vo.Member"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <!DOCTYPE html>
@@ -74,6 +72,8 @@
                 <div class="block ">
 
 			 	<!-- 입력창 -->
+<c:choose>
+	<c:when test="${isProjectMember || sessionScope.member.level == 1 || sessionScope.member.level == 2}">
 			 	<ul>
 					<li>
 					 	<div>
@@ -125,12 +125,23 @@
 
 			 	<!-- 출력 -->
 					<ul>
-					<c:forEach var="feed" items="#{feedList}">	
+					<c:forEach var="feed" items="${feedList}" varStatus="status">	
 						<li>
-                            <div class="message success">
-                            <!-- <div class="message info">
+						<div class="message 
+						<c:choose>
+						<c:when test="${(status.count % 3) == 0}">
+                            success
+						</c:when>
+						<c:when test="${(status.count % 3) == 1}">
+                            info
+						</c:when>
+						<c:otherwise>
+                            warning
+						</c:otherwise>
+                        </c:choose>">
+                           <%-- <div class="message info">
                             <div class="message warning">
-                            <div class="message error"> -->
+                            <div class="message error"> --%>
                             <c:choose>
 							<c:when test="${feed.photoUrl != ''}">
 								<img src="${rootPath}/res/photo/${feed.photoUrl}" alt="Profile Pic" class="header_member_photo_img" >
@@ -157,10 +168,15 @@
 						</li>
 					</c:forEach>
 					</ul>
+	</c:when>
+	<c:otherwise>
+		<span>해당 피드 권한이 없습니다.</span>
+	</c:otherwise>
+</c:choose>	
 						
 			<div class="feed_bottom_btns_div">
 				 <button class="btn-icon btn-green btn-person" 
-							onclick="document.location.href='${rootPath}/project/view.do?projectNo=${project.no}';"><span></span>프로젝트 정보</button>
+							onclick="document.location.href='${rootPath}/project/view.do?no=${project.no}';"><span></span>프로젝트 정보</button>
 			</div>
                 </div>
             </div>
