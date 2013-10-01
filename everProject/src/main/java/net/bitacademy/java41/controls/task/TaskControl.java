@@ -8,6 +8,7 @@ import javax.servlet.ServletContext;
 import net.bitacademy.java41.services.ProjectService;
 import net.bitacademy.java41.services.TaskService;
 import net.bitacademy.java41.vo.Project;
+import net.bitacademy.java41.vo.ProjectMember;
 import net.bitacademy.java41.vo.Task;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -33,9 +34,11 @@ public class TaskControl {
 			int projectNo, 
 			Model model) throws Exception {
 		Project project = projectService.getProjectInfo(projectNo);
+		List<ProjectMember> projectMemberList = projectService.getProjectMemberList(projectNo);
 		List<Task> taskList =  taskService.getTaskList(projectNo);
 		
 		model.addAttribute("project", project);
+		model.addAttribute("projectMemberList", projectMemberList);
 		model.addAttribute("taskList", taskList);
 		
 		return "task/taskList";
@@ -73,9 +76,11 @@ public class TaskControl {
 			int taskNo, 
 			Model model) throws Exception {
 		Project project = projectService.getProjectInfo(projectNo);
+		List<ProjectMember> projectMemberList = projectService.getProjectMemberList(projectNo);
 		Task task = taskService.getTask(projectNo, taskNo);
 		
 		model.addAttribute("project", project);
+		model.addAttribute("projectMemberList", projectMemberList);
 		model.addAttribute("task", task);
 		
 		return "task/taskView";

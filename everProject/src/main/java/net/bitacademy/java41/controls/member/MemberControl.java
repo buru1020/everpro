@@ -4,6 +4,7 @@ import java.io.File;
 import java.util.List;
 
 import javax.servlet.ServletContext;
+import javax.servlet.http.HttpSession;
 
 import net.bitacademy.java41.services.MemberService;
 import net.bitacademy.java41.vo.Member;
@@ -63,10 +64,12 @@ public class MemberControl {
 	@RequestMapping("/view")
 	public String view(
 			String email,
+			@ModelAttribute("member") Member member, 
 			Model model) throws Exception {
-		Member member = memberService.getMemberInfo(email);
+		Member memberInfo = memberService.getMemberInfo(email);
 		List<Project> projectList = memberService.getUserProjectList(email);
-		model.addAttribute("memberInfo", member);
+		model.addAttribute("member", member);
+		model.addAttribute("memberInfo", memberInfo);
 		model.addAttribute("projectList", projectList);
 		
 		return "member/memberView";
@@ -75,17 +78,20 @@ public class MemberControl {
 	@RequestMapping(value="/update", method=RequestMethod.GET)
 	public String updateForm(
 			String email, 
-			Model model ) throws Exception {
-		Member member = memberService.getMemberInfo(email);
-		model.addAttribute("memberInfo", member);
+			Model model
+			/*HttpSession session*/ ) throws Exception {
+		Member memberInfo = memberService.getMemberInfo(email);
+		model.addAttribute("memberInfo", memberInfo);
+		/*session.setAttribute("memberInfo", memberInfo);*/
 		
 		return "member/memberUpdateForm";
 	}
 	
 	@RequestMapping(value="/update", method=RequestMethod.POST)
 	public String update(
-			Member memberInfo,
-			MultipartFile photo, 
+			@ModelAttribute("memberInfo") Member memberInfo,
+			MultipartFile photo,
+			HttpSession sessoin, 
 			Model model ) throws Exception {
 		String[] photos = null;
 		if (photo.getSize() > 0) {
