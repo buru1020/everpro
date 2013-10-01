@@ -7,7 +7,6 @@ import net.bitacademy.java41.dao.FeedDao;
 import net.bitacademy.java41.dao.MemberDao;
 import net.bitacademy.java41.dao.ProjectDao;
 import net.bitacademy.java41.dao.ProjectMemberDao;
-import net.bitacademy.java41.vo.Feed;
 import net.bitacademy.java41.vo.Project;
 import net.bitacademy.java41.vo.ProjectMember;
 
@@ -66,13 +65,8 @@ public class ProjectServiceImpl implements ProjectService {
 		try {
 			taskService.deleteTask(projectNo, 0);
 			
-			HashMap<String, Object> paramMap = new HashMap<String, Object>();
-			paramMap.put("projectNo", projectNo);
-			paramMap.put("email", null);
-			paramMap.put("feedNo", null);
+			this.deleteProjectMember(projectNo, 0, null);
 			
-			feedDao.deleteFeed(paramMap);
-			projectMemberDao.deleteProjectMember(paramMap);
 			int count = projectDao.deleteProject(projectNo);
 			
 			return count;
@@ -83,14 +77,15 @@ public class ProjectServiceImpl implements ProjectService {
 	}
 	
 	@Transactional(propagation=Propagation.REQUIRED, rollbackFor=Throwable.class)
-	public int deleteProjectMember(int projectNo) throws Exception {
+	public int deleteProjectMember(int projectNo, int feedNo, String email) throws Exception {
 		
 		try {
-			
 			HashMap<String, Object> paramMap = new HashMap<String, Object>();
 			paramMap.put("projectNo", projectNo);
-			paramMap.put("email", null);
+			paramMap.put("feedNo", feedNo);
+			paramMap.put("email", email);
 			
+			feedDao.deleteFeed(paramMap);
 			
 			int count = projectMemberDao.deleteProjectMember(paramMap);
 			return count;

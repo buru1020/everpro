@@ -19,7 +19,7 @@ public interface ProjectService {
 	
 	int deleteProject(int projectNo) throws Exception;
 	
-	int deleteProjectMember(int projectNo) throws Exception;
+	int deleteProjectMember(int projectNo, int feedNo, String emai) throws Exception;
 	
 	int projectUpdate(Project project) throws Exception;
 	

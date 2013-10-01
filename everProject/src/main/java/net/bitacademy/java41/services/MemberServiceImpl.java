@@ -19,6 +19,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 @Service
 public class MemberServiceImpl implements MemberService {
+	@Autowired ProjectService projectService;
 	@Autowired MemberDao memberDao;
 	@Autowired MemberImageDao memberImageDao;
 	@Autowired ProjectDao projectDao;
@@ -110,11 +111,7 @@ public class MemberServiceImpl implements MemberService {
 		try {
 			memberImageDao.deletePhoto(email);
 			
-			HashMap<String, Object> paramMap = new HashMap<String, Object>();
-			paramMap.put("projectNo", 0);
-			paramMap.put("email", email);
-			
-			projectMemberDao.deleteProjectMember(paramMap);
+			projectService.deleteProjectMember(0, 0, email);
 			
 			int count = memberDao.deleteMember(email);
 			

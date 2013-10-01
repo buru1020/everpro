@@ -6,28 +6,26 @@
 <mapper namespace="net.bitacademy.java41.dao.FeedDao">
 
 	<select id="getFeedList" parameterType="int" resultType="Feed">
-		select a.FNO as feedNo
-			, a.PNO as projectNo
-			, a.EMAIL
-			, a.CONTENT
-			, a.REG_DATE as regDate
-			, c.MNAME as name
-			, d.IMGURL as photoUrl
-			, b.LEVEL as prjMembLevel
-		from SPMS_FEEDS a
-			, SPMS_PRJMEMB b
-			, SPMS_MEMBS c left join 
-			 (
-				select EMAIL, IMGURL
-				from SPMS_MEMIMG
-				where 1=1
-				order by INO desc limit 0, 1
-				) d on c.EMAIL = d.EMAIL 
-		where 1=1
-			and a.PNO = b.PNO
-			and a.EMAIL = b.EMAIL
-			and b.EMAIL = c.EMAIL
-			and a.PNO = #{value}
+		select a.FNO as feedNo 
+			, a.PNO as projectNo 
+			, a.EMAIL 
+			, a.CONTENT 
+			, a.REG_DATE as regDate 
+			, a.MNAME as name 
+			, a.LEVEL as prjMembLevel 
+			, b.IMGURL as photoUrl
+		from (
+				select a.FNO, a.PNO, a.EMAIL, a.CONTENT, a.REG_DATE, c.MNAME,  b.LEVEL 
+				from SPMS_FEEDS a 
+					, SPMS_PRJMEMB b 
+					, SPMS_MEMBS c 
+				where 1=1 
+					and a.PNO = b.PNO 
+					and a.EMAIL = b.EMAIL 
+					and b.EMAIL = c.EMAIL 
+					and a.PNO = #{value}
+			) a left join SPMS_MEMIMG b on a.EMAIL = b.EMAIL 
+		order by a.FNO desc 		
 	</select>
 	
 	<insert id="addFeed" parameterType="Feed">
@@ -51,43 +49,6 @@
 			</trim>
 		</where> 
 	</delete> 
-	
-<!-- 
-	<select id="getTaskList" resultType="Task" parameterType="int">
-		select TNO as taskNo, 
-				PNO as projectNo, 
-				TITLE, 
-				UIPROTOURL, 
-				CONTENT, 
-				START_DATE as startDate,
-				END_DATE as endDate, 
-				STATUS
-	 	from SPMS_TASKS 
-	 	where 1=1
-	 		and PNO = #{value} 
-	 	order by TNO desc
-	</select>
-	
-	
-
-	
-	
-	<update id="updateTask" parameterType="Task">
-		update SPMS_TASKS 
-		set
-			TITLE = #{title}, 
-			UIPROTOURL = #{uiProtoUrl}, 
-			CONTENT = #{content},
-			START_DATE = #{startDate}, 
-			END_DATE = #{endDate}, 
-			STATUS = #{status}
-		where 1=1
-			and PNO = #{projectNo} 
-			and TNO = #{taskNo}
-	</update>
-	
-	-->
-	
 	
 	
 </mapper> 

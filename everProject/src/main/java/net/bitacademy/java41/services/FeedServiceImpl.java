@@ -46,28 +46,5 @@ public class FeedServiceImpl implements FeedService {
 		}
 	}
 	
-	/*
-	public Feed getTask(int projectNo, int taskNo)throws Exception{
-		HashMap<String,Object> paramMap = new HashMap<String,Object>();
-		paramMap.put("projectNo", projectNo);
-		paramMap.put("taskNo", taskNo);
-		
-		return taskDao.getTask(paramMap);
-	}
-	
-	
-	@Transactional(propagation=Propagation.REQUIRED, rollbackFor=Throwable.class)
-	public int updateTask(Task task) throws Exception {
-		try {
-			return taskDao.updateTask(task);
-			
-		} catch (Exception e) {
-			throw e;
-		}
-	}
-	
-	
-	
 
-	*/
 }

@@ -93,7 +93,7 @@
 								onclick="document.location.href='${rootPath}/feed/list.do?projectNo=${project.no}';">
 						</c:if>
 					</c:forEach>			
-						<c:if test="${sessionScope.member.level == 1}"> 
+						<c:if test="${sessionScope.member.level == 1 || sessionScope.member.level == 2}"> 
 							<input type="submit" value="피드" class="btn btn-yellow btn-small"
 								onclick="document.location.href='${rootPath}/feed/list.do?projectNo=${project.no}';">
 						</c:if>						
