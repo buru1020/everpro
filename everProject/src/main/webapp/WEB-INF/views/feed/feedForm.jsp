@@ -74,6 +74,7 @@
 			 	<!-- 입력창 -->
 <c:choose>
 	<c:when test="${isProjectMember || sessionScope.member.level == 1 || sessionScope.member.level == 2}">
+		<c:if test="${isProjectMember}">
 			 	<ul>
 					<li>
 					 	<div>
@@ -122,7 +123,7 @@
 					 </div>
 				 	</li>
 				</ul>	
-
+		</c:if>
 			 	<!-- 출력 -->
 					<ul>
 					<c:forEach var="feed" items="${feedList}" varStatus="status">	
