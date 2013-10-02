@@ -36,20 +36,28 @@ public class FeedControl {
 			Model model) throws Exception {
 		Project project = projectService.getProjectInfo(projectNo);
 		List<ProjectMember> projectMemberList = projectService.getProjectMemberList(projectNo);
-		List<Feed> feedList =  feedService.getFeedList(projectNo);
 		boolean isProjectMember = projectService.isProjectMember(projectNo, sessionMember);
+		List<Feed> feedList =  feedService.getFeedList(projectNo);
+		String tmpContent = null;
+		for( Feed feed : feedList ) {
+			tmpContent = feed.getContent().replace("%nl&%", "<br>");
+			feed.setContent(tmpContent);
+		}
+		
 		
 		model.addAttribute("project", project);
 		model.addAttribute("projectMemberList", projectMemberList);
-		model.addAttribute("feedList", feedList);
 		model.addAttribute("isProjectMember", isProjectMember);
+		model.addAttribute("feedList", feedList);
 		
 		return "feed/feedForm";
 	}
 	
 	@RequestMapping("/add")
 	public String add(Feed feed) throws Exception {
-
+		String content = feed.getContent().replace("\n", "%nl&%");
+		System.out.println(content);
+		feed.setContent(content);
 		feedService.addFeed(feed);
 		
 		return "redirect:../feed/list.do?projectNo=" + feed.getProjectNo();
