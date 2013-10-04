@@ -5,6 +5,7 @@
 <!DOCTYPE html>
 <html>
 <head>
+<title>everProject Member List </title>
     <meta charset="UTF-8"/>
     <title>EverProject</title>
     <link rel="icon" type="image/png" href="${rootPath}/res/logo_sim.png">

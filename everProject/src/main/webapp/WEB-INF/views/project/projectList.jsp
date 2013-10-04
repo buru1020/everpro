@@ -4,7 +4,7 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml">
-<head>
+<head><title>everProject List </title>
     <meta http-equiv="content-type" content="text/html; charset=utf-8" />
     <title>EverProject</title>
     <link rel="icon" type="image/png" href="${rootPath}/res/logo_sim.png">

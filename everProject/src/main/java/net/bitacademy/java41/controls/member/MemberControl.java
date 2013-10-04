@@ -62,15 +62,9 @@ public class MemberControl {
 	}
 	
 	@RequestMapping("/view")
-	public String view(
-			String email,
-			@ModelAttribute("member") Member member, 
-			Model model) throws Exception {
-		Member memberInfo = memberService.getMemberInfo(email);
-		List<Project> projectList = memberService.getUserProjectList(email);
-		model.addAttribute("member", member);
-		model.addAttribute("memberInfo", memberInfo);
-		model.addAttribute("projectList", projectList);
+	public String view(String email, Model model) throws Exception {
+		model.addAttribute("memberInfo", memberService.getMemberInfo(email));
+		model.addAttribute("projectList", memberService.getUserProjectList(email));
 		
 		return "member/memberView";
 	}
@@ -78,11 +72,9 @@ public class MemberControl {
 	@RequestMapping(value="/update", method=RequestMethod.GET)
 	public String updateForm(
 			String email, 
-			Model model
-			/*HttpSession session*/ ) throws Exception {
+			Model model ) throws Exception {
 		Member memberInfo = memberService.getMemberInfo(email);
 		model.addAttribute("memberInfo", memberInfo);
-		/*session.setAttribute("memberInfo", memberInfo);*/
 		
 		return "member/memberUpdateForm";
 	}
@@ -93,15 +85,14 @@ public class MemberControl {
 			MultipartFile photo,
 			HttpSession sessoin, 
 			Model model ) throws Exception {
-		String[] photos = null;
-		if (photo.getSize() > 0) {
+		
+		if (photo.getSize() > 0 && photo != null) {
 			String filename = this.getNewFileName();
 			String path = sc.getAttribute("rootRealPath") + "res/photo/" + filename;
-			photo.transferTo( new File(path) );
-			photos = new String[]{ filename };
-			
-			memberInfo.setPhotos(photos);
+			photo.transferTo(new File(path));
+			memberInfo.setPhotos(new String[]{filename});
 		}
+		count =  memberService.updateMemberInfo(memberInfo);
 		
 		String returnUrl = sc.getAttribute("rootPath") + "/main.do";
 		String status = "";
@@ -136,15 +127,18 @@ public class MemberControl {
 	
 	@RequestMapping(value="/signup", method=RequestMethod.GET)
 	public String signUpForm() throws Exception {
-		return "member/signupForm";
+		return "member/signupForm2";
 	}
 	
 	@RequestMapping(value="/signup", method=RequestMethod.POST)
 	public String signUp(
 				Member member,
 				Model model, 
-				SessionStatus status) throws Exception {
-		int result = memberService.signUp(member);
+				SessionStatus status
+				) throws Exception {
+		
+			int result = memberService.signUp(member);
+			
 		if (result > 0) {
 			model.addAttribute("member", member);
 			return "member/signupSuccess";
@@ -152,7 +146,6 @@ public class MemberControl {
 			status.setComplete();
 			return "member/signupFail";
 		}
-		
 	}
 	
 	@RequestMapping(value="/updateMyInfo", method=RequestMethod.GET)

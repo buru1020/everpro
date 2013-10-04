@@ -49,6 +49,7 @@
 			      </div>
 					<div class="sign-up">
 			          <a href="${rootPath}/member/signup.do">Need an account? Sign up free.</a>
+<%-- 			          <a href="${rootPath}auth/loginForm2">Need an account? Sign up free.</a> --%>
 			        </div>
 			    </div>
 			  </form>

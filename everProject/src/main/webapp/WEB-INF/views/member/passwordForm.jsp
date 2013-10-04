@@ -129,7 +129,7 @@
                     <div class="form_submit_div">
 						<input type="submit" value="변경" class="btn btn-green submit">
 						<input type="button" value="취소" class="btn btn-grey reset"
-								onclick="document.location.href='myInfoUpdate.do?email=${member.email}'">
+								onclick="document.location.href='updateMyInfo.do?email=${member.email}'">
 					</div>
                     </form>
                 </div>
