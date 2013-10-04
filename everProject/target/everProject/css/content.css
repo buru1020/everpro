@@ -1,0 +1,20 @@
+.form_submit_div {
+	padding-left: 40%;
+	padding-right: 40%;
+}
+.submit {
+	margin-left: 5px;
+	margin-right: 5px;
+}
+.reset {
+	margin-left: 5px;
+	margin-right: 5px;
+}
+.table_bottom_btns_div {
+	float: right;
+	margin: 5px;
+}
+.content_member_photo_img {
+	width: 150px;
+	height: 150px;
+}

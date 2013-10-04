@@ -1,0 +1,187 @@
+body {
+    color: #333;
+    font-family: Arial, sans-serif;
+    font-size: 14px;
+    line-height: 1.42857142857143; /* 20px equiv line-height */
+}
+body {
+    background: #f5f5f5;
+    color: #333;
+}
+html, body, p, div, h1, h2, h3, h4, h5, h6, img, pre, form, fieldset {
+    margin: 0;
+    padding: 0;
+}
+
+#content {
+	-moz-box-sizing: border-box;
+	-webkit-box-sizing: border-box;
+	box-sizing: border-box;
+	clear: both;
+	position: relative;
+}
+
+#content:before {
+	content: "";
+	clear: both;
+	display: table;
+}
+
+.workflow-box.small {
+	margin-left: auto;
+	margin-right: auto;
+	width: 500px;
+}
+
+article, aside, details, figcaption, figure, footer, header, hgroup, nav, section {
+	display: block;
+}
+
+.clearfix:after {
+	content: ".";
+	display: block;
+	height: 0;
+	clear: both;
+	visibility: hidden;
+}
+form.aui {
+	margin: 20px 0 0 0;
+	position: relative;
+}
+form.aui:first-child {
+	margin-top: 0;
+}
+form.aui .field-group, form.aui .group, form.aui .date-select {
+	-moz-box-sizing: border-box;
+	box-sizing: border-box;
+	clear: both;
+	padding: 4px 0 4px 145px;
+	position: relative;
+	margin: 1px 0;
+	width: 100%;
+}
+
+form.aui .field-group:before, form.aui .field-group:after, form.aui .group:before, form.aui .group:after, form.aui .date-select:before, form.aui .date-select:after {
+	content: " ";
+	display: table;
+}
+Pseudo ::after element
+form.aui .field-group:after, form.aui .group:after, form.aui .date-select:after {
+	clear: both;
+}
+form.aui .field-group:before, form.aui .field-group:after, form.aui .group:before, form.aui .group:after, form.aui .date-select:before, form.aui .date-select:after {
+	content: " ";
+	display: table;
+}
+
+.workflow-box form.aui input.text, .workflow-box form.aui input.password, .workflow-box form.aui .select, .workflow-box form.aui textarea {
+	width: 100%;
+}
+form.aui .text, form.aui .password, form.aui .select, form.aui .aui-select2-container .select2-choices {
+	height: 2.1428571428571em;
+	line-height: 1.4285714285714;
+	padding: 4px 5px;
+	}
+form.aui .text, form.aui .password, form.aui .textarea, form.aui .select, form.aui .multi-select, form.aui .aui-select2-container .select2-choices {
+	border: 1px solid #ccc;
+	border-radius: 3.01px;
+	box-shadow: inset 0 1px 3px #ccc;
+	-moz-box-sizing: border-box;
+	box-sizing: border-box;
+	font-size: inherit;
+	margin: 0;
+	max-width: 250px;
+	vertical-align: baseline;
+	width: 100%;
+}
+form.aui .text, form.aui .password, form.aui .upfile, form.aui .textarea, form.aui .select, form.aui .multi-select, form.aui .aui-select2-container {
+	color: #333;
+	font-family: inherit;
+	font-size: 14px;
+}
+form.aui .buttons-container {
+	-moz-box-sizing: border-box;
+	box-sizing: border-box;
+	clear: both;
+	margin: 1px 0 0 0;
+	padding: 4px 0 4px 145px;
+	position: relative;
+	width: 100%;
+}
+form.aui .buttons-container > .buttons {
+	font-size: 0;
+}
+form.aui .buttons-container > .buttons > * {
+	font-size: 14px;
+}
+.aui-button.aui-button-primary, .aui-button.aui-button-primary:visited {
+	background: #0c591c;
+	background: -webkit-linear-gradient(top, #14892c 0%, #0c591c 100%);
+	background: -moz-linear-gradient(top, #14892c 0%, #0c591c 100%);
+	background: -ms-linear-gradient(top, #14892c 0%, #0c591c 100%);
+	background: -o-linear-gradient(top, #14892c 0%, #0c591c 100%);
+	background: linear-gradient(to bottom, #14892c 0%, #0c591c 100%);
+	border-color: #486582;
+	color: #fff;
+	font-weight: bold;
+	-webkit-font-smoothing: antialiased;
+	text-shadow: 0 1px 0 #205081;
+}
+.aui-button, a.aui-button, .aui-button:visited {
+	background: #f2f2f2;
+	background: -webkit-linear-gradient(top, #fff 0%, #f2f2f2 100%);
+	background: -moz-linear-gradient(top, #fff 0%, #f2f2f2 100%);
+	background: -ms-linear-gradient(top, #fff 0%, #f2f2f2 100%);
+	background: -o-linear-gradient(top, #fff 0%, #f2f2f2 100%);
+	background: linear-gradient(to bottom, #fff 0%, #f2f2f2 100%);
+	border: 1px solid #ccc;
+	border-radius: 3.01px;
+	-moz-box-sizing: border-box;
+	box-sizing: border-box;
+	color: #333;
+	cursor: pointer;
+	display: inline-block;
+	font-family: inherit;
+	font-size: 14px;
+	font-variant: normal;
+	font-weight: normal;
+	height: 2.1428571428571em;
+	line-height: 1.42857142857143;
+	margin: 0;
+	padding: 4px 10px;
+	text-decoration: none;
+	text-shadow: 0 1px 0 white;
+	vertical-align: baseline;
+	white-space: nowrap;
+}
+
+.aui-button.aui-button-primary:hover, .aui-button.aui-button-primary:focus {
+	background: #4db44d;
+	background: -webkit-linear-gradient(top, #4db44d 0%, #2c8f2c 100%);
+	background: -moz-linear-gradient(top, #4db44d 0%, #2c8f2c 100%);
+	background: -ms-linear-gradient(top, #4db44d 0%, #2c8f2c 100%);
+	background: -o-linear-gradient(top, #4db44d 0%, #2c8f2c 100%);
+	background: linear-gradient(to bottom, #4db44d 0%, #2c8f2c 100%);
+	border-color: #205081;
+	color: #fff;
+	text-shadow: 0 1px 0 #205081;
+}
+
+#log_img {
+	width: 600px; 
+	height: 335px; 
+	display: table; 
+	margin-left: auto; 
+	margin-right: auto;
+}
+
+a:focus, a:hover, a:active {
+	text-decoration: underline;
+}
+a {
+	color: #4db44d;
+	text-decoration: none;
+}
+#login-form .sign-up {
+margin-top: 20px;
+}

@@ -1,0 +1,15 @@
+.row1 {
+  margin: 0 auto;
+  zoom: 1;
+  -webkit-transition: width 0.15s ease-in-out;
+  -moz-transition: width 0.15s ease-in-out;
+}
+
+.row1:before,
+.row1:after {
+  content: "";
+  display: table;
+}
+.row1:after {
+  clear: both;
+}
