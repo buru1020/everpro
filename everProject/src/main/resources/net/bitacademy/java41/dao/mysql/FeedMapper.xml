@@ -28,6 +28,23 @@
 		order by a.FNO desc 		
 	</select>
 	
+	<select id="getAllFeedList" resultType="Feed">
+		select a.FNO as feedNo 
+			, a.PNO as projectNo 
+			, a.EMAIL 
+			, a.CONTENT 
+			, a.REG_DATE as regDate 
+			, b.IMGURL as photoUrl
+			, c.mname as name
+			, c.level as prjMembLevel 
+		from spms_feeds a, spms_memimg b, spms_membs c
+		where a.email=b.email
+		  and b.email=c.email
+		order by a.FNO desc;
+	</select>
+		
+		
+	
 	<insert id="addFeed" parameterType="Feed">
 		insert into SPMS_FEEDS (CONTENT, REG_DATE, EMAIL, PNO) 
 			values (#{content}, now(), #{email}, #{projectNo});

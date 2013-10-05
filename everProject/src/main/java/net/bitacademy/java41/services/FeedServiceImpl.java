@@ -45,6 +45,10 @@ public class FeedServiceImpl implements FeedService {
 			throw e;
 		}
 	}
+
+	public List<Feed> getFeedAllList() throws Exception {
+		return feedDao.getAllFeedList();
+	}
 	
 
 }

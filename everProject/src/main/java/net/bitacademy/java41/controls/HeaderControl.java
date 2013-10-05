@@ -15,8 +15,8 @@ public class HeaderControl {
 	@RequestMapping("/header")
 	public String execute(
 			HttpSession session, Model model) throws Exception {
+		
 		model.addAttribute("member", (Member) session.getAttribute("member"));
-		model.addAttribute("feed", (Feed) session.getAttribute("feed"));
 		return "header";
 	}
 

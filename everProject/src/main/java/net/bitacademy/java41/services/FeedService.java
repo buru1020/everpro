@@ -12,5 +12,7 @@ public interface FeedService {
 	int addFeed(Feed feed) throws Exception;
 	
 	int deleteFeed(int projectNo, int feedNo) throws Exception;
+
+	List<Feed> getFeedAllList() throws Exception;
 	
 }

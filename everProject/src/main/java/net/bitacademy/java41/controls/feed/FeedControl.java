@@ -53,6 +53,19 @@ public class FeedControl {
 		return "feed/feedForm";
 	}
 	
+	@RequestMapping("/listAll")
+	public String getAllFeedList(Model model) throws Exception {
+		List<Feed> feedList =  feedService.getFeedAllList();
+		String tmpContent = null;
+		for( Feed feed : feedList ) {
+			tmpContent = feed.getContent().replace("%nl&%", "<br>");
+			feed.setContent(tmpContent);
+		}
+		model.addAttribute("feedList", feedList);
+		
+		return "feed/feedForm";
+	}
+	
 	@RequestMapping("/add")
 	public String add(Feed feed) throws Exception {
 		String content = feed.getContent().replace("\n", "%nl&%");

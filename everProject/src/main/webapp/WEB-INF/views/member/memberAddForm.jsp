@@ -141,7 +141,19 @@
                                     	사진</label>
                             </td>
                             <td>
-                                <input type="file" class="mini" name="photo">
+                            
+<div id="droparea">
+	<div class="dropareainner">
+		<p class="dropfiletext">Drop files here</p>
+		<p>or</p>
+		<p><input id="uploadbtn" class="uploadbtn" type="button" value="Select Files"/></p>
+		
+		<p id="err">Wait there! You must ENABLE Javascript to have this works!</p>
+	</div>
+	<input id="upload" type="file" multiple />
+</div>
+<p class="message">Please take note that all uploaded images would <strong>NOT</strong> be saved on server.</p>
+<!--                                 <input type="file" class="mini" name="photo"> -->
                             </td>
                         </tr>
                         <tr>
