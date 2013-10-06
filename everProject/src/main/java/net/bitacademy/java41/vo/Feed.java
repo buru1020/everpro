@@ -21,8 +21,16 @@ public class Feed implements Serializable {
 	protected int 	projectNo;
 	protected String 	name;
 	protected int 		prjMembLevel;
+	protected String 	feedUrl;
 	protected String 	photoUrl;
 	
+	public String getPhotoUrl() {
+		return photoUrl;
+	}
+	public Feed setPhotoUrl(String photoUrl) {
+		this.photoUrl = photoUrl;
+		return this;
+	}
 	public int getFeedNo() {
 		return feedNo;
 	}
@@ -65,11 +73,11 @@ public class Feed implements Serializable {
 		this.name = name;
 		return this;
 	}
-	public String getPhotoUrl() {
-		return photoUrl;
+	public String getFeedUrl() {
+		return feedUrl;
 	}
-	public Feed setPhotoUrl(String photoUrl) {
-		this.photoUrl = photoUrl;
+	public Feed setFeedUrl(String feedUrl) {
+		this.feedUrl = feedUrl;
 		return this;
 	}
 	public int getPrjMembLevel() {

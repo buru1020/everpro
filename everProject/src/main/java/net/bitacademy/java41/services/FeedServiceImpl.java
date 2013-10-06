@@ -15,7 +15,6 @@ import org.springframework.transaction.annotation.Transactional;
 public class FeedServiceImpl implements FeedService {
 	@Autowired FeedDao feedDao;
 	
-
 	public List<Feed> getFeedList(int projectNo) throws Exception {
 		return feedDao.getFeedList(projectNo);
 	}
@@ -50,5 +49,10 @@ public class FeedServiceImpl implements FeedService {
 		return feedDao.getAllFeedList();
 	}
 	
-
+	/*private void addFeedFile(int feedNo) throws Exception {
+			feedFileDao.addFeedFile(feedNo);
+	}*/
 }
+
+	
+

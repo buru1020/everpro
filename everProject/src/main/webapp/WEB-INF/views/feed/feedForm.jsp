@@ -87,6 +87,7 @@
 						            <form action="add.do" method="post" enctype="multipart/form-data">
 						            	<input type="hidden" name="projectNo" value="${ project.no}">
                     					<input type="hidden" name="email" value="${ sessionScope.member.email}">
+                    					<input type="hidden" name="photoUrl" value="${ sessionScope.member.photos[0]}">
 						                <div class="_2yg">
 						                            <div id="u_0_18" class="uiMentionsInput _11a">
 						                                <div id="u_0_19" class="uiTypeahead composerTypeahead mentionsTypeahead" style="height: auto;">
@@ -100,16 +101,23 @@
 						                            </div>
 						                    <div class="_1dsp _4-">
 						                        <div class="clearfix">
-						                            <div class="_52lb _3-7 lfloat">
-						                                <div>
-						                                    <div id="u_7_y" class="lfloat">
-						                                        <div id="u_0_14" class="_6a _m _1dsq _1dsw">
-						                                            <a id="u_0_15" class="_1dsr" rel="ignore"></a>
-						                                            	                                             
-						                                        </div>
-						                                    </div>
-						                                </div>
-						                            </div>
+						                        <div id="u_g_y" class="lfloat">
+
+												    <div id="u_0_14" class="_6a _m _1dsq _1dsw">
+												        <a id="u_0_15" class="_1dsr" rel="ignore" role="presentation">
+												            <span class="_4-px ellipsis">
+												
+												                사진 추가
+												
+												            </span>
+												            <div class="_3jk">
+												                <input id="js_12" class="_n _5f0v" type="file" aria-label="회원님의 게시물에 사진을 추가" name="feedPhoto" multiple="1" title="업로드 할 파일 선택"></input>
+												            </div>
+												        </a>
+												    </div>
+												</div>
+									                            
+									                           
 						                            <ul class="uiList _1dso rfloat _509- _4ki _6-h _6-j _6-i">
 						                                  <button class="_42ft _42fu _11b selected _42g-" type="submit" value="Submit">Submit</button>
 						                            </ul>
@@ -150,14 +158,15 @@
 							<c:otherwise>
 								<img src="${rootPath}/img/img-profile.jpg" alt="Profile Pic" class="header_member_photo_img" />
 							</c:otherwise>
-							</c:choose>
+							</c:choose> 
                                 <span class="feed_name">${feed.name}</span>
                                 <span style="float: right;">${feed.regDate}</span>
+                                <img src="${rootPath}/res/feed/${feed.feedUrl}" width="100">
                                 <p>
                                     ${feed.content}
                                 </p>
                                 <div class="feed_btn">
-                                	<span class="feed_file">첨부파일: </span><a href="#">file.zip</a>
+                                	<span class="feed_file">첨부파일: </span><a href="#">${feed.feedUrl}</a>
                                 <c:if test="${feed.email == sessionScope.member.email || sessionScope.member.level == 1}">
                                 	<span class="feed_delete_btn">
                                 		<a href="${rootPath}/feed/delete.do?projectNo=${feed.projectNo}&feedNo=${feed.feedNo}" 
@@ -171,13 +180,57 @@
 					</ul>
 	</c:when>
 	<c:otherwise>
-		<span>해당 피드 권한이 없습니다.</span>
+		<ul>
+					<c:forEach var="feed" items="${feedList}" varStatus="status">	
+						<li>
+						<div class="message 
+						<c:choose>
+						<c:when test="${(status.count % 3) == 0}">
+                            success
+						</c:when>
+						<c:when test="${(status.count % 3) == 1}">
+                            info
+						</c:when>
+						<c:otherwise>
+                            warning
+						</c:otherwise>
+                        </c:choose>">
+                           <%-- <div class="message info">
+                            <div class="message warning">
+                            <div class="message error"> --%>
+                            <c:choose>
+							<c:when test="${feed.photoUrl != ''}">
+								<img src="${rootPath}/res/photo/${feed.photoUrl}" alt="Profile Pic" class="header_member_photo_img" >
+							</c:when>
+							<c:otherwise>
+								<img src="${rootPath}/img/img-profile.jpg" alt="Profile Pic" class="header_member_photo_img" />
+							</c:otherwise>
+							</c:choose> 
+                                <span class="feed_name">${feed.name}</span>
+                                <span style="float: right;">${feed.regDate}</span>
+                                <img src="${rootPath}/res/feed/${feed.feedUrl}" width="100">
+                                <p>
+                                    ${feed.content}
+                                </p>
+                                <div class="feed_btn">
+                                	<span class="feed_file">첨부파일: </span><a href="#">${feed.feedUrl}</a>
+                                <c:if test="${feed.email == sessionScope.member.email || sessionScope.member.level == 1}">
+                                	<span class="feed_delete_btn">
+                                		<a href="${rootPath}/feed/delete.do?projectNo=${feed.projectNo}&feedNo=${feed.feedNo}" 
+                                			class="btn-mini btn-red btn-cross"><span></span>Delete</a>
+                                	</span>
+                                </c:if>
+                                </div>
+                            </div>
+						</li>
+					</c:forEach>
+					</ul>
 	</c:otherwise>
 </c:choose>	
 						
 			<div class="feed_bottom_btns_div">
 				 <button class="btn-icon btn-green btn-person" 
-							onclick="document.location.href='${rootPath}/project/view.do?no=${project.no}';"><span></span>프로젝트 정보</button>
+							onclick="document.location.href='${rootPath}/project/list.do';"><span></span>프로젝트 정보</button>
 			</div>
                 </div>
             </div>

@@ -12,10 +12,11 @@
 			, a.CONTENT 
 			, a.REG_DATE as regDate 
 			, a.MNAME as name 
-			, a.LEVEL as prjMembLevel 
+			, a.LEVEL as prjMembLevel
+			, a.FEEDURL as feedUrl 
 			, b.IMGURL as photoUrl
 		from (
-				select a.FNO, a.PNO, a.EMAIL, a.CONTENT, a.REG_DATE, c.MNAME,  b.LEVEL 
+				select a.FNO, a.PNO, a.EMAIL, a.CONTENT, a.REG_DATE, a.feedUrl, c.MNAME,  b.LEVEL 
 				from SPMS_FEEDS a 
 					, SPMS_PRJMEMB b 
 					, SPMS_MEMBS c 
@@ -46,8 +47,8 @@
 		
 	
 	<insert id="addFeed" parameterType="Feed">
-		insert into SPMS_FEEDS (CONTENT, REG_DATE, EMAIL, PNO) 
-			values (#{content}, now(), #{email}, #{projectNo});
+		insert into SPMS_FEEDS (CONTENT, REG_DATE, EMAIL, PNO, feedUrl) 
+			values (#{content}, now(), #{email}, #{projectNo}, #{feedUrl});
 	</insert>
 	
 	<delete id="deleteFeed" parameterType="map">

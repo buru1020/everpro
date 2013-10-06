@@ -15,4 +15,5 @@ public interface FeedService {
 
 	List<Feed> getFeedAllList() throws Exception;
 	
+//	int addFeedFile(int feedNo) throws Exception;
 }
