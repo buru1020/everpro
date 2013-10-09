@@ -150,7 +150,7 @@
                                     	우편변호</label>
                             </td>
                             <td>
-                                <input type="text"class="mini"  name="postNo" value="${member.postNo}">
+                                <input type="text"class="mini"  name="postNo" value="0">
 								<input type="button" value="우편번호 찾기" class="btn btn-small btn-grey"
 								onclick="">
                             </td>
