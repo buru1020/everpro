@@ -18,10 +18,9 @@ public class Feed implements Serializable {
 	protected String 	content;
 	protected Date 		regDate;
 	protected String 	email;
-	protected int 	projectNo;
+	protected int 		projectNo;
 	protected String 	name;
 	protected int 		prjMembLevel;
-	protected String 	feedUrl;
 	protected String 	photoUrl;
 	
 	public String getPhotoUrl() {
@@ -71,13 +70,6 @@ public class Feed implements Serializable {
 	}
 	public Feed setName(String name) {
 		this.name = name;
-		return this;
-	}
-	public String getFeedUrl() {
-		return feedUrl;
-	}
-	public Feed setFeedUrl(String feedUrl) {
-		this.feedUrl = feedUrl;
 		return this;
 	}
 	public int getPrjMembLevel() {

@@ -34,7 +34,7 @@ public class AuthControl {
 		
 		model.addAttribute("email", email);
 		model.addAttribute("isSaveId", isSaveId);
-		return "auth/loginForm2";
+		return "auth/loginForm";
 	}
 	
 	@RequestMapping(value="/login", method=RequestMethod.POST)

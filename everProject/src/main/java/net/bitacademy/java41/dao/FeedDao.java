@@ -12,15 +12,7 @@ public interface FeedDao {
 
 	int addFeed(Feed feed) throws Exception;
 	
-//	Task getTask(Map<String, Object> paramMap) throws Exception;
-//
-//	int updateTask(Task task) throws Exception;
-//	
-//	int addTask(Task task) throws Exception;
-//
 	int deleteFeed(Map<String, Object> paramMap) throws Exception;
 
-	List<Feed> getAllFeedList() throws Exception ;
-	
 	
 }

@@ -45,13 +45,6 @@ public class FeedServiceImpl implements FeedService {
 		}
 	}
 
-	public List<Feed> getFeedAllList() throws Exception {
-		return feedDao.getAllFeedList();
-	}
-	
-	/*private void addFeedFile(int feedNo) throws Exception {
-			feedFileDao.addFeedFile(feedNo);
-	}*/
 }
 
 	

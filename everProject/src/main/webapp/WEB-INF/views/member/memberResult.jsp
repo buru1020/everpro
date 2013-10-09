@@ -3,7 +3,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <meta charset="UTF-8"/>
+    <meta charset="utf-8" />
     <meta http-equiv="Refresh" content="2;url=${returnUrl}">
     <title>EverProject</title>
     <link rel="icon" type="image/png" href="${rootPath}/res/logo_sim.png">
@@ -82,7 +82,7 @@
 <jsp:include page="/sidebar.do"></jsp:include>
 
 <!-- Content -->
-        <div class="grid_10">
+        <section class="grid_10">
             <div class="box round first fullpage">
                 <h2>
 					처리결과</h2>
@@ -99,7 +99,7 @@
 					</c:choose><br>
                 </div>
             </div>
-        </div>
+        </section>
 <!-- //Content -->
 
 

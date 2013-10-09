@@ -2,9 +2,9 @@
 <!DOCTYPE html>
 <html>
 <head>
-<meta http-equiv="Refresh" content="1;url=<%=request.getServletContext().getContextPath() %>/main.do">
-<meta charset="UTF-8">
-<title>시스템 오류</title>
+    <meta charset="utf-8" />
+	<meta http-equiv="Refresh" content="1;url=<%=request.getServletContext().getContextPath() %>/main.do">
+	<title>EverProject</title>
 </head>
 <body>
 

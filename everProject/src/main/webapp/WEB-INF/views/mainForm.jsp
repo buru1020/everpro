@@ -2,9 +2,9 @@
 <%@page import="net.bitacademy.java41.vo.Member"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
-<html xmlns="http://www.w3.org/1999/xhtml">
+<html>
 <head>
-    <meta http-equiv="content-type" content="text/html; charset=utf-8" />
+    <meta charset="utf-8" />
     <title>EverProject</title>
     <link rel="icon" type="image/png" href="${rootPath}/res/logo_sim.png">
     
@@ -62,7 +62,7 @@
 <jsp:include page="/sidebar.do"></jsp:include>
 
 <!-- Content -->
-        <div class="grid_10">
+        <section class="grid_10">
             <div class="box round first">
                 <h2>Main Video</h2>
                 <div class="block">
@@ -73,7 +73,7 @@
                     </div> -->
                 </div>
             </div>
-        </div>
+        </section>
 <!-- //Content -->
 
 

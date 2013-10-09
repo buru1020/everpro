@@ -8,7 +8,6 @@ import javax.servlet.http.HttpSession;
 
 import net.bitacademy.java41.services.MemberService;
 import net.bitacademy.java41.vo.Member;
-import net.bitacademy.java41.vo.Project;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -127,7 +126,7 @@ public class MemberControl {
 	
 	@RequestMapping(value="/signup", method=RequestMethod.GET)
 	public String signUpForm() throws Exception {
-		return "member/signupForm2";
+		return "member/signupForm";
 	}
 	
 	@RequestMapping(value="/signup", method=RequestMethod.POST)

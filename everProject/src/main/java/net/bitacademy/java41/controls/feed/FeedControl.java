@@ -1,6 +1,5 @@
 package net.bitacademy.java41.controls.feed;
 
-import java.io.File;
 import java.util.List;
 
 import javax.servlet.ServletContext;
@@ -17,9 +16,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.SessionAttributes;
-import org.springframework.web.multipart.MultipartFile;
 
 @Controller
 @SessionAttributes("member")
@@ -54,31 +51,8 @@ public class FeedControl {
 		return "feed/feedForm";
 	}
 	
-	@RequestMapping("/listAll")
-	public String getAllFeedList(Model model) throws Exception {
-		List<Feed> feedList =  feedService.getFeedAllList();
-		String tmpContent = null;
-		for( Feed feed : feedList ) {
-			tmpContent = feed.getContent().replace("%nl&%", "<br>");
-			feed.setContent(tmpContent);
-		}
-		model.addAttribute("feedList", feedList);
-		
-		return "feed/feedForm";
-	}
-	
 	@RequestMapping("/add")
-	public String add(Feed feed,
-					   @RequestParam("feedPhoto") MultipartFile feedUrl) throws Exception {
-		
-		String filename = null;
-		if(feedUrl.getSize() > 0 && feedUrl != null){
-			filename = this.getNewFileNames();
-			String path = sc.getAttribute("rootRealPath") + "res/feed/" + filename;
-			feedUrl.transferTo( new File (path) );
-		}
-		feed.setFeedUrl(filename);
-		
+	public String add(Feed feed) throws Exception {
 		String content = feed.getContent().replace("\n", "%nl&%");
 		System.out.println(content);
 		feed.setContent(content);
@@ -87,15 +61,6 @@ public class FeedControl {
 		return "redirect:../feed/list.do?projectNo=" + feed.getProjectNo();
 	}
 	
-	synchronized private String getNewFileNames() {
-		long mills = System.currentTimeMillis();
-		if(curTime != mills){
-			curTime = mills;
-			count = 0;
-		}
-		return "feed_" + mills + "_" + (++count);
-	}
-
 	@RequestMapping("/delete")
 	public String delete(int projectNo, int feedNo) throws Exception {
 		

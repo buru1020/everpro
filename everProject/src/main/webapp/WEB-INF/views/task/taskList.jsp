@@ -1,11 +1,9 @@
-<%@page import="net.bitacademy.java41.vo.Project"%>
-<%@page import="net.bitacademy.java41.vo.Member"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <!DOCTYPE html>
-<html xmlns="http://www.w3.org/1999/xhtml">
+<html>
 <head>
-    <meta http-equiv="content-type" content="text/html; charset=utf-8" />
+    <meta charset="utf-8" />
     <title>EverProject</title>
     <link rel="icon" type="image/png" href="${rootPath}/res/logo_sim.png">
     
@@ -61,14 +59,7 @@
 
 
 <!-- Content -->
-   
-   
-   
-	<!-- Container Start -->
-
-
-
-	<div class="grid_10">
+	<section class="grid_10">
             <div class="box round first grid">
              
 			 <h2>작업 목록</h2>
@@ -116,8 +107,7 @@
 			</div>
                 </div>
             </div>
-        </div>
-	
+        </section>
 <!-- //Content -->
 
 

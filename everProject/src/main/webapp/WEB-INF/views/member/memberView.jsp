@@ -3,7 +3,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <meta charset="UTF-8"/>
+    <meta charset="utf-8" />
     <title>EverProject</title>
     <link rel="icon" type="image/png" href="${rootPath}/res/logo_sim.png">
     
@@ -80,7 +80,7 @@
 <jsp:include page="/sidebar.do"></jsp:include>
 
 <!-- Content -->
-        <div class="grid_10">
+        <section class="grid_10">
             <div class="box round first fullpage">
                 <h2>
 					회원정보</h2>
@@ -232,7 +232,7 @@
 				</table>
                 </div>
             </div>
-        </div>
+        </section>
 <!-- //Content -->
 
 
