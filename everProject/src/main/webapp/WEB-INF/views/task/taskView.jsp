@@ -126,14 +126,14 @@
 							<input type="submit" value="작업목록" class="btn btn-orange"
 								onclick="document.location.href='${rootPath}/task/list.do?projectNo=${task.projectNo}';">
 					<c:forEach var="projectMember" items="${projectMemberList}"> 					
-						<c:if test="${projectMember.email == sessionScope.member.email}">
+						<c:if test="${projectMember.email == sessionScope.loginInfo.email}">
 							<input type="submit" value="변경" class="btn btn-green submit"
 								onclick="document.location.href='${rootPath}/task/update.do?projectNo=${task.projectNo}&taskNo=${task.taskNo}';">
 							<input type="reset" value="삭제" class="btn btn-grey"
 								onclick="document.location.href='${rootPath}/task/delete.do?projectNo=${task.projectNo}&taskNo=${task.taskNo}';">
 						</c:if>
 					</c:forEach>
-						<c:if test="${sessionScope.member.level == 1}">
+						<c:if test="${sessionScope.loginInfo.level == 1}">
 							<input type="submit" value="변경" class="btn btn-green submit"
 								onclick="document.location.href='${rootPath}/task/update.do?projectNo=${task.projectNo}&taskNo=${task.taskNo}';">
 							<input type="reset" value="삭제" class="btn btn-grey"

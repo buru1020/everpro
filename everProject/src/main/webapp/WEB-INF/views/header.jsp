@@ -7,8 +7,8 @@
                 <div class="floatright">
                     <div class="floatleft">
 					<c:choose>
-					<c:when test="${sessionScope.member.photos[0] != null}">
-						<img src="${rootPath}/res/photo/${sessionScope.member.photos[0]}" alt="Profile Pic" class="header_member_photo_img" >
+					<c:when test="${sessionScope.loginInfo.photo != null}">
+						<img src="${rootPath}/res/photo/${sessionScope.loginInfo.photo}" alt="Profile Pic" class="header_member_photo_img" >
 					</c:when>
 					<c:otherwise>
 						<img src="${rootPath}/img/img-profile.jpg" alt="Profile Pic" class="header_member_photo_img" />
@@ -17,14 +17,14 @@
                     </div>    
                     <div class="floatleft marginleft10">
                         <ul class="inline-ul floatleft">
-                            <li>Hello ${sessionScope.member.name}</li>
+                            <li>Hello ${sessionScope.loginInfo.name}</li>
                             <li><a href="${rootPath}/member/updateMyInfo.do">Config</a></li>
                             <li><a href="${rootPath}/auth/logout.do">Logout</a></li>
                         </ul>
                         <br />
-                        <span class="small grey">${sessionScope.member.tel}</span>
+                        <span class="small grey">${sessionScope.loginInfo.tel}</span>
                         <br />
-                        <span class="small grey">${sessionScope.member.email}</span>
+                        <span class="small grey">${sessionScope.loginInfo.email}</span>
                     </div>
                 </div>
                 <div class="clear">

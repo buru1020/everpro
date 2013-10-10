@@ -131,6 +131,7 @@
                             </td>
                             <td>
                                 <input type="file" class="mini" name="photo">
+                                <input type="hidden" class="mini" name="photoName" value="${memberInfo.photos[0]}">
                             </td>
                         </tr>
                         <tr>

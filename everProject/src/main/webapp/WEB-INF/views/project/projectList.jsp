@@ -59,7 +59,7 @@
 <!-- Content -->
 	 <section class="grid_10">
             <div class="box round first grid">
-                <h2>화원 목록</h2>
+                <h2>프로젝트 목록</h2>
                 <div class="block">
                     <table class="data display datatable" id="example">
 					<thead>
@@ -81,13 +81,13 @@
 							<c:when test="${project.plName != ''}">${project.plName}</c:when>
 							<c:otherwise>-</c:otherwise>
 						</c:choose></td>
-						<td><c:if test="${project.plEmail == sessionScope.member.email}">★</c:if></td>
+						<td><c:if test="${project.plEmail == sessionScope.loginInfo.email}">★</c:if></td>
 					</tr>
 </c:forEach>
 						
 					</tbody></table>
 				<div class="table_bottom_btns_div">
-					 <c:if test="${!(member.level == 1)}">
+					 <c:if test="${!(sessionScope.loginInfo.level == 1)}">
 					 <button class="btn-icon btn-green btn-person" 
 							onclick="document.location.href='${rootPath}/project/add.do';"><span></span>신규 프로젝트 등록</button>
 					</c:if> 

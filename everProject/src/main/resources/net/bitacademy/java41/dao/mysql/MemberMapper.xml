@@ -97,12 +97,19 @@
 		values( #{email}, #{path} )
 	</insert>	
 
-	<select id="listPhoto" parameterType="String" resultType="Photo">
+	<select id="listPhoto" parameterType="string" resultType="Photo">
    		select INO as no, IMGURL as filename
 		from SPMS_MEMIMG
 		where EMAIL = #{value}
 		order by INO desc
 	</select>
+	
+	<select id="getCurPassword" parameterType="string" resultType="string">
+   		select PWD as password
+		from SPMS_MEMBS
+		where EMAIL = #{value}
+	</select>
+	
 </mapper>
 
 

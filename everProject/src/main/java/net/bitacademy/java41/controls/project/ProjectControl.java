@@ -3,23 +3,21 @@ package net.bitacademy.java41.controls.project;
 import java.util.List;
 
 import javax.servlet.ServletContext;
+import javax.servlet.http.HttpSession;
 
 import net.bitacademy.java41.services.ProjectService;
-import net.bitacademy.java41.vo.Member;
+import net.bitacademy.java41.vo.LoginInfo;
 import net.bitacademy.java41.vo.Project;
 import net.bitacademy.java41.vo.ProjectMember;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.SessionAttributes;
 
 @Controller
-@SessionAttributes("member")
 @RequestMapping("/project")
 public class ProjectControl {
 	@Autowired ServletContext sc;
@@ -40,10 +38,11 @@ public class ProjectControl {
 	@RequestMapping(value="/add", method=RequestMethod.POST)
 	public String add(
 			Project project,
-			@ModelAttribute("member") Member member ) throws Exception {
-		project.setPlEmail(member.getEmail())
-				.setPlName(member.getName())
-				.setPlTel(member.getTel());
+			HttpSession session ) throws Exception {
+		LoginInfo loginInfo = (LoginInfo) session.getAttribute("loginInfo");
+		project.setPlEmail(loginInfo.getEmail())
+				.setPlName(loginInfo.getName())
+				.setPlTel(loginInfo.getTel());
 		projectService.resisterProject(project);
 		
 		return "redirect:list.do";

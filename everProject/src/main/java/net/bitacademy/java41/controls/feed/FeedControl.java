@@ -3,23 +3,21 @@ package net.bitacademy.java41.controls.feed;
 import java.util.List;
 
 import javax.servlet.ServletContext;
+import javax.servlet.http.HttpSession;
 
 import net.bitacademy.java41.services.FeedService;
 import net.bitacademy.java41.services.ProjectService;
 import net.bitacademy.java41.vo.Feed;
-import net.bitacademy.java41.vo.Member;
+import net.bitacademy.java41.vo.LoginInfo;
 import net.bitacademy.java41.vo.Project;
 import net.bitacademy.java41.vo.ProjectMember;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.SessionAttributes;
 
 @Controller
-@SessionAttributes("member")
 @RequestMapping("/feed")
 public class FeedControl {
 	@Autowired ServletContext sc;
@@ -32,11 +30,11 @@ public class FeedControl {
 	@RequestMapping("/list")
 	public String list(
 			int projectNo,
-			@ModelAttribute("member") Member sessionMember, 
+			HttpSession session, 
 			Model model) throws Exception {
 		Project project = projectService.getProjectInfo(projectNo);
 		List<ProjectMember> projectMemberList = projectService.getProjectMemberList(projectNo);
-		boolean isProjectMember = projectService.isProjectMember(projectNo, sessionMember);
+		boolean isProjectMember = projectService.isProjectMember(projectNo, (LoginInfo) session.getAttribute("loginInfo"));
 		List<Feed> feedList =  feedService.getFeedList(projectNo);
 		String tmpContent = null;
 		for( Feed feed : feedList ) {

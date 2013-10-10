@@ -2,12 +2,13 @@ package net.bitacademy.java41.services;
 
 import java.util.List;
 
+import net.bitacademy.java41.vo.LoginInfo;
 import net.bitacademy.java41.vo.Member;
 import net.bitacademy.java41.vo.Project;
 
 public interface MemberService {
 
-	int signUp(Member member) throws Exception;
+	LoginInfo signUp(Member member) throws Exception;
 
 	int addMember(Member member) throws Exception;
 	
@@ -21,6 +22,9 @@ public interface MemberService {
 	
 	int updateMemberInfo(Member member) throws Exception;
 	
+	LoginInfo updateMyInfo(Member member) throws Exception;
+	
 	int deleteMember(String email) throws Exception;
+
 
 }

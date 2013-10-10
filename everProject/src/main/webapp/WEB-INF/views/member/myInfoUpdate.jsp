@@ -94,7 +94,7 @@
                                     	이메일</label>
                             </td>
                             <td>
-                                <input type="text" class="mini" name="email" value="${member.email}" readonly="readonly">
+                                <input type="text" class="mini" name="email" value="${sessionScope.loginInfo.email}" readonly="readonly">
                             </td>
                         </tr>
                         <tr>
@@ -114,7 +114,7 @@
                                     	이름</label>
                             </td>
                             <td>
-                                <input type="text" class="mini" name="name" value="${member.name}" required>
+                                <input type="text" class="mini" name="name" value="${sessionScope.loginInfo.name}" required>
                             </td>
                         </tr>
                         <tr>
@@ -123,7 +123,7 @@
                                     	전화</label>
                             </td>
                             <td>
-                                <input type="text" class="mini" name="tel" value="${member.tel}" required>
+                                <input type="text" class="mini" name="tel" value="${sessionScope.loginInfo.tel}" required>
                             </td>
                         </tr>
                         <tr>
@@ -141,7 +141,7 @@
                                     	블로그</label>
                             </td>
                             <td>
-                                <input type="text" class="mini" name="blog" value="${member.blog}">
+                                <input type="text" class="mini" name="blog" value="${sessionScope.loginInfo.blog}">
                             </td>
                         </tr>
                         <tr>
@@ -170,7 +170,7 @@
                                     	상세주소</label>
                             </td>
                             <td>
-                                <input type="text" class="mini" name="detailAddress" value="${member.detailAddress}">
+                                <input type="text" class="mini" name="detailAddress" value="${sessionScope.loginInfo.detailAddress}">
                             </td>
                         </tr>
                         <tr>
@@ -179,7 +179,7 @@
                                     	태그</label>
                             </td>
                             <td>
-                                <input type="text" name="tag" class="mini" value="${member.tag}">
+                                <input type="text" name="tag" class="mini" value="${sessionScope.loginInfo.tag}">
                             </td>
                         </tr>
                         <tr>
@@ -190,10 +190,10 @@
                             <td>
                                 <select id="select" name="level">
 								<c:choose>
-									<c:when test="${member.level == 0}"><option value="0" selected>일반회원</option></c:when>
-									<c:when test="${member.level == 1}"><option value="1" selected>관리자</option></c:when>
-									<c:when test="${member.level == 2}"><option value="2" selected>PM</option></c:when>
-									<c:when test="${member.level == 9}"><option value="9" selected>손님</option></c:when>
+									<c:when test="${sessionScope.loginInfo.level == 0}"><option value="0" selected>일반회원</option></c:when>
+									<c:when test="${sessionScope.loginInfo.level == 1}"><option value="1" selected>관리자</option></c:when>
+									<c:when test="${sessionScope.loginInfo.level == 2}"><option value="2" selected>PM</option></c:when>
+									<c:when test="${sessionScope.loginInfo.level == 9}"><option value="9" selected>손님</option></c:when>
 								</c:choose>                      
                                 </select>
                             </td>

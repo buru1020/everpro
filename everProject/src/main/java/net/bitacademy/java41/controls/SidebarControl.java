@@ -3,7 +3,7 @@ package net.bitacademy.java41.controls;
 import javax.servlet.http.HttpSession;
 
 import net.bitacademy.java41.services.ProjectService;
-import net.bitacademy.java41.vo.Member;
+import net.bitacademy.java41.vo.LoginInfo;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -17,9 +17,9 @@ public class SidebarControl {
 	@RequestMapping("/sidebar")
 	public String execute(
 			HttpSession session, Model model) throws Exception {
-		Member member = (Member) session.getAttribute("member");
-		model.addAttribute("projectList", 
-				projectService.getMyProjectList(member.getEmail()));
+		LoginInfo loginInfo = (LoginInfo) session.getAttribute("loginInfo");
+		model.addAttribute("projectList", projectService.getMyProjectList(loginInfo.getEmail()));
+		
 		return "sidebar";
 	}
 }

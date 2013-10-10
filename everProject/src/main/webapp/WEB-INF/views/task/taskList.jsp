@@ -95,12 +95,12 @@
 			</table>
 			<div class="table_bottom_btns_div">
 			<c:forEach var="projectMember" items="${projectMemberList}"> 					
-				<c:if test="${projectMember.email == sessionScope.member.email}"> 						
+				<c:if test="${projectMember.email == sessionScope.loginInfo.email}"> 						
 				 <button class="btn-icon btn-green btn-person" 
 							onclick="document.location.href='${rootPath}/task/add.do?projectNo=${project.no}';"><span></span>새 작업 등록</button>
 				</c:if>
 			</c:forEach>
-				<c:if test="${sessionScope.member.level == 1}">
+				<c:if test="${sessionScope.loginInfo.level == 1}">
 				<button class="btn-icon btn-green btn-person" 
 							onclick="document.location.href='${rootPath}/task/add.do?projectNo=${project.no}';"><span></span>새 작업 등록</button>
 				</c:if>

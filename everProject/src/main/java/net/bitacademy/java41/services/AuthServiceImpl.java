@@ -5,6 +5,7 @@ import java.util.List;
 
 import net.bitacademy.java41.dao.MemberDao;
 import net.bitacademy.java41.dao.MemberImageDao;
+import net.bitacademy.java41.vo.LoginInfo;
 import net.bitacademy.java41.vo.Member;
 import net.bitacademy.java41.vo.Photo;
 
@@ -13,6 +14,7 @@ import org.springframework.stereotype.Service;
 
 @Service
 public class AuthServiceImpl implements AuthService {
+	@Autowired MemberService memberService;
 	@Autowired MemberDao memberDao;
 	@Autowired MemberImageDao memberImageDao; 
 
@@ -37,6 +39,52 @@ public class AuthServiceImpl implements AuthService {
 			member.setPhotos(photos);
 		}
 		return member;
+	}
+
+	public LoginInfo getLoginInfo(String email, String password) throws Exception {
+		Member member = this.getUserInfo(email, password);
+		LoginInfo loginInfo = new LoginInfo()
+											.setEmail(member.getEmail())
+											.setName(member.getName())
+											.setTel(member.getTel())
+											.setBlog(member.getBlog())
+											.setRegDate(member.getRegDate())
+											.setUpdateDate(member.getUpdateDate())
+											.setPostNo(member.getPostNo())
+											.setDetailAddress(member.getDetailAddress())
+											.setTag(member.getTag())
+											.setLevel(member.getLevel());
+		String[] photos = member.getPhotos();
+		if (photos != null && photos.length > 0) {
+			loginInfo.setPhoto(photos[0]);
+		}
+		
+		return loginInfo;
+	}
+	
+	public LoginInfo getLoginInfo(String email) throws Exception {
+		Member member = memberService.getMemberInfo(email);
+		LoginInfo loginInfo = new LoginInfo()
+											.setEmail(member.getEmail())
+											.setName(member.getName())
+											.setTel(member.getTel())
+											.setBlog(member.getBlog())
+											.setRegDate(member.getRegDate())
+											.setUpdateDate(member.getUpdateDate())
+											.setPostNo(member.getPostNo())
+											.setDetailAddress(member.getDetailAddress())
+											.setTag(member.getTag())
+											.setLevel(member.getLevel());
+		String[] photos = member.getPhotos();
+		if (photos != null && photos.length > 0) {
+			loginInfo.setPhoto(photos[0]);
+		}
+		
+		return loginInfo;
+	}
+
+	public String getCurPassword(String email) throws Exception {
+		return memberDao.getCurPassword(email);
 	}
 
 }

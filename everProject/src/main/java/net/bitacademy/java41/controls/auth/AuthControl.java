@@ -2,9 +2,10 @@ package net.bitacademy.java41.controls.auth;
 
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import net.bitacademy.java41.services.AuthService;
-import net.bitacademy.java41.vo.Member;
+import net.bitacademy.java41.vo.LoginInfo;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -12,12 +13,10 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.CookieValue;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.bind.support.SessionStatus;
 
 
 @Controller
-@SessionAttributes("member")
 @RequestMapping("/auth")
 public class AuthControl {
 	@Autowired AuthService authService;
@@ -43,10 +42,10 @@ public class AuthControl {
 				String password,
 				String saveId, 
 				HttpServletResponse response, 
-				Model model, 
+				HttpSession session, 
 				SessionStatus status ) throws Exception {
 		
-		Member member = authService.getUserInfo(email, password);
+		LoginInfo loginInfo = authService.getLoginInfo(email, password);
 		if(saveId != null) {
 			Cookie cookie = new Cookie("email", email);
 			cookie.setMaxAge(60 * 60 * 24); // 하루
@@ -60,8 +59,8 @@ public class AuthControl {
 			response.addCookie(cookie);
 		}
 			
-		if (member != null) {
-			model.addAttribute("member", member);
+		if (loginInfo != null) {
+			session.setAttribute("loginInfo", loginInfo);
 			return "redirect:../main.do";
 			
 		} else {

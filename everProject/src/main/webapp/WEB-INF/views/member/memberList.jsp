@@ -91,7 +91,7 @@
 					</tbody>
 				</table>
 				<div class="table_bottom_btns_div">
-<c:if test="${member.level == 1}">
+<c:if test="${sessionScope.loginInfo.level == 1}">
 					<button class="btn-icon btn-green btn-person" 
 							onclick="document.location.href='${rootPath}/member/add.do';"><span></span>회원 등록</button>
 </c:if>							

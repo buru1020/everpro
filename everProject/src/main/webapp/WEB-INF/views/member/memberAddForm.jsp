@@ -139,7 +139,6 @@
                                     	사진</label>
                             </td>
                             <td>
-                            
 <div id="droparea">
 	<div class="dropareainner">
 		<p class="dropfiletext">Drop files here</p>
@@ -148,7 +147,7 @@
 		
 		<p id="err">Wait there! You must ENABLE Javascript to have this works!</p>
 	</div>
-	<input id="upload" type="file" multiple />
+	<input id="upload" type="file" name="photo" multiple />
 </div>
 <p class="message">Please take note that all uploaded images would <strong>NOT</strong> be saved on server.</p>
 <!--                                 <input type="file" class="mini" name="photo"> -->

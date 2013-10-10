@@ -85,12 +85,12 @@
 							<input type="submit" value="작업들" class="btn btn-yellow btn-small"
 								onclick="document.location.href='${rootPath}/task/list.do?projectNo=${project.no}';">								
 					<c:forEach var="projectMember" items="${projectMemberList}"> 					
-						<c:if test="${projectMember.email == sessionScope.member.email}"> 								
+						<c:if test="${projectMember.email == sessionScope.loginInfo.email}"> 								
 							<input type="submit" value="피드" class="btn btn-yellow btn-small"
 								onclick="document.location.href='${rootPath}/feed/list.do?projectNo=${project.no}';">
 						</c:if>
 					</c:forEach>			
-						<c:if test="${sessionScope.member.level == 1 || sessionScope.member.level == 2}"> 
+						<c:if test="${sessionScope.loginInfo.level == 1 || sessionScope.loginInfo.level == 2}"> 
 							<input type="submit" value="피드" class="btn btn-yellow btn-small"
 								onclick="document.location.href='${rootPath}/feed/list.do?projectNo=${project.no}';">
 						</c:if>						
@@ -140,14 +140,14 @@
 							<input type="submit" value="목록" class="btn btn-yello"
 								onclick="document.location.href='${rootPath}/project/list.do';">
 					<c:forEach var="projectMember" items="${projectMemberList}"> 					
-						<c:if test="${projectMember.email == sessionScope.member.email}"> 
+						<c:if test="${projectMember.email == sessionScope.loginInfo.email}"> 
 							<input type="submit" value="변경" class="btn btn-green submit"
 								onclick="document.location.href='${rootPath}/project/update.do?no=${project.no}';">
 							<input type="reset" value="삭제" class="btn btn-grey"
 								onclick="document.location.href='${rootPath}/project/delete.do?no=${project.no}';">
 						</c:if>
 					</c:forEach>
-						<c:if test="${sessionScope.member.level == 1}"> 
+						<c:if test="${sessionScope.loginInfo.level == 1}"> 
 							<input type="submit" value="변경" class="btn btn-green submit"
 								onclick="document.location.href='${rootPath}/project/update.do?no=${project.no}';">
 							<input type="reset" value="삭제" class="btn btn-grey"

@@ -193,7 +193,7 @@
                    
                     	<button class="btn btn-orange" 
                     			onclick="document.location.href='list.do';">목록</button>
-<c:if test="${member.level == 1}">                     			
+<c:if test="${sessionScope.loginInfo.level == 1}">                     			
                     	<button class="btn btn-green" 
                     			onclick="document.location.href='update.do?email=${memberInfo.email}';">변경</button>
                     	<button class="btn btn-grey" 

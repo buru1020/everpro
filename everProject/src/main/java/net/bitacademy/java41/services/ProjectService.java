@@ -2,7 +2,7 @@ package net.bitacademy.java41.services;
 
 import java.util.List;
 
-import net.bitacademy.java41.vo.Member;
+import net.bitacademy.java41.vo.LoginInfo;
 import net.bitacademy.java41.vo.Project;
 import net.bitacademy.java41.vo.ProjectMember;
 
@@ -24,7 +24,7 @@ public interface ProjectService {
 	
 	int projectUpdate(Project project) throws Exception;
 
-	boolean isProjectMember(int projectNo, Member sessionMember) throws Exception;
+	boolean isProjectMember(int projectNo, LoginInfo loginInfo) throws Exception;
 	
 
 }

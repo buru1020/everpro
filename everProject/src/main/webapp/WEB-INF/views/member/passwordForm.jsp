@@ -94,7 +94,7 @@
                                     	이메일</label>
                             </td>
                             <td>
-                                <input type="text" class="mini" name="email" value="${member.email}" readonly>
+                                <input type="text" class="mini" name="email" value="${sessionScope.loginInfo.email}" readonly>
                             </td>
                         </tr>
                         <tr>
@@ -128,7 +128,7 @@
                     <div class="form_submit_div">
 						<input type="submit" value="변경" class="btn btn-green submit">
 						<input type="button" value="취소" class="btn btn-grey reset"
-								onclick="document.location.href='updateMyInfo.do?email=${member.email}'">
+								onclick="document.location.href='updateMyInfo.do?email=${sessionScope.loginInfo.email}'">
 					</div>
                     </form>
                 </div>

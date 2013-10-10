@@ -11,7 +11,7 @@ import javax.servlet.ServletResponse;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import net.bitacademy.java41.vo.Member;
+import net.bitacademy.java41.vo.LoginInfo;
 
 //@WebFilter("/*")
 public class AuthFilter implements Filter {
@@ -26,8 +26,8 @@ public class AuthFilter implements Filter {
 		HttpServletRequest request = (HttpServletRequest) req;
 		HttpServletResponse response = (HttpServletResponse) resp;
 		
-		Member member = (Member)request.getSession().getAttribute("member");
-		if (member != null || /*로그인 했다면*/
+		LoginInfo loginInfo = (LoginInfo)request.getSession().getAttribute("loginInfo");
+		if (loginInfo != null || /*로그인 했다면*/
 //				request.getServletPath().endsWith(".css") ||
 //				request.getServletPath().endsWith(".png") ||
 //				request.getServletPath().endsWith(".gif") ||

@@ -5,14 +5,14 @@
                 <div class="block" id="section-menu">
                     <ul class="section menu">
 <c:choose> 
-	<c:when test="${member.level == 1}">
+	<c:when test="${sessionScope.loginInfo.level == 1}">
 		<!-- 관리프로젝트 -->
                         <li><a class="menuitem">관리메뉴</a>
                             <ul class="submenu">
 				                <li><a href="${rootPath}/member/list.do">멤버관리</a></li>
 								<li><a href="${rootPath}/project/list.do">프로젝트관리</a></li>
                             </ul>
-                        </li>		
+                        </li>	
 	</c:when>
 	<c:otherwise>
 		<!-- 참여프로젝트 -->

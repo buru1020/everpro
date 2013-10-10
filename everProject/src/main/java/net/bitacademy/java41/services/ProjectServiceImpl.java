@@ -7,7 +7,7 @@ import net.bitacademy.java41.dao.FeedDao;
 import net.bitacademy.java41.dao.MemberDao;
 import net.bitacademy.java41.dao.ProjectDao;
 import net.bitacademy.java41.dao.ProjectMemberDao;
-import net.bitacademy.java41.vo.Member;
+import net.bitacademy.java41.vo.LoginInfo;
 import net.bitacademy.java41.vo.Project;
 import net.bitacademy.java41.vo.ProjectMember;
 
@@ -101,11 +101,11 @@ public class ProjectServiceImpl implements ProjectService {
 	}
 
 	@Override
-	public boolean isProjectMember(int projectNo, Member sessionMember)
+	public boolean isProjectMember(int projectNo, LoginInfo loginInfo)
 			throws Exception {
 		List<ProjectMember> projectMemberList = this.getProjectMemberList(projectNo);
 		for( ProjectMember projectMember : projectMemberList ) {
-			if ( projectMember.getEmail().equals(sessionMember.getEmail()) ) {
+			if ( projectMember.getEmail().equals(loginInfo.getEmail()) ) {
 				return true;
 			}
 		}

@@ -21,4 +21,6 @@ public interface MemberDao {
 	
 	int changePassword(Map<String, String> paramMap) throws Exception;
 
+	String getCurPassword(String email) throws Exception;
+
 }

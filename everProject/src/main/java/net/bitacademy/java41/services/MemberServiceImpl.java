@@ -7,6 +7,7 @@ import net.bitacademy.java41.dao.MemberDao;
 import net.bitacademy.java41.dao.MemberImageDao;
 import net.bitacademy.java41.dao.ProjectDao;
 import net.bitacademy.java41.dao.ProjectMemberDao;
+import net.bitacademy.java41.vo.LoginInfo;
 import net.bitacademy.java41.vo.Member;
 import net.bitacademy.java41.vo.Photo;
 import net.bitacademy.java41.vo.Project;
@@ -28,10 +29,28 @@ public class MemberServiceImpl implements MemberService {
 
 
 	@Transactional(propagation=Propagation.REQUIRED, rollbackFor=Throwable.class)
-	public int signUp(Member member) throws Exception {
+	public LoginInfo signUp(Member member) throws Exception {
 		int count = memberDao.addMember(member);
+		LoginInfo loginInfo = null;
+		if (count > 0) {
+			loginInfo = new LoginInfo()
+								.setEmail(member.getEmail())
+								.setName(member.getName())
+								.setTel(member.getTel())
+								.setBlog(member.getBlog())
+								.setRegDate(member.getRegDate())
+								.setUpdateDate(member.getUpdateDate())
+								.setPostNo(member.getPostNo())
+								.setDetailAddress(member.getDetailAddress())
+								.setTag(member.getTag())
+								.setLevel(member.getLevel());
+			String[] photos = member.getPhotos();
+			if (photos != null && photos.length > 0) {
+				loginInfo.setPhoto(photos[0]);
+			}
+		}
 			
-		return count;
+		return loginInfo;
 	}
 
 	@Transactional(propagation=Propagation.REQUIRED, rollbackFor=Throwable.class)
@@ -93,18 +112,43 @@ public class MemberServiceImpl implements MemberService {
 	public int updateMemberInfo(Member member) throws Exception {
 		try {
 			int count = memberDao.updateMember(member);
-			memberImageDao.deletePhoto(member.getEmail());
 			String[] photos = member.getPhotos();
-			
-			addPhotos(member, photos);
+			if (photos != null && photos.length > 0) {
+				memberImageDao.deletePhoto(member.getEmail());
+				addPhotos(member, photos);
+			}
 			
 			return count;
 			
 		} catch (Exception e) {
 			throw e;
-			
 		}
 	}
+	
+	public LoginInfo updateMyInfo(Member member) throws Exception {
+		int count = this.updateMemberInfo(member);
+		LoginInfo loginInfo = null;
+		if (count > 0) {
+			loginInfo = new LoginInfo()
+								.setEmail(member.getEmail())
+								.setName(member.getName())
+								.setTel(member.getTel())
+								.setBlog(member.getBlog())
+								.setRegDate(member.getRegDate())
+								.setUpdateDate(member.getUpdateDate())
+								.setPostNo(member.getPostNo())
+								.setDetailAddress(member.getDetailAddress())
+								.setTag(member.getTag())
+								.setLevel(member.getLevel());
+			String[] photos = member.getPhotos();
+			if (photos != null && photos.length > 0) {
+				loginInfo.setPhoto(photos[0]);
+			}
+		}
+		
+		return loginInfo;
+	}
+	
 	
 	@Transactional(propagation=Propagation.REQUIRED, rollbackFor=Throwable.class)
 	public int deleteMember(String email) throws Exception {
@@ -133,5 +177,6 @@ public class MemberServiceImpl implements MemberService {
 			}
 		}
 	}
+
 
 }

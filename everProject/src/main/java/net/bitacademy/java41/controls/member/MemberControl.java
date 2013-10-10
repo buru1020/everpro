@@ -6,7 +6,9 @@ import java.util.List;
 import javax.servlet.ServletContext;
 import javax.servlet.http.HttpSession;
 
+import net.bitacademy.java41.services.AuthService;
 import net.bitacademy.java41.services.MemberService;
+import net.bitacademy.java41.vo.LoginInfo;
 import net.bitacademy.java41.vo.Member;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,16 +18,15 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.bind.support.SessionStatus;
 import org.springframework.web.multipart.MultipartFile;
 
 @Controller
-@SessionAttributes("member")
 @RequestMapping("/member")
 public class MemberControl {
 	@Autowired ServletContext sc;
 	@Autowired MemberService memberService;
+	@Autowired AuthService authService;
 	
 	long curTime = 0;
 	int count = 0;
@@ -82,16 +83,17 @@ public class MemberControl {
 	public String update(
 			@ModelAttribute("memberInfo") Member memberInfo,
 			MultipartFile photo,
-			HttpSession sessoin, 
+			String photoName,
 			Model model ) throws Exception {
 		
-		if (photo.getSize() > 0 && photo != null) {
+		if ( photo != null && photo.getSize() > 0 ) {
 			String filename = this.getNewFileName();
 			String path = sc.getAttribute("rootRealPath") + "res/photo/" + filename;
 			photo.transferTo(new File(path));
 			memberInfo.setPhotos(new String[]{filename});
+		} else {
+			memberInfo.setPhotos(new String[]{photoName});
 		}
-		count =  memberService.updateMemberInfo(memberInfo);
 		
 		String returnUrl = sc.getAttribute("rootPath") + "/main.do";
 		String status = "";
@@ -105,6 +107,7 @@ public class MemberControl {
 		}
 		model.addAttribute("returnUrl", returnUrl);
 		model.addAttribute("status", status);
+		
 		return "member/memberResult";
 	}
 	
@@ -132,14 +135,14 @@ public class MemberControl {
 	@RequestMapping(value="/signup", method=RequestMethod.POST)
 	public String signUp(
 				Member member,
-				Model model, 
+				HttpSession session, 
 				SessionStatus status
 				) throws Exception {
 		
-			int result = memberService.signUp(member);
+		LoginInfo loginInfo = memberService.signUp(member);
 			
-		if (result > 0) {
-			model.addAttribute("member", member);
+		if (loginInfo != null) {
+			session.setAttribute("loginInfo", loginInfo);
 			return "member/signupSuccess";
 		} else {
 			status.setComplete();
@@ -156,11 +159,13 @@ public class MemberControl {
 	public String updateMyInfo(
 			Member member,
 			MultipartFile photo,
-			@ModelAttribute("member") Member sessionMember,
+			HttpSession session,
 			Model model ) throws Exception {
+		
+		LoginInfo loginInfo = (LoginInfo) session.getAttribute("loginInfo");
 		String returnUrl = null;
 		String status = null;
-		if (member.getPassword().equals(sessionMember.getPassword())) {
+		if (member.getPassword().equals(authService.getCurPassword(loginInfo.getEmail()))) {
 			String[] photos = null;
 			if (photo.getSize() > 0) {
 				String filename = this.getNewFileName();
@@ -171,12 +176,12 @@ public class MemberControl {
 			if (photos != null) {
 				member.setPhotos(photos);
 			} else {
-				member.setPhotos(sessionMember.getPhotos());
+				member.setPhotos( new String[] {loginInfo.getPhoto()} );
 			}
 			
-			int result = memberService.updateMemberInfo(member); 
-			if (result > 0) {
-				model.addAttribute("member", member);
+			loginInfo = memberService.updateMyInfo(member); 
+			if (loginInfo != null) {
+				session.setAttribute("loginInfo", loginInfo);
 				returnUrl = sc.getAttribute("rootPath") + "/main.do";
 				status = "UPDATE_SUCCESS";
 			} else {
@@ -204,11 +209,12 @@ public class MemberControl {
 			@RequestParam("password") String oldPassword,
 			String newPassword,
 			String newPassword2,
+			HttpSession session,
 			Model model ) throws Exception {
 		if (newPassword.equals(newPassword2)) {
 			int result = memberService.isChangePassword(email, oldPassword, newPassword);
 			if (result > 0) {
-				model.addAttribute("member", memberService.getMemberInfo(email));
+				session.setAttribute("loginInfo", authService.getLoginInfo(email));
 				model.addAttribute("status", "SUCCESS");
 			} else {
 				model.addAttribute("status", "OLD_PASSWORD_ERROR");

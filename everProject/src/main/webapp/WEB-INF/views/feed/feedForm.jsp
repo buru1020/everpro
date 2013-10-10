@@ -69,20 +69,20 @@
 
 			 	<!-- 입력창 -->
 <c:choose>
-	<c:when test="${isProjectMember || sessionScope.member.level == 1 || sessionScope.member.level == 2}">
+	<c:when test="${isProjectMember || sessionScope.loginInfo.level == 1 || sessionScope.loginInfo.level == 2}">
 		<c:if test="${isProjectMember}">
 			 	<ul>
 					<li>
 					 	<div>
 						 	<div style="float: left;">
-						 		<img src="${rootPath}/res/photo/${sessionScope.member.photos[0]}" alt="Profile Pic" class="header_member_photo_img" >
+						 		<img src="${rootPath}/res/photo/${sessionScope.loginInfo.photo}" alt="Profile Pic" class="header_member_photo_img" >
 							</div>
 						<div style="margin-left: 60px;">
 						    <div id="u_0_x" class="_119 stat_elem focus_target mtm mbl _5bsm child_was_focused" onclick="Bootloader.loadComponents(ComposerXControllerBootload, emptyFunction);" data-location="maincolumn">
 						        <div class="_55d0">
 						            <form action="add.do" method="post" enctype="multipart/form-data">
 						            	<input type="hidden" name="projectNo" value="${ project.no}">
-                    					<input type="hidden" name="email" value="${ sessionScope.member.email}">
+                    					<input type="hidden" name="email" value="${ sessionScope.loginInfo.email}">
 						                <div class="_2yg">
 						                            <div id="u_0_18" class="uiMentionsInput _11a">
 						                                <div id="u_0_19" class="uiTypeahead composerTypeahead mentionsTypeahead" style="height: auto;">
@@ -161,7 +161,7 @@
                                 </p>
                                 <div class="feed_btn">
                                 	<span class="feed_file">첨부파일: </span><a href="#">file.zip</a>
-                                <c:if test="${feed.email == sessionScope.member.email || sessionScope.member.level == 1}">
+                                <c:if test="${feed.email == sessionScope.loginInfo.email || sessionScope.loginInfo.level == 1}">
                                 	<span class="feed_delete_btn">
                                 		<a href="${rootPath}/feed/delete.do?projectNo=${feed.projectNo}&feedNo=${feed.feedNo}" 
                                 			class="btn-mini btn-red btn-cross"><span></span>Delete</a>
