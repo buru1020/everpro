@@ -1,14 +1,15 @@
 package net.bitacademy.java41.controls.project;
 
-import java.util.List;
+import java.io.PrintWriter;
+import java.io.StringWriter;
 
 import javax.servlet.ServletContext;
 import javax.servlet.http.HttpSession;
 
 import net.bitacademy.java41.services.ProjectService;
+import net.bitacademy.java41.vo.JsonResult;
 import net.bitacademy.java41.vo.LoginInfo;
 import net.bitacademy.java41.vo.Project;
-import net.bitacademy.java41.vo.ProjectMember;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -16,6 +17,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 @Controller
 @RequestMapping("/project")
@@ -23,17 +25,50 @@ public class ProjectControl {
 	@Autowired ServletContext sc;
 	@Autowired ProjectService projectService;
 	
+	
+	@RequestMapping("/myProjectList")
+	@ResponseBody
+	public Object list(HttpSession session) throws Exception {
+		JsonResult jsonResult = new JsonResult();
+		try {
+			LoginInfo loginInfo = (LoginInfo) session.getAttribute("loginInfo");
+			
+			jsonResult.setData(projectService.getMyProjectList(loginInfo.getEmail()));
+			jsonResult.setStatus("success");
+		} catch (Throwable e) {
+			StringWriter out = new StringWriter();
+			e.printStackTrace(new PrintWriter(out));
+			
+			jsonResult.setData(out.toString());
+			jsonResult.setStatus("fail");
+		}
+		
+		return jsonResult;
+	}
 
 	@RequestMapping("/list")
-	public String list(Model model) throws Exception {
-		model.addAttribute("totalProjectList", projectService.getTotalProjectList());
-		return "project/projectList";
+	@ResponseBody
+	public Object list() throws Exception {
+		JsonResult jsonResult = new JsonResult();
+		try {
+			jsonResult.setData( projectService.getTotalProjectList() );
+			jsonResult.setStatus("success");
+			
+		} catch (Throwable e) {
+			StringWriter out = new StringWriter();
+			e.printStackTrace(new PrintWriter(out));
+			
+			jsonResult.setData(out.toString());
+			jsonResult.setStatus("fail");
+		}
+		
+		return jsonResult;
 	}
 	
-	@RequestMapping(value="/add", method=RequestMethod.GET)
-	public String addForm() throws Exception {
-		return "project/projectAddForm";
-	}
+//	@RequestMapping(value="/add", method=RequestMethod.GET)
+//	public String addForm() throws Exception {
+//		return "project/projectAddForm";
+//	}
 	
 	@RequestMapping(value="/add", method=RequestMethod.POST)
 	public String add(
@@ -49,15 +84,25 @@ public class ProjectControl {
 	}
 
 	@RequestMapping("/view")
-	public String view(
-			@RequestParam("no") int projectNo,
-			Model model ) throws Exception {
-		Project project = projectService.getProjectInfo(projectNo);
-		List<ProjectMember> projectMemberList = projectService.getProjectMemberList(projectNo);
-		model.addAttribute("project", project);
-		model.addAttribute("projectMemberList", projectMemberList);
+	@ResponseBody
+	public Object view( int projectNo ) throws Exception {
+		JsonResult jsonResult = new JsonResult();
+		try {
+//			Project project = projectService.getProjectInfo(projectNo);
+//			List<ProjectMember> projectMemberList = projectService.getProjectMemberList(projectNo);
+			
+			jsonResult.setData( projectService.getProjectInfo(projectNo) );
+			jsonResult.setStatus("success");
+			
+		} catch (Throwable e) {
+			StringWriter out = new StringWriter();
+			e.printStackTrace(new PrintWriter(out));
+			
+			jsonResult.setData(out.toString());
+			jsonResult.setStatus("fail");
+		}
 		
-		return "project/projectView";
+		return jsonResult;
 	}
 	
 	@RequestMapping(value="/update", method=RequestMethod.GET)

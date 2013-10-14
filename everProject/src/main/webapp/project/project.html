@@ -1,0 +1,87 @@
+	<!-- 프로젝트 List -->	 
+	 <div id="divProjectList" class="grid_10">
+            <div class="box round first grid">
+                <h2>프로젝트 목록</h2>
+                <div class="block">
+                    <table class="data display datatable" id="projectTable">
+					<thead>
+						<tr><th class="sorting_asc" rowspan="1" colspan="1" style="width: 253px;">프로젝트 명</th>
+						<th class="sorting" rowspan="1" colspan="1" style="width: 313px;">시작일</th>
+						<th class="sorting" rowspan="1" colspan="1" style="width: 294px;">종료일</th>
+						<th class="sorting" rowspan="1" colspan="1" style="width: 212px;">PL</th>
+						<th class="sorting" rowspan="1" colspan="1" style="width: 153px;">등급</th>
+						</tr>
+					</thead>
+					
+					<tbody id="tbodyProject">
+<!-- 						<c:forEach var="project" items="${totalProjectList}">			 -->
+<!-- 					<tr onclick="document.location.href='${rootPath}/project/view.do?no=${project.no}'"> -->
+<!-- 						<td style="text-align: left;">${project.title}</td> -->
+<!-- 						<td>${project.startDate}</td> -->
+<!-- 						<td>${project.endDate}</td> -->
+<!-- 						<td><c:choose> -->
+<!-- 							<c:when test="${project.plName != ''}">${project.plName}</c:when> -->
+<!-- 							<c:otherwise>-</c:otherwise> -->
+<!-- 						</c:choose></td> -->
+<!-- 						<td><c:if test="${project.plEmail == sessionScope.loginInfo.email}">★</c:if></td> -->
+<!-- 					</tr> -->
+<!-- </c:forEach> -->
+						
+					</tbody></table>
+				<div class="table_bottom_btns_div">
+<!-- 					 <c:if test="${!(sessionScope.loginInfo.level == 1)}"> -->
+					 <button id="btnAddProject" class="btn-icon btn-green btn-person"><span></span>신규 프로젝트 등록</button>
+<!-- 					</c:if>  -->
+				</div>
+                    
+                </div>
+            </div>
+        </div>
+        
+        <!-- 프로젝트 View -->
+		<div id="divProjectView" class="grid_10" style="display: none;">
+            <div class="box round first grid">
+                <h2>
+                    신규 프로젝트 등록</h2>
+                <div class="block ">
+                    <form action="add.do" method="post">
+                    <table class="form">
+                        <tbody><tr>
+                            <td class="col1"><label>프로젝트명 </label></td>
+                            <td class="col2"><input id="projectTitle" type="text" class="mini" name="title" required/><br></td>
+                        </tr>
+                        <tr>
+                            <td><label>내용</label></td>
+                            <td><textarea id="projectContent" rows="4" cols="50" class="mini" name="content" required></textarea><br></td>
+                        </tr>
+                        <tr>
+                            <td><label>시작일</label></td>
+                            <td> <input id="projectStartDate" type="text" class="mini" name="startDate" placeholder="예)2013-4-5" required/>
+                           <br></td>
+                        </tr>
+                        <tr>
+                            <td><label>종료일</label></td>
+                            <td> <input id="projectEndDate" type="text" class="mini" name="endDate" placeholder="예)2013-4-5" required/>
+                            <br></td>
+                        </tr>
+                           <tr>
+                            <td><label>태그</label></td>
+                            <td> <input id="projectTag" type="text" class="mini" name="tag" placeholder="예)태그1 태그2 태그3 (공백으로 구분)"/>
+                            <br></td>
+                        </tr>
+                     
+                    </tbody></table>
+              
+                 	<div class="form_submit_div">
+                 		<input id="btnList" type="button" value="목록" class="btn btn-yello reset">
+                 		<input id="btnAdd" type="button" value="등록" class="btn btn-green submit new-project">
+						<input id="btnUpdate" type="button" value="변경" class="btn btn-green submit view-project">
+						<input id="btnDelete" type="reset" value="삭제" class="btn btn-grey view-project">
+						<input id="btnReset" type="reset" value="취소" class="btn btn-grey reset">
+					</div>
+					
+                    </form>
+ 
+                </div>
+            </div>
+        </div>        
