@@ -5,12 +5,6 @@ project_onload = function() {
 	$("#btnAddProject").click(function(event){
 		$("#divProjectList").css("display", "none");	// 등록버튼 보이기
 		
-//		var resetEvent = new MouseEvent('click', {
-//		    'view': window,
-//		    'bubbles': true,
-//		    'cancelable': true
-//		});
-//		$("#btnReset").dispatchEvent(resetEvent);
 		$("#btnReset").click();
 		
 		$(".new-project").css("display", "");	// 수정버튼, 번호입력창 감추기
