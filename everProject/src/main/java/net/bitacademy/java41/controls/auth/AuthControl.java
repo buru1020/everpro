@@ -1,5 +1,7 @@
 package net.bitacademy.java41.controls.auth;
 
+import java.util.HashMap;
+
 import javax.servlet.ServletContext;
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletResponse;
@@ -40,29 +42,22 @@ public class AuthControl {
 	
 	@RequestMapping("/loginInfo")
 	@ResponseBody
-	public Object loginInfo(
-			HttpSession session,
-			SessionStatus status) throws Exception {
+	public Object loginInfo(HttpSession session, SessionStatus status) throws Exception {
 		LoginInfo loginInfo = (LoginInfo) session.getAttribute("loginInfo");
 
-		JsonResult jsonResult = null;
-		
+		HashMap<String, Object> jsonResultMap = new HashMap<String, Object>();
 		if (loginInfo != null) {
-			jsonResult =  new JsonResult().setStatus("success")
-												.setData(loginInfo);
+			jsonResultMap.put("data", loginInfo);
+			jsonResultMap.put("status", "success");
 		} else {
 			status.setComplete();
-			jsonResult =  new JsonResult().setStatus("fail");
+			jsonResultMap.put("status", "fail");
 		}
+		jsonResultMap.put("rootPath", sc.getAttribute("rootPath"));
+		jsonResultMap.put("rootRealPath", sc.getAttribute("rootRealPath"));
 		
-		return jsonResult;
+		return jsonResultMap;
 		
-//		HashMap<String, Object> jsonResultMap = new HashMap<String, Object>();
-//		jsonResultMap.put("jsonResult", jsonResult);
-//		jsonResultMap.put("rootPath", sc.getAttribute("rootPath"));
-//		jsonResultMap.put("rootRealPath", sc.getAttribute("rootRealPath"));
-//		
-//		return jsonResultMap;
 	}
 	
 	@RequestMapping(value="/login", method=RequestMethod.POST)
@@ -99,6 +94,7 @@ public class AuthControl {
 	}
 	
 	@RequestMapping("/logout")
+	@ResponseBody
 	public Object logout(SessionStatus status) throws Exception {
 		status.setComplete();
 		JsonResult jsonResult = new JsonResult().setStatus("success");

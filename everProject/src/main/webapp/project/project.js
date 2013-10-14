@@ -1,4 +1,8 @@
 project_onload = function() {
+	if ($("#sessionLevel").val() == 1) {
+		$("#btnAddProject").css("display", "none");
+	}
+	
 	listProject();
 	
 	
@@ -6,14 +10,17 @@ project_onload = function() {
 		$("#divProjectList").css("display", "none");	// 등록버튼 보이기
 		
 		$("#btnReset").click();
+		$("#h2ProjectView").html("신규 프로젝트 등록");
 		
 		$(".new-project").css("display", "");	// 수정버튼, 번호입력창 감추기
 		$(".view-project").css("display", "none"); // view 섹션 보이기
 		$("#divProjectView").css("display", "");
+		$("#divProjectMemberView").css("display", "");
 	});
 	
 	$("#btnList").click(function(event) {
 		$("#divProjectView").css("display", "none");
+		$("#divProjectMemberView").css("display", "none");
 		$("#divProjectList").css("display", "");
 	});
 	
@@ -21,13 +28,13 @@ project_onload = function() {
 		addProject();
 	});
 	
-//	$("#btnUpdate").click(function() {
-//		updateProject();
-//	});
-//	
-//	$("#btnDelete").click(function() {
-//		deleteProject();
-//	});
+	$("#btnUpdate").click(function() {
+		updateProject();
+	});
+	
+	$("#btnDelete").click(function() {
+		deleteProject();
+	});
 	
 };
 
@@ -37,23 +44,14 @@ function listProject() {
 		success: function(result) {
 			if (result.status == "success") {
 				var projects = result.data;
-/*
-				<c:forEach var="project" items="${totalProjectList}">			
-				<tr onclick="document.location.href='${rootPath}/project/view.do?no=${project.no}'">
-					<td style="text-align: left;">${project.title}</td>
-					<td>${project.startDate}</td>
-					<td>${project.endDate}</td>
-					<td><c:choose>
-						<c:when test="${project.plName != ''}">${project.plName}</c:when>
-						<c:otherwise>-</c:otherwise>
-					</c:choose></td>
-					<td><c:if test="${project.plEmail == sessionScope.loginInfo.email}">★</c:if></td>
-				</tr>
-*/				
 				
 				$(".data-projectTableRow").remove();
 				
 				for( var i = 0; i < projects.length; i++ ) {
+					var plYn = "";
+					if (projects[i].plEmail == $("#sessionEmail").val() ) {
+						plYn = "★";
+					}
 					$("<tr>").attr("class", "data-projectTableRow")
 								.attr("data-projectNo", projects[i].no)
 								.click(function(event) {
@@ -63,7 +61,7 @@ function listProject() {
 							.append( $("<td>").html(projects[i].startDate) )
 							.append( $("<td>").html(projects[i].endDate) )
 							.append( $("<td>").html(projects[i].plName) )
-							.append( $("<td>").html( "★" ) )
+							.append( $("<td>").html( plYn ) )
 							.appendTo( $("#tbodyProject") );
 				}
 			} else {
@@ -81,16 +79,17 @@ function addProject(projectNo) {
 	$.ajax("project/add.do", {
 		type: "POST",
 		data: {
-			title: $("#title").val(),
-			content: $("#pcontent").val(),
-			startDate: $("#startDate").val(),
-			endDate: $("#endDate").val(),
-			tag: $("#tag").val()
+			title: $("#projectTitle").val(),
+			content: $("#projectContent").val(),
+			startDate: $("#projectStartDate").val(),
+			endDate: $("#projectEndDate").val(),
+			tag: $("#projectTag").val()
 		},
 		success: function(result) {
 			if (result.status == "success") {
 				listProject();
 				$("#divProjectView").css("display", "none");
+				$("#divProjectMemberView").css("display", "none");
 				$("#divProjectList").css("display", "");
 			} else {
 				alert("실행중 오류 발생");
@@ -107,17 +106,18 @@ function updateProject(projectNo) {
 	$.ajax("project/update.do", {
 		type: "POST",
 		data: {
-			no: $("#no").val(),
-			title: $("#title").val(),
-			content: $("#pcontent").val(),
-			startDate: $("#startDate").val(),
-			endDate: $("#endDate").val(),
-			tag: $("#tag").val()
+			no: $("#projectNo").val(),
+			title: $("#projectTitle").val(),
+			content: $("#projectContent").val(),
+			startDate: $("#projectStartDate").val(),
+			endDate: $("#projectEndDate").val(),
+			tag: $("#projectTag").val()
 		},
 		success: function(result) {
 			if (result.status == "success") {
 				listProject();
 				$("#divProjectView").css("display", "none");
+				$("#divProjectMemberView").css("display", "none");
 				$("#divProjectList").css("display", "");
 			} else {
 				alert("실행중 오류 발생");
@@ -135,7 +135,7 @@ function viewDetailProject(projectNo) {
 		type: "GET",
 		success: function(result) {
 			if (result.status == "success") {
-				var project = result.data;
+				var project = result.project;
 				$("#projectNo").val(project.no);
 				$("#projectTitle").val(project.title);
 				$("#projectContent").val(project.content);
@@ -143,10 +143,29 @@ function viewDetailProject(projectNo) {
 				$("#projectEndDate").val(project.endDate);
 				$("#projectTag").val(project.tag);
 				
+				var projectMemberList = result.projectMemberList;
+				for( var i = 0; i < projectMemberList.length; i++ ) {
+					console.log(projectMemberList[i]);
+					var projectMemberName = projectMemberList[i].name;
+					if (projectMemberList[i].projectLevel == 0) {
+						projectMemberName += " ★";
+					}
+					$("<tr>").attr("class", "odd gradeX")
+							.append( $("<td>").html(projectMemberName) )
+							.append( $("<td>").html(projectMemberList[i].email) )
+							.append( $("<td>").html(projectMemberList[i].tel) )
+							.append( $("<td>").html(projectMemberList[i].blog) )
+							.appendTo( $("#tbodyProjectMember") );
+				}
+				
 				$("#divProjectList").css("display", "none");
 				$(".new-project").css("display", "none");
+				$("#h2ProjectView").html("프로젝트 정보");
+//				if ($("#sessionEmail").val() == )
 				$(".view-project").css("display", "");
 				$("#divProjectView").css("display", "");
+				$("#divProjectMemberView").css("display", "");
+				
 			} else {
 				alert("실행중 오류 발생");
 				console.log(result.data);
@@ -159,12 +178,13 @@ function viewDetailProject(projectNo) {
 }
 
 function deleteProject(projectNo) {
-	$.ajax("project/delete.do?no=" + $("#no").val(), {
+	$.ajax("project/delete.do?projectNo=" + $("#projectNo").val(), {
 		type: "GET",
 		success: function(result) {
 			if (result.status == "success") {
 				listProject();
 				$("#divProjectView").css("display", "none");
+				$("#divProjectMemberView").css("display", "none");
 				$("#divProjectList").css("display", "");
 			} else {
 				alert("실행중 오류 발생");

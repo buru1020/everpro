@@ -1,12 +1,15 @@
 package net.bitacademy.java41.controls.task;
 
 import java.io.File;
+import java.io.PrintWriter;
+import java.io.StringWriter;
 import java.util.List;
 
 import javax.servlet.ServletContext;
 
 import net.bitacademy.java41.services.ProjectService;
 import net.bitacademy.java41.services.TaskService;
+import net.bitacademy.java41.vo.JsonResult;
 import net.bitacademy.java41.vo.Project;
 import net.bitacademy.java41.vo.ProjectMember;
 import net.bitacademy.java41.vo.Task;
@@ -17,6 +20,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
 @Controller
@@ -30,18 +34,26 @@ public class TaskControl {
 	int count = 0;
 	
 	@RequestMapping("/list")
-	public String list(
-			int projectNo, 
-			Model model) throws Exception {
-		Project project = projectService.getProjectInfo(projectNo);
-		List<ProjectMember> projectMemberList = projectService.getProjectMemberList(projectNo);
-		List<Task> taskList =  taskService.getTaskList(projectNo);
+	@ResponseBody
+	public Object list(
+			int projectNo) throws Exception {
 		
-		model.addAttribute("project", project);
-		model.addAttribute("projectMemberList", projectMemberList);
-		model.addAttribute("taskList", taskList);
-		
-		return "task/taskList";
+		JsonResult jsonResult = new JsonResult();
+		try {
+			
+			projectService.getProjectInfo(projectNo);
+			projectService.getProjectMemberList(projectNo);
+			taskService.getTaskList(projectNo);
+			
+			jsonResult.setStatus("success");
+		} catch (Throwable e) {
+			StringWriter out = new StringWriter();
+			e.printStackTrace(new PrintWriter(out));
+			
+			jsonResult.setStatus("fail");
+			jsonResult.setData(out.toString());
+		}
+		return jsonResult;
 	}
 	
 	@RequestMapping(value="/add", method=RequestMethod.GET)

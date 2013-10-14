@@ -23,9 +23,38 @@ header_onload = function() {
 		  });
 		this.dispatchEvent(event);
 	});
+
+	$("#navMember").click( function() {
+		var event = new MouseEvent('memberManagement', {
+			'view': window,
+			'bubbles': true,
+			'cancelable': true
+		});
+		this.dispatchEvent(event);
+	});
+	
+	$("#updateMyInfo").click( function() {
+		var event = new MouseEvent('updateMyInfo', {
+			'view': window,
+			'bubbles': true,
+			'cancelable': true
+		});
+		this.dispatchEvent(event);
+	});
 	
 	
 };
+
+function loadLoginInfo() {
+	$("#userName").html("Hello " + $("#sessionName").val());
+	$("#userTel").html( $("#sessionTel").val() );
+	$("#userEmail").html( $("#sessionEmail").val() );
+	if ($("#sessionPhoto").val() != undefined) {
+		$("#userPhoto").attr("src", $("#rootPath").val() + "/res/photo/" + $("#sessionPhoto").val());
+	} else {
+		$("#userPhoto").attr("src", $("#rootPath").val() + "/img/img-profile.jpg");
+	}
+}
 
 
 

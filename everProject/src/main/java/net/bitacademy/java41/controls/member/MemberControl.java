@@ -1,220 +1,145 @@
 package net.bitacademy.java41.controls.member;
 
 import java.io.File;
-import java.util.List;
+import java.io.PrintWriter;
+import java.io.StringWriter;
 
 import javax.servlet.ServletContext;
-import javax.servlet.http.HttpSession;
 
-import net.bitacademy.java41.services.AuthService;
 import net.bitacademy.java41.services.MemberService;
+import net.bitacademy.java41.vo.JsonResult;
 import net.bitacademy.java41.vo.LoginInfo;
 import net.bitacademy.java41.vo.Member;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.support.SessionStatus;
+import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.multipart.MultipartFile;
 
+/*
+ * @SessionAttributes("member")
+ * - DispatcherServlet이 요청에 해당하는 페이지 컨트롤러의 메서드를 호출할 때,
+ * 	1) 파라미터 중에서 세션에 저장된 "member"와 같은 타입의 객체가 있다면 
+ * 		새로 객체를 만들지 않고 기존 세션에 저장된 객체를 꼽아준다.
+ */
+
 @Controller
+@SessionAttributes({"member","loginInfo"})
 @RequestMapping("/member")
 public class MemberControl {
 	@Autowired ServletContext sc;
 	@Autowired MemberService memberService;
-	@Autowired AuthService authService;
-	
-	long curTime = 0;
+	long currTime = 0;
 	int count = 0;
 	
-	@RequestMapping("/list")
-	public String list(Model model) throws Exception {
-		List<Member> memberList = memberService.getTotalMemberList();
-		model.addAttribute("memberList", memberList);
-		
-		return "member/memberList";
-	}
-	
-	@RequestMapping(value="/add", method=RequestMethod.GET)
-	public String addForm() {
-		return "member/memberAddForm";
-	}
-	
-	@RequestMapping(value="/add", method=RequestMethod.POST)
-	public String add(
-			Member member, 
-			MultipartFile photo ) throws Exception {
-		String[] photos = null;
-		if (photo.getSize() > 0) {
-			String filename = this.getNewFileName();
-			String path = sc.getAttribute("rootRealPath") + "res/photo/" + filename;
-			photo.transferTo( new File(path) );
-			photos = new String[]{ filename };
-			
-			member.setPhotos(photos);
-		}
-		memberService.addMember(member);
-		return "redirect:list.do";
-	}
-	
-	@RequestMapping("/view")
-	public String view(String email, Model model) throws Exception {
-		model.addAttribute("memberInfo", memberService.getMemberInfo(email));
-		model.addAttribute("projectList", memberService.getUserProjectList(email));
-		
-		return "member/memberView";
-	}
-	
-	@RequestMapping(value="/update", method=RequestMethod.GET)
-	public String updateForm(
-			String email, 
-			Model model ) throws Exception {
-		Member memberInfo = memberService.getMemberInfo(email);
-		model.addAttribute("memberInfo", memberInfo);
-		
-		return "member/memberUpdateForm";
-	}
-	
-	@RequestMapping(value="/update", method=RequestMethod.POST)
-	public String update(
-			@ModelAttribute("memberInfo") Member memberInfo,
-			MultipartFile photo,
-			String photoName,
-			Model model ) throws Exception {
-		
-		if ( photo != null && photo.getSize() > 0 ) {
-			String filename = this.getNewFileName();
-			String path = sc.getAttribute("rootRealPath") + "res/photo/" + filename;
-			photo.transferTo(new File(path));
-			memberInfo.setPhotos(new String[]{filename});
-		} else {
-			memberInfo.setPhotos(new String[]{photoName});
-		}
-		
-		String returnUrl = sc.getAttribute("rootPath") + "/main.do";
-		String status = "";
-		int result = memberService.updateMemberInfo(memberInfo);
-		if (result > 0) {
-			returnUrl = sc.getAttribute("rootPath") + "/member/view.do?email=" + memberInfo.getEmail();
-			status = "UPDATE_SUCCESS";
-		} else {
-			returnUrl = sc.getAttribute("rootPath") + "/member/updateForm.do?email=" + memberInfo.getEmail();
-			status = "UPDATE_FAIL";
-		}
-		model.addAttribute("returnUrl", returnUrl);
-		model.addAttribute("status", status);
-		
-		return "member/memberResult";
-	}
-	
-	@RequestMapping("/delete")
-	public String delete(String email, Model model) throws Exception {
-		String returnUrl = sc.getAttribute("rootPath") + "/member/list.do";
-		String status = "";
-		int result = memberService.deleteMember(email);
-		if (result > 0) {
-			status = "DELETE_SUCCESS";
-		} else {
-			status = "DELETE_FAIL";
-		}
-		model.addAttribute("returnUrl", returnUrl);
-		model.addAttribute("status", status);
-		
-		return "member/memberResult";
-	}
-	
 	@RequestMapping(value="/signup", method=RequestMethod.GET)
-	public String signUpForm() throws Exception {
+	public String signupForm() {
 		return "member/signupForm";
 	}
 	
 	@RequestMapping(value="/signup", method=RequestMethod.POST)
-	public String signUp(
-				Member member,
-				HttpSession session, 
-				SessionStatus status
-				) throws Exception {
-		
-		LoginInfo loginInfo = memberService.signUp(member);
-			
-		if (loginInfo != null) {
-			session.setAttribute("loginInfo", loginInfo);
-			return "member/signupSuccess";
-		} else {
-			status.setComplete();
-			return "member/signupFail";
-		}
-	}
-	
-	@RequestMapping(value="/updateMyInfo", method=RequestMethod.GET)
-	public String updateMyInfoForm() throws Exception {
-		return "member/myInfoUpdate";
-	}
-	
-	@RequestMapping(value="/updateMyInfo", method=RequestMethod.POST)
-	public String updateMyInfo(
+	public String signup(
 			Member member,
 			MultipartFile photo,
-			HttpSession session,
-			Model model ) throws Exception {
+			Model model) throws Exception {
+		String filename = this.getNewFileName();
+		String path = sc.getAttribute("rootRealPath") + "file/" + filename;
+		photo.transferTo(new File(path));
+		member.setPhotos(new String[]{filename});
 		
-		LoginInfo loginInfo = (LoginInfo) session.getAttribute("loginInfo");
-		String returnUrl = null;
-		String status = null;
-		if (member.getPassword().equals(authService.getCurPassword(loginInfo.getEmail()))) {
-			String[] photos = null;
-			if (photo.getSize() > 0) {
-				String filename = this.getNewFileName();
-				String path = sc.getAttribute("rootRealPath") + "res/photo/" + filename;
-				photo.transferTo(new File(path));
-				photos = new String[]{ filename };
-			}
-			if (photos != null) {
-				member.setPhotos(photos);
-			} else {
-				member.setPhotos( new String[] {loginInfo.getPhoto()} );
-			}
+		memberService.signUp(member);
+		LoginInfo loginInfo = new LoginInfo()
+							.setName(member.getName())
+							.setEmail(member.getEmail())
+							.setTel(member.getTel());
+//							.setPhotoPath(member.getPhotos()[0]);
+		model.addAttribute("loginInfo", loginInfo);
+		
+		return "redirect:../main.do";
+	}
+	
+	@RequestMapping("/list")
+	@ResponseBody
+	public Object list() throws Exception {
+		
+		JsonResult jsonResult = new JsonResult();
+		
+		try {
+			jsonResult.setData( memberService.getTotalMemberList() );
+			jsonResult.setStatus("success");
+		} catch (Throwable e) {
+			StringWriter out = new StringWriter();
+			e.printStackTrace(new PrintWriter(out));
 			
-			loginInfo = memberService.updateMyInfo(member); 
-			if (loginInfo != null) {
-				session.setAttribute("loginInfo", loginInfo);
-				returnUrl = sc.getAttribute("rootPath") + "/main.do";
-				status = "UPDATE_SUCCESS";
-			} else {
-				returnUrl = sc.getAttribute("rootPath") + "/main.do";
-				status = "UPDATE_FAIL";
-			}
-		} else {
-			returnUrl = sc.getAttribute("rootPath") + "/member/updateMyInfo.do";
-			status = "PASSWORD_WRONG";
+			jsonResult.setStatus("fail");
+			jsonResult.setData(out.toString());
 		}
-		model.addAttribute("returnUrl", returnUrl);
-		model.addAttribute("status", status);
 		
-		return "member/memberResult";
+		return jsonResult;
 	}
 	
-	@RequestMapping(value="/passwordChange", method=RequestMethod.GET)
-	protected String form() {
-		return "member/passwordForm";
+	
+	@RequestMapping(value="/add", method=RequestMethod.POST)
+	@ResponseBody
+	public Object add(
+			Member member/*, MultipartFile photo*/) throws Exception {
+	/*	String filename = this.getNewFileName();
+		String path = sc.getAttribute("rootRealPath") + "file/" + filename;
+		photo.transferTo(new File(path));
+		member.setPhotos(new String[]{filename});*/
+	
+		JsonResult jsonResult = new JsonResult();
+		
+		try {
+			memberService.signUp(member);
+			jsonResult.setStatus("success");
+		} catch (Throwable e) {
+			StringWriter out = new StringWriter();
+			e.printStackTrace(new PrintWriter(out));
+			
+			jsonResult.setStatus("fail");
+			jsonResult.setData(out.toString());
+		}
+		
+		return jsonResult;
+		
 	}
 	
-	@RequestMapping(value="/passwordChange", method=RequestMethod.POST)
-	public String changePassword(
+	@RequestMapping("/view")
+	@ResponseBody
+	public Object view(String email) throws Exception {
+
+		JsonResult jsonResult = new JsonResult();
+		
+		try {
+			jsonResult.setData( memberService.getMemberInfo(email) );
+			jsonResult.setStatus("success");
+		} catch (Throwable e) {
+			StringWriter out = new StringWriter();
+			e.printStackTrace(new PrintWriter(out));
+			
+			jsonResult.setStatus("fail");
+			jsonResult.setData(out.toString());
+		}
+		
+		return jsonResult;
+	}
+	
+/*	@RequestMapping(value="/passwordChange", method=RequestMethod.POST)
+	@ResponseBody
+	public Object changePassword(
 			String email, 
-			@RequestParam("password") String oldPassword,
-			String newPassword,
-			String newPassword2,
-			HttpSession session,
-			Model model ) throws Exception {
+			@RequestParam("password") String currPassword, 
+			String newPassword, String newPassword2,
+			Model model)
+					throws Exception {
 		if (newPassword.equals(newPassword2)) {
-			int result = memberService.isChangePassword(email, oldPassword, newPassword);
-			if (result > 0) {
-				session.setAttribute("loginInfo", authService.getLoginInfo(email));
+			if (memberService.changePassword(email, currPassword, newPassword)) {
 				model.addAttribute("status", "SUCCESS");
 			} else {
 				model.addAttribute("status", "OLD_PASSWORD_ERROR");
@@ -224,21 +149,73 @@ public class MemberControl {
 		}
 		
 		return "member/passwordChangeResult";
+	}
+	*/
+	
+	@RequestMapping(value="/update",method=RequestMethod.POST)
+	@ResponseBody
+	public Object update(Member member) throws Exception {
+		/*MultiPartFile photo
+		 * String filename = this.getNewFileName();
+		String path = sc.getAttribute("rootRealPath") + "file/" + filename;
+		photo.transferTo(new File(path));
+		member.setPhotos(new String[]{filename});*/
+		
+		JsonResult jsonResult = new JsonResult();
+		
+		try {
+			memberService.updateMemberInfo(member);
+			jsonResult.setStatus("success");
+		} catch (Throwable e) {
+			StringWriter out = new StringWriter();
+			e.printStackTrace(new PrintWriter(out));
 			
+			jsonResult.setStatus("fail");
+			jsonResult.setData(out.toString());
+		}
+		
+		return jsonResult;
 	}
 	
+	@RequestMapping("/delete")
+	@ResponseBody
+	public Object delete(String email) throws Exception {
+		
+		JsonResult jsonResult = new JsonResult();
+		
+		try {
+			memberService.deleteMember(email);
+			jsonResult.setStatus("success");
+		} catch (Throwable e) {
+			StringWriter out = new StringWriter();
+			e.printStackTrace(new PrintWriter(out));
+			
+			jsonResult.setStatus("fail");
+			jsonResult.setData(out.toString());
+		}
+		
+		return jsonResult;
+	}
 	
-	synchronized
-	private String getNewFileName() {
-		long millis = System.currentTimeMillis();
-		if (curTime != millis) {
-			curTime = millis;
+	synchronized private String getNewFileName() {
+		long millis = System.currentTimeMillis(); //1000
+		if (currTime != millis) {
+			currTime = millis;
 			count = 0;
 		}
 		return "member_" + millis + "_" + (++count);
 	}
-
-
-
-	
 }
+
+
+
+
+
+
+
+
+
+
+
+
+

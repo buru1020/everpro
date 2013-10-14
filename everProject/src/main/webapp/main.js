@@ -1,4 +1,5 @@
 $(document).ready(function() {
+	loadSessionInfo();
 	$("#mainHeader").load("header.html", function() { header_onload(); } );
 	$("#mainSidebar").load("sidebar.html", function() { sidebar_onload(); } );
 	$("#mainFooter").load("footer.html");
@@ -7,32 +8,41 @@ $(document).ready(function() {
 		$("#mainContent").load("project/project.html", function() { project_onload(); } );
 	});
 	
-//	document.body.addEventListener("memberManagement", function(event) {
-//		$("#mainContent").load("member/member.html");
-//	});
-//	
-//	document.body.addEventListener("taskManagement", function(event) {
-//		$("#mainContent").load("task/task.html");
-//	});
-//	
+	document.body.addEventListener("memberManagement", function(event) {
+		console.log(event.test);
+		$("#mainContent").load("member/member.html", function(){ memberjs_onload(); });
+	});
+	
+	document.body.addEventListener("updateMyInfo", function(event) {
+		$("#mainContent").load("member/member.html", function(){ viewDetailMember($("#sessionEmail").val()); });
+	});
+	
+	document.body.addEventListener("taskManagement", function(event) {
+		$("#mainContent").load("task/task.html");
+	});
+	
 //	document.body.addEventListener("feed", function(event) {
 //		$("#mainContent").load("feed/feed.html");
 //	});
 }); 
 
-function loadLoginInfo() {
+function loadSessionInfo() {
 	$.ajax("auth/loginInfo.do", {
 		type: "GET",
+		async: false,
 		success: function(result) {
 			if (result.status == "success") {
-				$("#userName").html("Hello " + result.data.name);
-				$("#userTel").html(result.data.tel);
-				$("#userEmail").html(result.data.email);
-				if (result.data.photoPath != undefined) {
-					$("#memberPhoto").html(result.data.photoPath);
-				} else {
-					$("#memberPhoto").setAttribute = "images/test01.png";
-				}
+				$("#rootPath").val(result.rootPath);
+				$("#rootRealPath").val(result.rootRealPath);
+				$("#sessionEmail").val(result.data.email);
+				$("#sessionName").val(result.data.name);
+				$("#sessionTel").val(result.data.tel);
+				$("#sessionBlog").val(result.data.blog);
+				$("#sessionRegDate").val(result.data.regDate);
+				$("#sessionPostNo").val(result.data.postNo);
+				$("#sessionLevel").val(result.data.level);
+				$("#sessionPhoto").val(result.data.photo);
+				
 			} else {
 				location.href = "auth/login.html";
 			}
@@ -41,6 +51,7 @@ function loadLoginInfo() {
 			alert("서버와의 통신이 원활하지 않습니다.\n잠시 후 다시 시도하세요.");
 		}
 	});
+	
 }
 
 function loadMyProjects() {
@@ -53,7 +64,6 @@ function loadMyProjects() {
 				$(".data-row").remove();
 				
 				for( var i = 0; i <  myProjectList.length; i++ ) {
-					console.log(myProjectList[i].title);
 					projectTitle = myProjectList[i].title;
 					if (myProjectList[i].level == 0) {
 						projectTitle += "★";
