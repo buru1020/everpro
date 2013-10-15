@@ -1,4 +1,4 @@
-task_onload = function() {
+$(function() {
 	listTask();
 	
 	$("#btnAddProject").click(function(event){
@@ -28,7 +28,7 @@ task_onload = function() {
 //		deleteProject();
 //	});
 	
-};
+});
 
 function listTask(projectNo) {
 	$.ajax("task/list.do?projectNo=" + projectNo, {

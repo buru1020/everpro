@@ -2,20 +2,31 @@ var session;
 
 $(document).ready(function() {
 	loadSessionInfo();
-	$("#mainHeader").load("header.html", function() { header_onload(); } );
-	$("#mainSidebar").load("sidebar.html", function() { sidebar_onload(); } );
+	
+	$("#mainHeader").load("header.html");
+	$("#mainSidebar").load("sidebar.html");
 	$("#mainFooter").load("footer.html");
 	
 	document.body.addEventListener("projectManagement", function(event) {
-		$("#mainContent").load("project/project.html", function() { project_onload(); } );
+		$("#mainContent").load("project/project.html");
+	});
+	
+	$("body").on("viewProject", function(event, projectNo) {
+		$("#mainContent").load("project/project.html", function() {
+			viewDetailProject(projectNo);
+		});
+	});
+	
+	$("body").on("viewFeed", function(event, projectNo) {
+		alert("feed - " + projectNo);
 	});
 	
 	document.body.addEventListener("clickProject", function(event) {
-		$("#mainContent").load("project/project.html", function() { project_onload(event.projectNo); } );
+		$("#mainContent").load("project/project.html");
 	});
 	
 	document.body.addEventListener("memberManagement", function(event) {
-		$("#mainContent").load("member/member.html", function(){ memberjs_onload(); });
+		$("#mainContent").load("member/member.html");
 	});
 	
 	document.body.addEventListener("updateMyInfo", function(event) {
@@ -67,20 +78,17 @@ function loadMyProjects() {
 						projectTitle += "★";
 					}
 					$("<li>")
-							.attr("class", "data-row")
-							.append("<a>").attr("href", "#")
-												.attr("data-no", myProjectList[i].no)
-												.html( projectTitle )
-												.click(function() {
-													var event = new MouseEvent("clickProject", {
-														'view': window,
-														'bubbles': true,
-														'cancelable': true
-													});
-													event.projectNo = $(this).attr("data-no");
-													this.dispatchEvent(event);
-												})
-							.appendTo( $(".ulProject") );
+						.addClass("data-row")
+						.append( 
+									$("<a>")
+										.addClass("clickProject")
+										.attr("href", "#")
+										.attr("data-no", myProjectList[i].no)
+										.text( projectTitle ) )
+						.appendTo( 
+										$(".sideMyProjects")
+											.add($(".headerMyProjects"))
+											.add($(".headerFeed")) );
 				}
 			} else {
 				location.href = "auth/login.html";

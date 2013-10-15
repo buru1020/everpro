@@ -1,14 +1,9 @@
-project_onload = function(projectNo) {
+$(function() {
 	if (session.level == 1) {
 		$("#btnAddProject").css("display", "none");
 	}
 	
-	if (projectNo != null) {
-		viewDetailProject(projectNo);
-	} else {
-		listProject();
-	}
-	
+	listProject();
 	
 	$("#btnAddProject").click(function(event){
 		$("#divProjectList").css("display", "none");	// 등록버튼 보이기
@@ -49,7 +44,7 @@ project_onload = function(projectNo) {
 		this.dispatchEvent(event);
 	});
 	
-};
+});
 
 function listProject() {
 	$.ajax("project/list.do", {
@@ -65,17 +60,18 @@ function listProject() {
 					if (projects[i].plEmail == session.email ) {
 						plYn = "★";
 					}
-					$("<tr>").attr("class", "data-projectTableRow")
-								.attr("data-projectNo", projects[i].no)
-								.click(function(event) {
+					$("<tr>")
+							.addClass("data-projectTableRow")
+							.attr("data-projectNo", projects[i].no)
+							.click(function(event) {
 									viewDetailProject( $(this).attr("data-projectNo") );
-								})
-							.append( $("<td>").html(projects[i].title).css("text-align", "left") )
-							.append( $("<td>").html(projects[i].startDate) )
-							.append( $("<td>").html(projects[i].endDate) )
-							.append( $("<td>").html(projects[i].plName) )
-							.append( $("<td>").html( plYn ) )
-							.appendTo( $("#tbodyProject") );
+							})
+						.append( $("<td>").text(projects[i].title).css("text-align", "left") )
+						.append( $("<td>").text(projects[i].startDate) )
+						.append( $("<td>").text(projects[i].endDate) )
+						.append( $("<td>").text(projects[i].plName) )
+						.append( $("<td>").text( plYn ) )
+						.appendTo( $("#tbodyProject") );
 				}
 			} else {
 				alert("실행중 오류 발생");
@@ -163,11 +159,11 @@ function viewDetailProject(projectNo) {
 					if (projectMemberList[i].projectLevel == 0) {
 						projectMemberName += " ★";
 					}
-					$("<tr>").attr("class", "odd gradeX")
-							.append( $("<td>").html(projectMemberName) )
-							.append( $("<td>").html(projectMemberList[i].email) )
-							.append( $("<td>").html(projectMemberList[i].tel) )
-							.append( $("<td>").html(projectMemberList[i].blog) )
+					$("<tr>").addClass("odd gradeX")
+							.append( $("<td>").text(projectMemberList[i].name) )
+							.append( $("<td>").text(projectMemberList[i].email) )
+							.append( $("<td>").text(projectMemberList[i].tel) )
+							.append( $("<td>").text(projectMemberList[i].blog) )
 							.appendTo( $("#tbodyProjectMember") );
 				}
 				

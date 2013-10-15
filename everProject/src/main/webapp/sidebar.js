@@ -1,4 +1,4 @@
-sidebar_onload = function() {
+$(function() {
 	if (session.level == 1) {
 		$("#adminSideMenu").css("display", "");
 		$("#generalSideMenu").css("display", "none");
@@ -8,6 +8,10 @@ sidebar_onload = function() {
 	}
 	
 	loadMyProjects();
+	
+	$(".sideMyProjects").on("click", ".clickProject", function() {
+		$(this).trigger("viewProject", [$(this).attr("data-no")]);
+	});
 	
 	$("#sidebarProject").click( function() {
 		var event = new MouseEvent('projectManagement', {
@@ -26,5 +30,5 @@ sidebar_onload = function() {
 		});
 		this.dispatchEvent(event);
 	});
-};
+});
 

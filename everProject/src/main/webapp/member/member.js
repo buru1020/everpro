@@ -1,4 +1,4 @@
-memberjs_onload = function() {
+$(function() {
 	if ( session.level != 1 ) {
 			$("#btnNewForm").css("display", "none");
 	}
@@ -49,7 +49,7 @@ memberjs_onload = function() {
 	$("#btnpwChange").click(function(){
 		ChangePassword();
 	});
-};
+});
 
 function ChangePassword() {
 	$.ajax("member/passwordChange.do", {

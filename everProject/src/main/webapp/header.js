@@ -1,6 +1,14 @@
-header_onload = function() {
+$(function() {
 	loadLoginInfo();
 	loadMyProjects();
+	
+	$(".headerFeed").on("click", ".clickProject", function() {
+		$(this).trigger("viewFeed", [$(this).attr("data-no")]);
+	});
+	
+	$(".headerMyProjects").on("click", ".clickProject", function() {
+		$(this).trigger("viewProject", [$(this).attr("data-no")]);
+	});
 	
 	$("#logout").click(function(event) {
 		event.preventDefault();		//원래 태그가 하는일을 하지 못하도록 한다.
@@ -43,7 +51,7 @@ header_onload = function() {
 	});
 	
 	
-};
+});
 
 function loadLoginInfo() {
 	$("#userName").html("Hello " + session.name);
