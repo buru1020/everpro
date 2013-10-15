@@ -1,5 +1,5 @@
 sidebar_onload = function() {
-	if ($("#sessionLevel").val() == 1) {
+	if (session.level == 1) {
 		$("#adminSideMenu").css("display", "");
 		$("#generalSideMenu").css("display", "none");
 	} else {

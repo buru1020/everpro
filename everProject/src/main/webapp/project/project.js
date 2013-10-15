@@ -1,5 +1,5 @@
 project_onload = function(projectNo) {
-	if ($("#sessionLevel").val() == 1) {
+	if (session.level == 1) {
 		$("#btnAddProject").css("display", "none");
 	}
 	
@@ -62,7 +62,7 @@ function listProject() {
 				
 				for( var i = 0; i < projects.length; i++ ) {
 					var plYn = "";
-					if (projects[i].plEmail == $("#sessionEmail").val() ) {
+					if (projects[i].plEmail == session.email ) {
 						plYn = "★";
 					}
 					$("<tr>").attr("class", "data-projectTableRow")
@@ -174,7 +174,6 @@ function viewDetailProject(projectNo) {
 				$("#divProjectList").css("display", "none");
 				$(".new-project").css("display", "none");
 				$("#h2ProjectView").html("프로젝트 정보");
-//				if ($("#sessionEmail").val() == )
 				$(".view-project").css("display", "");
 				$("#divProjectView").css("display", "");
 				$("#divProjectMemberView").css("display", "");

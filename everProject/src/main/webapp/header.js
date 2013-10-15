@@ -46,13 +46,13 @@ header_onload = function() {
 };
 
 function loadLoginInfo() {
-	$("#userName").html("Hello " + $("#sessionName").val());
-	$("#userTel").html( $("#sessionTel").val() );
-	$("#userEmail").html( $("#sessionEmail").val() );
+	$("#userName").html("Hello " + session.name);
+	$("#userTel").html( session.tel );
+	$("#userEmail").html( session.email );
 	if ($("#sessionPhoto").val() != undefined) {
-		$("#userPhoto").attr("src", $("#rootPath").val() + "/res/photo/" + $("#sessionPhoto").val());
+		$("#userPhoto").attr("src", session.rootRealPath + "/res/photo/" + session.photo );
 	} else {
-		$("#userPhoto").attr("src", $("#rootPath").val() + "/img/img-profile.jpg");
+		$("#userPhoto").attr("src", session.rootPath + "/img/img-profile.jpg");
 	}
 }
 

@@ -1,5 +1,5 @@
 memberjs_onload = function() {
-	if ( $("#sessionLevel").val() != 1 ) {
+	if ( session.level != 1 ) {
 			$("#btnNewForm").css("display", "none");
 	}
 	listMember();
@@ -179,9 +179,6 @@ function viewDetailMember(email) {
 		success: function(result) {
 			if(result.status == "success") {
 				var member = result.data;
-				console.log(result.data.email);
-				console.log($("#sessionEmail").val());
-				console.log($("#email"));
 				$("#viewemail").val(member.email);
 				$("#viewname").val(member.name);
 				$("#viewpassword").val("");
@@ -195,7 +192,7 @@ function viewDetailMember(email) {
 				$("#list").css("display", "none");
 				$("#pwchange").css("display", "none");
 				$(".new-member").css("display", "none");
-				if ( $("#sessionEmail").val() == member.email || $("#sessionLevel").val() == 1 ) {
+				if ( session.email == member.email || session.level == 1 ) {
 					$(".view-member").css("display", "");
 				} else {
 					$(".view-member").css("display", "none");
