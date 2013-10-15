@@ -46,15 +46,29 @@ public class AuthControl {
 		LoginInfo loginInfo = (LoginInfo) session.getAttribute("loginInfo");
 
 		HashMap<String, Object> jsonResultMap = new HashMap<String, Object>();
+		HashMap<String, Object> sessionMap = new HashMap<String, Object>();
+		sessionMap.put("rootPath", sc.getAttribute("rootPath"));
+		sessionMap.put("rootRealPath", sc.getAttribute("rootRealPath"));
 		if (loginInfo != null) {
-			jsonResultMap.put("data", loginInfo);
+			sessionMap.put("isLogin", true);
+			sessionMap.put("email", loginInfo.getEmail());
+			sessionMap.put("name", loginInfo.getName());
+			sessionMap.put("tel", loginInfo.getTel());
+			sessionMap.put("blog", loginInfo.getBlog());
+			sessionMap.put("regDate", loginInfo.getRegDate());
+			sessionMap.put("postNo", loginInfo.getPostNo());
+			sessionMap.put("level", loginInfo.getLevel());
+			sessionMap.put("photo", loginInfo.getPhoto());
+			
 			jsonResultMap.put("status", "success");
 		} else {
 			status.setComplete();
+			sessionMap.put("isLogin", false);
+			
 			jsonResultMap.put("status", "fail");
 		}
-		jsonResultMap.put("rootPath", sc.getAttribute("rootPath"));
-		jsonResultMap.put("rootRealPath", sc.getAttribute("rootRealPath"));
+		
+		jsonResultMap.put("session", sessionMap);
 		
 		return jsonResultMap;
 		

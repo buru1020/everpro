@@ -1,3 +1,5 @@
+var session;
+
 $(document).ready(function() {
 	loadSessionInfo();
 	$("#mainHeader").load("header.html", function() { header_onload(); } );
@@ -32,21 +34,14 @@ $(document).ready(function() {
 function loadSessionInfo() {
 	$.ajax("auth/loginInfo.do", {
 		type: "GET",
+		dataType: "json",
 		async: false,
 		success: function(result) {
 			if (result.status == "success") {
-				$("#rootPath").val(result.rootPath);
-				$("#rootRealPath").val(result.rootRealPath);
-				$("#sessionEmail").val(result.data.email);
-				$("#sessionName").val(result.data.name);
-				$("#sessionTel").val(result.data.tel);
-				$("#sessionBlog").val(result.data.blog);
-				$("#sessionRegDate").val(result.data.regDate);
-				$("#sessionPostNo").val(result.data.postNo);
-				$("#sessionLevel").val(result.data.level);
-				$("#sessionPhoto").val(result.data.photo);
+				session = result.session;
 				
 			} else {
+				session = result.session;
 				location.href = "auth/login.html";
 			}
 		},
