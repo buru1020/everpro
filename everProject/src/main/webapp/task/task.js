@@ -74,104 +74,104 @@ function listTask(projectNo) {
 		}
 	});
 }
-
-function addProject(projectNo) {
-	$.ajax("project/add.do", {
-		type: "POST",
-		data: {
-			title: $("#title").val(),
-			content: $("#pcontent").val(),
-			startDate: $("#startDate").val(),
-			endDate: $("#endDate").val(),
-			tag: $("#tag").val()
-		},
-		success: function(result) {
-			if (result.status == "success") {
-				listProject();
-				$("#divProjectView").css("display", "none");
-				$("#divProjectList").css("display", "");
-			} else {
-				alert("실행중 오류 발생");
-				console.log(result.data);
-			}
-		},
-		error: function(message) {
-			alert("서버와의 통신이 원활하지 않습니다.\n잠시 후 다시 시도하세요.");
-		}
-	});
-}
-
-function updateProject(projectNo) {
-	$.ajax("project/update.do", {
-		type: "POST",
-		data: {
-			no: $("#no").val(),
-			title: $("#title").val(),
-			content: $("#pcontent").val(),
-			startDate: $("#startDate").val(),
-			endDate: $("#endDate").val(),
-			tag: $("#tag").val()
-		},
-		success: function(result) {
-			if (result.status == "success") {
-				listProject();
-				$("#divProjectView").css("display", "none");
-				$("#divProjectList").css("display", "");
-			} else {
-				alert("실행중 오류 발생");
-				console.log(result.data);
-			}
-		},
-		error: function(message) {
-			alert("서버와의 통신이 원활하지 않습니다.\n잠시 후 다시 시도하세요.");
-		}
-	});
-}
-
-function viewDetailProject(projectNo) {
-	$.ajax("project/view.do?projectNo=" + projectNo, {
-		type: "GET",
-		success: function(result) {
-			if (result.status == "success") {
-				var project = result.data;
-				$("#projectNo").val(project.no);
-				$("#projectTitle").val(project.title);
-				$("#projectContent").val(project.content);
-				$("#projectStartDate").val(project.startDate);
-				$("#projectEndDate").val(project.endDate);
-				$("#projectTag").val(project.tag);
-				
-				$("#divProjectList").css("display", "none");
-				$(".new-project").css("display", "none");
-				$(".view-project").css("display", "");
-				$("#divProjectView").css("display", "");
-			} else {
-				alert("실행중 오류 발생");
-				console.log(result.data);
-			}
-		},
-		error: function(message) {
-			alert("서버와의 통신이 원활하지 않습니다.\n잠시 후 다시 시도하세요.");
-		}
-	});
-}
-
-function deleteProject(projectNo) {
-	$.ajax("project/delete.do?no=" + $("#no").val(), {
-		type: "GET",
-		success: function(result) {
-			if (result.status == "success") {
-				listProject();
-				$("#divProjectView").css("display", "none");
-				$("#divProjectList").css("display", "");
-			} else {
-				alert("실행중 오류 발생");
-				console.log(result.data);
-			}
-		},
-		error: function(message) {
-			alert("서버와의 통신이 원활하지 않습니다.\n잠시 후 다시 시도하세요.");
-		}
-	});
-}
+//
+//function addTask(projectNo) {
+//	$.ajax("project/add.do", {
+//		type: "POST",
+//		data: {
+//			title: $("#title").val(),
+//			content: $("#pcontent").val(),
+//			startDate: $("#startDate").val(),
+//			endDate: $("#endDate").val(),
+//			tag: $("#tag").val()
+//		},
+//		success: function(result) {
+//			if (result.status == "success") {
+//				listProject();
+//				$("#divProjectView").css("display", "none");
+//				$("#divProjectList").css("display", "");
+//			} else {
+//				alert("실행중 오류 발생");
+//				console.log(result.data);
+//			}
+//		},
+//		error: function(message) {
+//			alert("서버와의 통신이 원활하지 않습니다.\n잠시 후 다시 시도하세요.");
+//		}
+//	});
+//}
+//
+//function updateTask(projectNo) {
+//	$.ajax("project/update.do", {
+//		type: "POST",
+//		data: {
+//			no: $("#no").val(),
+//			title: $("#title").val(),
+//			content: $("#pcontent").val(),
+//			startDate: $("#startDate").val(),
+//			endDate: $("#endDate").val(),
+//			tag: $("#tag").val()
+//		},
+//		success: function(result) {
+//			if (result.status == "success") {
+//				listProject();
+//				$("#divProjectView").css("display", "none");
+//				$("#divProjectList").css("display", "");
+//			} else {
+//				alert("실행중 오류 발생");
+//				console.log(result.data);
+//			}
+//		},
+//		error: function(message) {
+//			alert("서버와의 통신이 원활하지 않습니다.\n잠시 후 다시 시도하세요.");
+//		}
+//	});
+//}
+//
+//function viewDetailTask(projectNo) {
+//	$.ajax("project/view.do?projectNo=" + projectNo, {
+//		type: "GET",
+//		success: function(result) {
+//			if (result.status == "success") {
+//				var project = result.data;
+//				$("#projectNo").val(project.no);
+//				$("#projectTitle").val(project.title);
+//				$("#projectContent").val(project.content);
+//				$("#projectStartDate").val(project.startDate);
+//				$("#projectEndDate").val(project.endDate);
+//				$("#projectTag").val(project.tag);
+//				
+//				$("#divProjectList").css("display", "none");
+//				$(".new-project").css("display", "none");
+//				$(".view-project").css("display", "");
+//				$("#divProjectView").css("display", "");
+//			} else {
+//				alert("실행중 오류 발생");
+//				console.log(result.data);
+//			}
+//		},
+//		error: function(message) {
+//			alert("서버와의 통신이 원활하지 않습니다.\n잠시 후 다시 시도하세요.");
+//		}
+//	});
+//}
+//
+//function deleteTask(projectNo) {
+//	$.ajax("project/delete.do?no=" + $("#no").val(), {
+//		type: "GET",
+//		success: function(result) {
+//			if (result.status == "success") {
+//				listProject();
+//				$("#divProjectView").css("display", "none");
+//				$("#divProjectList").css("display", "");
+//			} else {
+//				alert("실행중 오류 발생");
+//				console.log(result.data);
+//			}
+//		},
+//		error: function(message) {
+//			alert("서버와의 통신이 원활하지 않습니다.\n잠시 후 다시 시도하세요.");
+//		}
+//	});
+//}
 

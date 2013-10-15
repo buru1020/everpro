@@ -8,8 +8,11 @@ $(document).ready(function() {
 		$("#mainContent").load("project/project.html", function() { project_onload(); } );
 	});
 	
+	document.body.addEventListener("clickProject", function(event) {
+		$("#mainContent").load("project/project.html", function() { project_onload(event.projectNo); } );
+	});
+	
 	document.body.addEventListener("memberManagement", function(event) {
-		console.log(event.test);
 		$("#mainContent").load("member/member.html", function(){ memberjs_onload(); });
 	});
 	
@@ -74,7 +77,13 @@ function loadMyProjects() {
 												.attr("data-no", myProjectList[i].no)
 												.html( projectTitle )
 												.click(function() {
-													alert("click---" + $(this).attr("data-no"));
+													var event = new MouseEvent("clickProject", {
+														'view': window,
+														'bubbles': true,
+														'cancelable': true
+													});
+													event.projectNo = $(this).attr("data-no");
+													this.dispatchEvent(event);
 												})
 							.appendTo( $(".ulProject") );
 				}

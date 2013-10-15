@@ -1,9 +1,13 @@
-project_onload = function() {
+project_onload = function(projectNo) {
 	if ($("#sessionLevel").val() == 1) {
 		$("#btnAddProject").css("display", "none");
 	}
 	
-	listProject();
+	if (projectNo != null) {
+		viewDetailProject(projectNo);
+	} else {
+		listProject();
+	}
 	
 	
 	$("#btnAddProject").click(function(event){
@@ -34,6 +38,15 @@ project_onload = function() {
 	
 	$("#btnDelete").click(function() {
 		deleteProject();
+	});
+	
+	$("#btnTask").click(function() {
+		var event = new MouseEvent('taskManagement', {
+		    'view': window,
+		    'bubbles': true,
+		    'cancelable': true
+		  });
+		this.dispatchEvent(event);
 	});
 	
 };

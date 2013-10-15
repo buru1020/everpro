@@ -1,9 +1,9 @@
 	<!-- Task List -->	 
-	 <div id="divProjectList" class="grid_10">
+	 <div id="divTaskList" class="grid_10">
             <div class="box round first grid">
                 <h2>Task 목록</h2>
                 <div class="block">
-                    <table class="data display datatable" id="projectTable">
+                    <table class="data display datatable" id="taskTable">
 					<thead>
 						<tr><th class="sorting_asc" rowspan="1" colspan="1" style="width: 253px;">프로젝트 명</th>
 						<th class="sorting" rowspan="1" colspan="1" style="width: 313px;">시작일</th>
@@ -13,7 +13,7 @@
 						</tr>
 					</thead>
 					
-					<tbody id="tbodyProject">
+					<tbody id="tbodyTask">
 <!-- 						<c:forEach var="project" items="${totalProjectList}">			 -->
 <!-- 					<tr onclick="document.location.href='${rootPath}/project/view.do?no=${project.no}'"> -->
 <!-- 						<td style="text-align: left;">${project.title}</td> -->
@@ -39,7 +39,7 @@
         </div>
         
         <!-- 프로젝트 View -->
-		<div id="divProjectView" class="grid_10" style="display: none;">
+		<div id="divTaskView" class="grid_10" style="display: none;">
             <div class="box round first grid">
                 <h2>
                     신규 프로젝트 등록</h2>
@@ -84,4 +84,3 @@
  
                 </div>
             </div>
-        </div>        
